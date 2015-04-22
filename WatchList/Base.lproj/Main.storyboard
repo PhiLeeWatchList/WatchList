@@ -29,7 +29,6 @@
         <!--Watch List-->
         <scene sceneID="YV2-0V-to2">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fja-z5-CjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Hz8-7N-gqa" customClass="MainViewController" customModule="WatchList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ob6-Q0-o8L"/>
@@ -101,13 +100,13 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fja-z5-CjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="904" y="432"/>
         </scene>
         <!--Add Friends-->
         <scene sceneID="f0A-7k-5BN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5tC-yE-d5A" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Ref-a4-mPc" customClass="AddFriendsViewController" customModule="WatchList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="isW-3n-zKY"/>
@@ -121,7 +120,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1JC-hI-Kej">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="1JC-hI-Kej">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1JC-hI-Kej" id="3sR-On-BV7">
@@ -139,13 +138,13 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5tC-yE-d5A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1684" y="833"/>
         </scene>
         <!--Beacon Setup-->
         <scene sceneID="4Vv-BI-n1l">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gug-fB-IvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Tlr-Nd-217" customClass="BeaconConfigViewController" customModule="WatchList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IRO-hH-0vT"/>
@@ -191,6 +190,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gug-fB-IvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1684" y="123"/>
         </scene>
