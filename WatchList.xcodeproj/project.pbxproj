@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C86246E1AB91A290042CAA8 /* AppDelegate.swift */; };
-		0C8624711AB91A290042CAA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8624701AB91A290042CAA8 /* ViewController.swift */; };
 		0C8624741AB91A290042CAA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624721AB91A290042CAA8 /* Main.storyboard */; };
 		0C8624761AB91A290042CAA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624751AB91A290042CAA8 /* Images.xcassets */; };
 		0C8624791AB91A290042CAA8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624771AB91A290042CAA8 /* LaunchScreen.xib */; };
@@ -21,6 +20,9 @@
 		0C9FBD4C1AE6F691001FB601 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C9FBD4A1AE6F691001FB601 /* Interface.storyboard */; };
 		0C9FBD4E1AE6F691001FB601 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C9FBD4D1AE6F691001FB601 /* Images.xcassets */; };
 		0C9FBD511AE6F691001FB601 /* WatchList WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0C9FBD361AE6F690001FB601 /* WatchList WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD591AE8466A001FB601 /* MainViewController.swift */; };
+		0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */; };
+		0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +67,6 @@
 		0C8624691AB91A290042CAA8 /* WatchList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C86246D1AB91A290042CAA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C86246E1AB91A290042CAA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0C8624701AB91A290042CAA8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0C8624731AB91A290042CAA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0C8624751AB91A290042CAA8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0C8624781AB91A290042CAA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -83,6 +84,9 @@
 		0C9FBD491AE6F691001FB601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C9FBD4B1AE6F691001FB601 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		0C9FBD4D1AE6F691001FB601 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0C9FBD591AE8466A001FB601 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconConfigViewController.swift; sourceTree = "<group>"; };
+		0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +141,9 @@
 			isa = PBXGroup;
 			children = (
 				0C86246E1AB91A290042CAA8 /* AppDelegate.swift */,
-				0C8624701AB91A290042CAA8 /* ViewController.swift */,
+				0C9FBD591AE8466A001FB601 /* MainViewController.swift */,
+				0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */,
+				0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */,
 				0C8624721AB91A290042CAA8 /* Main.storyboard */,
 				0C8624751AB91A290042CAA8 /* Images.xcassets */,
 				0C8624771AB91A290042CAA8 /* LaunchScreen.xib */,
@@ -370,9 +376,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */,
 				0C8624911AB91E640042CAA8 /* README.md in Sources */,
-				0C8624711AB91A290042CAA8 /* ViewController.swift in Sources */,
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
+				0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */,
+				0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +536,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -539,6 +548,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
