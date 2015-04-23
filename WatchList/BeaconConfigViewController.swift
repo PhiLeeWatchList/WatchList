@@ -63,6 +63,8 @@ class BeaconConfigViewController: UIViewController {
     
     @IBAction func onDone(sender: AnyObject) {
         //if all fields are good, then segue out and put us into transmit mode.
+        
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func onShare(sender: AnyObject) {
