@@ -23,6 +23,7 @@
 		0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD591AE8466A001FB601 /* MainViewController.swift */; };
 		0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */; };
 		0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */; };
+		9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B42541AE8D53B0010F7EB /* tableRowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		0C9FBD591AE8466A001FB601 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconConfigViewController.swift; sourceTree = "<group>"; };
 		0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
+		9B8B42541AE8D53B0010F7EB /* tableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tableRowController.swift; path = ../WatchList/tableRowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		0C9FBD371AE6F691001FB601 /* WatchList WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9B8B42541AE8D53B0010F7EB /* tableRowController.swift */,
 				0C9FBD3B1AE6F691001FB601 /* InterfaceController.swift */,
 				0C9FBD3D1AE6F691001FB601 /* NotificationController.swift */,
 				0C9FBD3F1AE6F691001FB601 /* Images.xcassets */,
@@ -396,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */,
 				0C9FBD3E1AE6F691001FB601 /* NotificationController.swift in Sources */,
 				0C9FBD3C1AE6F691001FB601 /* InterfaceController.swift in Sources */,
 			);
@@ -620,6 +624,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -629,8 +634,11 @@
 				IBSC_MODULE = WatchList_WatchKit_Extension;
 				INFOPLIST_FILE = "WatchList WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WatchList WatchKit App/WatchList WatchKit App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
@@ -640,13 +648,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = WatchList_WatchKit_Extension;
 				INFOPLIST_FILE = "WatchList WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WatchList WatchKit App/WatchList WatchKit App-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
@@ -689,6 +700,7 @@
 				0C9FBD551AE6F691001FB601 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C9FBD571AE6F691001FB601 /* Build configuration list for PBXNativeTarget "WatchList WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -697,6 +709,7 @@
 				0C9FBD531AE6F691001FB601 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

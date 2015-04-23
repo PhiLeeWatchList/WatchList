@@ -10,8 +10,28 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="WatchList_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <label alignment="left" text="WatchList" id="CbK-z6-Gsv"/>
+                        <table alignment="left" id="Dhq-2W-8lL">
+                            <items>
+                                <tableRow identifier="tableRowController" id="l4l-QS-gFa" customClass="tableRowController" customModule="WatchList_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="XmC-YB-VoZ">
+                                        <items>
+                                            <imageView width="40" alignment="left" image="lee" id="uEI-yB-wBY"/>
+                                            <label alignment="left" text="Name" numberOfLines="3" id="DhR-w7-wEI">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="tableRowLable" destination="DhR-w7-wEI" id="7Ii-Aa-Ebk"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
                     </items>
+                    <connections>
+                        <outlet property="table" destination="Dhq-2W-8lL" id="eqg-1F-hDZ"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
