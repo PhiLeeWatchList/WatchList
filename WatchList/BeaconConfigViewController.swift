@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+import CoreBluetooth
 
 class BeaconConfigViewController: UIViewController {
     
@@ -17,6 +19,9 @@ class BeaconConfigViewController: UIViewController {
     @IBOutlet weak var minorText: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var messageLabel: UILabel!
+    
+    var majorInt:UInt16 = 0
+    var minorInt:UInt16 = 0
     
     
     override func viewDidLoad() {
@@ -59,14 +64,19 @@ class BeaconConfigViewController: UIViewController {
     
     
     @IBAction func onNewButton(sender: AnyObject) {
+        self.guidText.text = self.randomGUID()
     }
     
     @IBAction func onDone(sender: AnyObject) {
         //if all fields are good, then segue out and put us into transmit mode.
-        
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.TRANSMIT_ON, object: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func onShare(sender: AnyObject) {
+    }
+    
+    func randomGUID() -> String {
+        return NSUUID().UUIDString;
     }
 }
