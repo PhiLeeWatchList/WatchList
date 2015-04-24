@@ -10,8 +10,9 @@ import UIKit
 import WatchKit
 
 class tableRowController: NSObject {
-   
-    @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
 
+    @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
+    
+    
     
 }
