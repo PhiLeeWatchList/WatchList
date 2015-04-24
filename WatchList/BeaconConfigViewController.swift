@@ -39,13 +39,10 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
     }
     
     func layoutForDevices() {
-        
-        
         self.newButton.layer.cornerRadius = 6.0
         self.newButton.layer.masksToBounds = true
         self.newButton.layer.borderColor = UIColor.init(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor
         self.newButton.layer.borderWidth = 1.0
-        
         
         self.majorText.layer.cornerRadius = 6.0
         self.majorText.layer.masksToBounds = true
@@ -57,7 +54,6 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
         self.minorText.layer.borderColor = UIColor.init(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor
         self.minorText.layer.borderWidth = 1.0
         
-        
         self.doneButton.layer.cornerRadius = 6.0
         self.doneButton.layer.masksToBounds = true
         self.doneButton.layer.borderColor = UIColor.init(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor
@@ -66,16 +62,10 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
     
     
     @IBAction func onNewButton(sender: AnyObject) {
-        self.guidText.text = self.randomGUID()
-        self.guid = self.guidText.text
-        
-        self.majorInt = UInt16(arc4random_uniform(65535))
-        self.minorInt = UInt16(arc4random_uniform(65535))
-        
-        println("major: \(self.majorInt), minor \(self.minorInt)")
-        self.majorText.text = String(self.majorInt)
-        self.minorText.text = String(self.minorInt)
+        self.randomBeaconValues()
     }
+    
+    
     
     @IBAction func onDone(sender: AnyObject) {
         //if all fields are good, then segue out and put us into transmit mode.
@@ -89,14 +79,24 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
         picker.mailComposeDelegate = self
         picker.setSubject("WatchList Friend ID")
         
-        picker.setMessageBody("Your friend whoever has sent you a WatchList friend code!  They must really like you! Copy these values into your friend list and then whoever will be able to see you around corners!!!!  Insane I know!!! <br><br> GUID: \(self.guid) <br> Major: \(self.majorInt) <br> Minor: \(self.minorInt)", isHTML: true)
+        picker.setMessageBody("Your friend whoever has sent you a WatchList friend code!  They must really like you! Copy these values into your friend list and then whoever will be able to see you around corners!!!!  Insane I know!!! <br><br> <b>GUID:</b> \(self.guid) <br> <b>Major:</b> \(self.majorInt) <br> <b>Minor:</b> \(self.minorInt)", isHTML: true)
         
         presentViewController(picker, animated: true, completion: nil)
     }
     
-    func randomGUID() -> String {
-        return NSUUID().UUIDString;
+    func randomBeaconValues() {
+        
+        self.guidText.text = NSUUID().UUIDString;
+        self.guid = self.guidText.text
+        
+        self.majorInt = UInt16(arc4random_uniform(65535))
+        self.minorInt = UInt16(arc4random_uniform(65535))
+        
+        println("major: \(self.majorInt), minor \(self.minorInt)")
+        self.majorText.text = String(self.majorInt)
+        self.minorText.text = String(self.minorInt)
     }
+    
     
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         dismissViewControllerAnimated(true, completion: nil)
