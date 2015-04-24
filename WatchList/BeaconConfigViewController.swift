@@ -9,8 +9,9 @@
 import UIKit
 import CoreLocation
 import CoreBluetooth
+import MessageUI
 
-class BeaconConfigViewController: UIViewController {
+class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     
     @IBOutlet weak var newButton: UIButton!
@@ -22,6 +23,7 @@ class BeaconConfigViewController: UIViewController {
     
     var majorInt:UInt16 = 0
     var minorInt:UInt16 = 0
+    var guid:String = "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0"
     
     
     override func viewDidLoad() {
@@ -65,18 +67,39 @@ class BeaconConfigViewController: UIViewController {
     
     @IBAction func onNewButton(sender: AnyObject) {
         self.guidText.text = self.randomGUID()
+        self.guid = self.guidText.text
+        
+        self.majorInt = UInt16(arc4random_uniform(65535))
+        self.minorInt = UInt16(arc4random_uniform(65535))
+        
+        println("major: \(self.majorInt), minor \(self.minorInt)")
+        self.majorText.text = String(self.majorInt)
+        self.minorText.text = String(self.minorInt)
     }
     
     @IBAction func onDone(sender: AnyObject) {
         //if all fields are good, then segue out and put us into transmit mode.
         NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.TRANSMIT_ON, object: nil)
         self.navigationController?.popViewControllerAnimated(true)
+        
     }
     
     @IBAction func onShare(sender: AnyObject) {
+        var picker = MFMailComposeViewController()
+        picker.mailComposeDelegate = self
+        picker.setSubject("WatchList Friend ID")
+        
+        picker.setMessageBody("Your friend whoever has sent you a WatchList friend code!  They must really like you! Copy these values into your friend list and then whoever will be able to see you around corners!!!!  Insane I know!!! <br><br> GUID: \(self.guid) <br> Major: \(self.majorInt) <br> Minor: \(self.minorInt)", isHTML: true)
+        
+        presentViewController(picker, animated: true, completion: nil)
     }
     
     func randomGUID() -> String {
         return NSUUID().UUIDString;
     }
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }
