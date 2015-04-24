@@ -14,6 +14,8 @@ class InterfaceController: WKInterfaceController {
 
     @IBOutlet weak var table: WKInterfaceTable!
     
+    @IBOutlet weak var noOneHereLabel: WKInterfaceLabel!
+    
     var users = [String]()
     
     var tableCreated = false
@@ -43,7 +45,10 @@ class InterfaceController: WKInterfaceController {
             
             if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
                 users = NSUserDefaults.standardUserDefaults().objectForKey("users") as! [String]
+                
             }
+            
+            noOneHereLabel.setHidden(true)
             
             users.append(user)
             
@@ -58,8 +63,9 @@ class InterfaceController: WKInterfaceController {
         
         if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
             users = NSUserDefaults.standardUserDefaults().objectForKey("users") as! [String]
+            noOneHereLabel.setHidden(true)
         } else {
-            users.append("No one has arrived yet")
+            noOneHereLabel.setHidden(false)
         }
         
         refreshTable()
