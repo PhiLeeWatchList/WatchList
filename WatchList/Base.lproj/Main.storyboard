@@ -80,19 +80,30 @@
                                     <segue destination="Ref-a4-mPc" kind="show" id="PVD-o9-Gs2"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="There is no one here.  I has sad." translatesAutoresizingMaskIntoConstraints="NO" id="jiE-Ru-wnn">
+                                <rect key="frame" x="16" y="213" width="568" height="243"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.43880208329999998" green="0.57097800929999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="jiE-Ru-wnn" firstAttribute="top" secondItem="Ey4-pi-jl4" secondAttribute="bottom" constant="31" id="1pe-ZM-F53"/>
                             <constraint firstItem="jcd-VF-ufV" firstAttribute="leading" secondItem="hkb-HG-2Bn" secondAttribute="leadingMargin" constant="-24" id="DYM-Ve-Wx8"/>
                             <constraint firstItem="ExG-97-M5U" firstAttribute="leading" secondItem="eDe-oo-8oW" secondAttribute="trailing" constant="8" id="EAp-2t-EM2"/>
                             <constraint firstItem="2qQ-fD-yuC" firstAttribute="top" secondItem="jcd-VF-ufV" secondAttribute="bottom" constant="20" id="HN9-OY-fm2"/>
+                            <constraint firstItem="jiE-Ru-wnn" firstAttribute="leading" secondItem="hkb-HG-2Bn" secondAttribute="leadingMargin" id="T8F-bc-ixZ"/>
                             <constraint firstItem="jcd-VF-ufV" firstAttribute="top" secondItem="ob6-Q0-o8L" secondAttribute="bottom" constant="63" id="TTl-vO-Hkv"/>
                             <constraint firstAttribute="centerX" secondItem="Ey4-pi-jl4" secondAttribute="centerX" id="Ujd-g6-49u"/>
                             <constraint firstAttribute="centerX" secondItem="2qQ-fD-yuC" secondAttribute="centerX" id="V3g-wI-Vnf"/>
                             <constraint firstItem="ExG-97-M5U" firstAttribute="trailing" secondItem="hkb-HG-2Bn" secondAttribute="trailingMargin" id="XHS-ZM-AsR"/>
                             <constraint firstItem="Ey4-pi-jl4" firstAttribute="top" secondItem="2qQ-fD-yuC" secondAttribute="bottom" constant="20" id="aeY-SE-IpP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jcd-VF-ufV" secondAttribute="trailing" constant="-24" id="bK7-oW-mc6"/>
+                            <constraint firstItem="gMz-bC-9Sm" firstAttribute="top" secondItem="jiE-Ru-wnn" secondAttribute="bottom" constant="100" id="hZD-Ob-pTZ"/>
                             <constraint firstItem="ExG-97-M5U" firstAttribute="top" secondItem="ob6-Q0-o8L" secondAttribute="bottom" constant="16" id="iP8-Yc-fpf"/>
+                            <constraint firstItem="jiE-Ru-wnn" firstAttribute="trailing" secondItem="hkb-HG-2Bn" secondAttribute="trailingMargin" id="lnL-6q-VPW"/>
                             <constraint firstItem="ExG-97-M5U" firstAttribute="centerY" secondItem="eDe-oo-8oW" secondAttribute="centerY" id="t2s-hi-EqZ"/>
                         </constraints>
                     </view>
@@ -103,6 +114,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
+                        <outlet property="textField" destination="jiE-Ru-wnn" id="qHu-B1-d40"/>
                         <outlet property="transmitLabel" destination="eDe-oo-8oW" id="d39-Pu-w2t"/>
                         <outlet property="transmitSwitch" destination="ExG-97-M5U" id="5UM-7e-K3U"/>
                     </connections>

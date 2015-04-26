@@ -38,7 +38,7 @@
 #import "EasedValue.h"
 
 #define DEBUG_CENTRAL NO
-#define DEBUG_PERIPHERAL YES
+#define DEBUG_PERIPHERAL NO
 #define DEBUG_PROXIMITY NO
 
 #define UPDATE_INTERVAL 1.0f
@@ -255,7 +255,7 @@
         
     } complete:^{
         // timeout the beacon to unknown position
-        // it it's still active it will be updated by central delegate "didDiscoverPeripheral"
+        // if it's still active it will be updated by central delegate "didDiscoverPeripheral"
         identifierRange = INDetectorRangeUnknown;
     }];
 }
