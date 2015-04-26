@@ -219,34 +219,44 @@
                                 <color key="textColor" red="0.72783564810000001" green="0.81281828710000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5H6-ef-Q7e">
-                                <rect key="frame" x="72" y="207" width="80" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Jane" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5H6-ef-Q7e">
+                                <rect key="frame" x="55" y="207" width="529" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="Jc7-ib-ooh"/>
                                 </constraints>
                                 <color key="textColor" red="0.43880208329999998" green="0.57097800929999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Jc7-ib-ooh"/>
+                                    </mask>
+                                </variation>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Major" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGo-w9-3eh">
-                                <rect key="frame" x="16" y="210" width="48" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGo-w9-3eh">
+                                <rect key="frame" x="16" y="210" width="31" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.72783564810000001" green="0.81281828710000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SlB-Hi-mZB">
-                                <rect key="frame" x="217" y="207" width="80" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Doe" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SlB-Hi-mZB">
+                                <rect key="frame" x="55" y="241" width="529" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="IUY-ph-eC1"/>
                                 </constraints>
                                 <color key="textColor" red="0.43880208329999998" green="0.57097800929999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="IUY-ph-eC1"/>
+                                    </mask>
+                                </variation>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfU-im-rVi">
-                                <rect key="frame" x="162" y="210" width="47" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfU-im-rVi">
+                                <rect key="frame" x="16" y="244" width="30" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.72783564810000001" green="0.81281828710000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -258,6 +268,7 @@
                             <constraint firstItem="x1e-y5-H8o" firstAttribute="leading" secondItem="Uuy-cf-Iy1" secondAttribute="leadingMargin" id="8NZ-k4-gzI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cZV-D5-A36" secondAttribute="trailing" constant="-24" id="BZK-av-8Bq"/>
                             <constraint firstItem="SlB-Hi-mZB" firstAttribute="leading" secondItem="KfU-im-rVi" secondAttribute="trailing" constant="8" id="C8y-rX-oJW"/>
+                            <constraint firstItem="KfU-im-rVi" firstAttribute="leading" secondItem="Uuy-cf-Iy1" secondAttribute="leadingMargin" id="EL8-JJ-kkE"/>
                             <constraint firstAttribute="centerX" secondItem="TxV-eq-ora" secondAttribute="centerX" id="IBd-ha-VT0"/>
                             <constraint firstItem="cZV-D5-A36" firstAttribute="top" secondItem="IRO-hH-0vT" secondAttribute="bottom" constant="63" id="JTr-PZ-Y0U"/>
                             <constraint firstItem="x1e-y5-H8o" firstAttribute="leading" secondItem="Uuy-cf-Iy1" secondAttribute="leadingMargin" id="JsK-37-jgX"/>
@@ -266,18 +277,23 @@
                             <constraint firstItem="0PN-LD-QEy" firstAttribute="top" secondItem="IRO-hH-0vT" secondAttribute="bottom" constant="20" id="QXQ-r2-5nv"/>
                             <constraint firstItem="5H6-ef-Q7e" firstAttribute="leading" secondItem="NGo-w9-3eh" secondAttribute="trailing" constant="8" id="QzE-KW-E8I"/>
                             <constraint firstItem="yG9-fU-aDp" firstAttribute="top" secondItem="RdR-g3-ekw" secondAttribute="bottom" constant="31" id="UZG-bs-aXI"/>
+                            <constraint firstItem="5H6-ef-Q7e" firstAttribute="trailing" secondItem="Uuy-cf-Iy1" secondAttribute="trailingMargin" id="Ubk-jf-B53"/>
                             <constraint firstItem="x1e-y5-H8o" firstAttribute="top" secondItem="RdR-g3-ekw" secondAttribute="bottom" constant="11" id="V5y-Ze-1xh"/>
+                            <constraint firstItem="KfU-im-rVi" firstAttribute="top" secondItem="NGo-w9-3eh" secondAttribute="bottom" constant="11" id="Zwi-WJ-qer"/>
                             <constraint firstItem="0PN-LD-QEy" firstAttribute="trailing" secondItem="Uuy-cf-Iy1" secondAttribute="trailingMargin" id="aWU-dn-Bhw"/>
+                            <constraint firstItem="SlB-Hi-mZB" firstAttribute="centerY" secondItem="KfU-im-rVi" secondAttribute="centerY" id="dfv-0w-96U"/>
                             <constraint firstItem="x1e-y5-H8o" firstAttribute="top" secondItem="yG9-fU-aDp" secondAttribute="bottom" constant="6" id="dwd-BP-bhC"/>
                             <constraint firstItem="x1e-y5-H8o" firstAttribute="leading" secondItem="Uuy-cf-Iy1" secondAttribute="leadingMargin" id="gVy-TG-t6g"/>
                             <constraint firstItem="TxV-eq-ora" firstAttribute="top" secondItem="SlB-Hi-mZB" secondAttribute="bottom" constant="100" id="glj-JJ-5Nk"/>
                             <constraint firstItem="yG9-fU-aDp" firstAttribute="leading" secondItem="Uuy-cf-Iy1" secondAttribute="leadingMargin" id="igw-WG-cV8"/>
+                            <constraint firstItem="SlB-Hi-mZB" firstAttribute="trailing" secondItem="Uuy-cf-Iy1" secondAttribute="trailingMargin" id="j8T-4i-dOj"/>
                             <constraint firstItem="cZV-D5-A36" firstAttribute="leading" secondItem="Uuy-cf-Iy1" secondAttribute="leadingMargin" constant="-24" id="ktl-NF-3l3"/>
                             <constraint firstItem="KfU-im-rVi" firstAttribute="centerY" secondItem="NGo-w9-3eh" secondAttribute="centerY" id="lCs-ob-1ac"/>
                             <constraint firstItem="KfU-im-rVi" firstAttribute="leading" secondItem="5H6-ef-Q7e" secondAttribute="trailing" constant="10" id="oKw-nt-ecT"/>
                             <constraint firstItem="c5G-lK-WVf" firstAttribute="top" secondItem="TxV-eq-ora" secondAttribute="bottom" constant="80" id="qMP-J5-q2x"/>
                             <constraint firstItem="NGo-w9-3eh" firstAttribute="top" secondItem="x1e-y5-H8o" secondAttribute="bottom" constant="8" id="rOo-EB-XMf"/>
                             <constraint firstItem="NGo-w9-3eh" firstAttribute="centerY" secondItem="5H6-ef-Q7e" secondAttribute="centerY" constant="-0.5" id="s01-xj-fho"/>
+                            <constraint firstItem="SlB-Hi-mZB" firstAttribute="leading" secondItem="5H6-ef-Q7e" secondAttribute="leading" id="twa-sx-L9Y"/>
                             <constraint firstItem="NGo-w9-3eh" firstAttribute="leading" secondItem="Uuy-cf-Iy1" secondAttribute="leadingMargin" id="vQe-vh-NjQ"/>
                             <constraint firstItem="x1e-y5-H8o" firstAttribute="trailing" secondItem="Uuy-cf-Iy1" secondAttribute="trailingMargin" id="xeU-d3-Ko6"/>
                             <constraint firstItem="cZV-D5-A36" firstAttribute="top" secondItem="0PN-LD-QEy" secondAttribute="bottom" constant="22" id="yPC-pp-Emb"/>
@@ -286,6 +302,10 @@
                             <mask key="constraints">
                                 <exclude reference="yPC-pp-Emb"/>
                                 <exclude reference="V5y-Ze-1xh"/>
+                                <exclude reference="lCs-ob-1ac"/>
+                                <exclude reference="oKw-nt-ecT"/>
+                                <exclude reference="C8y-rX-oJW"/>
+                                <exclude reference="Q0E-rH-M1K"/>
                                 <exclude reference="glj-JJ-5Nk"/>
                             </mask>
                         </variation>
@@ -302,10 +322,10 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="doneButton" destination="TxV-eq-ora" id="m4C-m7-9DP"/>
+                        <outlet property="firstText" destination="5H6-ef-Q7e" id="O5X-xX-7BG"/>
                         <outlet property="guidText" destination="x1e-y5-H8o" id="HJq-qK-16E"/>
-                        <outlet property="majorText" destination="5H6-ef-Q7e" id="fxo-5H-1CW"/>
+                        <outlet property="lastText" destination="SlB-Hi-mZB" id="tJI-6E-RA7"/>
                         <outlet property="messageLabel" destination="0PN-LD-QEy" id="zEM-vH-vtQ"/>
-                        <outlet property="minorText" destination="SlB-Hi-mZB" id="2wO-D6-nMD"/>
                         <outlet property="newButton" destination="RdR-g3-ekw" id="4Ix-tx-pjL"/>
                     </connections>
                 </viewController>
