@@ -7,34 +7,35 @@
 //
 
 import UIKit
-import CoreLocation
+//import CoreLocation //TODO: remove ibeacon
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDelegate { //TODO: remove ibeacon
 
     var window: UIWindow?
-    var locationManager: CLLocationManager?
+    // var locationManager: CLLocationManager? //TODO: remove ibeacon
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         application.statusBarHidden = true
         
-        self.locationManager = CLLocationManager()
-        self.locationManager!.delegate = self
-        
-        //allow user to accept location
-        self.locationManager!.requestAlwaysAuthorization()
-        
-        if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
-        {
-            //allow user to accept location when backgrounded
-            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
-        }
-        else
-        {
-            //do iOS 7
-        }
+        //TODO: remove ibeacon
+//        self.locationManager = CLLocationManager()
+//        self.locationManager!.delegate = self
+//        
+//        //allow user to accept location
+//        self.locationManager!.requestAlwaysAuthorization()
+//        
+//        if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
+//        {
+//            //allow user to accept location when backgrounded
+//            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+//        }
+//        else
+//        {
+//            //do iOS 7
+//        }
         
         
         
@@ -63,44 +64,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
-        /*
-        A user can transition in or out of a region while the application is not running. When this happens CoreLocation will launch the application momentarily, call this delegate method and we will let the user know via a local notification.
-        */
-        let notification: UILocalNotification = UILocalNotification();
-        
-        if(state == CLRegionState.Inside)
-        {
-            notification.alertBody = "You're inside the region";
-        }
-        else if(state == CLRegionState.Outside)
-        {
-            notification.alertBody = "You're outside the region";
-        }
-        else
-        {
-            return;
-        }
-        
-        /*
-        If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
-        If it's not, iOS will display the notification to the user.
-        */
-        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-    }
-    
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        
-        // If the application is in the foreground, we will notify the user of the region's state via an alert.
-        
-        let alertController = UIAlertController(title: "Detection!", message:
-            notification.alertBody, preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
-        
-        
-        self.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
-        
-    }
+    //TODO: remove ibeacon
+//    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
+//        /*
+//        A user can transition in or out of a region while the application is not running. When this happens CoreLocation will launch the application momentarily, call this delegate method and we will let the user know via a local notification.
+//        */
+//        let notification: UILocalNotification = UILocalNotification();
+//        
+//        if(state == CLRegionState.Inside)
+//        {
+//            notification.alertBody = "You're inside the region";
+//        }
+//        else if(state == CLRegionState.Outside)
+//        {
+//            notification.alertBody = "You're outside the region";
+//        }
+//        else
+//        {
+//            return;
+//        }
+//        
+//        /*
+//        If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
+//        If it's not, iOS will display the notification to the user.
+//        */
+//        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+//    }
+//    
+//    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+//        
+//        // If the application is in the foreground, we will notify the user of the region's state via an alert.
+//        
+//        let alertController = UIAlertController(title: "Detection!", message:
+//            notification.alertBody, preferredStyle: UIAlertControllerStyle.Alert)
+//        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+//        
+//        
+//        self.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+//        
+//    }
 
 
 }

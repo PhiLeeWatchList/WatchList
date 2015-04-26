@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		0C47B2A21AEAAAAC00902891 /* AppIcon_180px.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C47B2A11AEAAAAC00902891 /* AppIcon_180px.png */; };
 		0C47B2A41AEACC0F00902891 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2A31AEACC0F00902891 /* Constants.swift */; };
+		0C47B2AC1AEC5F9D00902891 /* INBeaconService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2AB1AEC5F9D00902891 /* INBeaconService.m */; };
+		0C47B2AF1AEC5FF400902891 /* CLBeacon+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2AE1AEC5FF400902891 /* CLBeacon+Ext.m */; };
+		0C47B2B61AEC600C00902891 /* CBCentralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2B11AEC600C00902891 /* CBCentralManager+Ext.m */; };
+		0C47B2B71AEC600C00902891 /* CBPeripheralManager+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2B31AEC600C00902891 /* CBPeripheralManager+Ext.m */; };
+		0C47B2B81AEC600C00902891 /* CBUUID+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2B51AEC600C00902891 /* CBUUID+Ext.m */; };
+		0C47B2BC1AEC602700902891 /* GCDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2BB1AEC602700902891 /* GCDUtilities.m */; };
+		0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2BE1AEC603A00902891 /* EasedValue.m */; };
 		0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C86246E1AB91A290042CAA8 /* AppDelegate.swift */; };
 		0C8624741AB91A290042CAA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624721AB91A290042CAA8 /* Main.storyboard */; };
 		0C8624761AB91A290042CAA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624751AB91A290042CAA8 /* Images.xcassets */; };
@@ -69,6 +76,22 @@
 /* Begin PBXFileReference section */
 		0C47B2A11AEAAAAC00902891 /* AppIcon_180px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_180px.png; sourceTree = "<group>"; };
 		0C47B2A31AEACC0F00902891 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0C47B2A91AEC5F9C00902891 /* WatchList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WatchList-Bridging-Header.h"; sourceTree = "<group>"; };
+		0C47B2AA1AEC5F9D00902891 /* INBeaconService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INBeaconService.h; sourceTree = "<group>"; };
+		0C47B2AB1AEC5F9D00902891 /* INBeaconService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INBeaconService.m; sourceTree = "<group>"; };
+		0C47B2AD1AEC5FF400902891 /* CLBeacon+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+Ext.h"; sourceTree = "<group>"; };
+		0C47B2AE1AEC5FF400902891 /* CLBeacon+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+Ext.m"; sourceTree = "<group>"; };
+		0C47B2B01AEC600C00902891 /* CBCentralManager+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBCentralManager+Ext.h"; sourceTree = "<group>"; };
+		0C47B2B11AEC600C00902891 /* CBCentralManager+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBCentralManager+Ext.m"; sourceTree = "<group>"; };
+		0C47B2B21AEC600C00902891 /* CBPeripheralManager+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheralManager+Ext.h"; sourceTree = "<group>"; };
+		0C47B2B31AEC600C00902891 /* CBPeripheralManager+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheralManager+Ext.m"; sourceTree = "<group>"; };
+		0C47B2B41AEC600C00902891 /* CBUUID+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBUUID+Ext.h"; sourceTree = "<group>"; };
+		0C47B2B51AEC600C00902891 /* CBUUID+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBUUID+Ext.m"; sourceTree = "<group>"; };
+		0C47B2B91AEC602700902891 /* GCDSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDSingleton.h; sourceTree = "<group>"; };
+		0C47B2BA1AEC602700902891 /* GCDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDUtilities.h; sourceTree = "<group>"; };
+		0C47B2BB1AEC602700902891 /* GCDUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDUtilities.m; sourceTree = "<group>"; };
+		0C47B2BD1AEC603A00902891 /* EasedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasedValue.h; sourceTree = "<group>"; };
+		0C47B2BE1AEC603A00902891 /* EasedValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasedValue.m; sourceTree = "<group>"; };
 		0C8624691AB91A290042CAA8 /* WatchList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C86246D1AB91A290042CAA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C86246E1AB91A290042CAA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +143,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C47B2A71AEC5F6D00902891 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				0C47B2A81AEC5F7F00902891 /* Vicinity */,
+			);
+			path = 3rdParty;
+			sourceTree = "<group>";
+		};
+		0C47B2A81AEC5F7F00902891 /* Vicinity */ = {
+			isa = PBXGroup;
+			children = (
+				0C47B2AA1AEC5F9D00902891 /* INBeaconService.h */,
+				0C47B2AB1AEC5F9D00902891 /* INBeaconService.m */,
+				0C47B2AD1AEC5FF400902891 /* CLBeacon+Ext.h */,
+				0C47B2AE1AEC5FF400902891 /* CLBeacon+Ext.m */,
+				0C47B2B01AEC600C00902891 /* CBCentralManager+Ext.h */,
+				0C47B2B11AEC600C00902891 /* CBCentralManager+Ext.m */,
+				0C47B2B21AEC600C00902891 /* CBPeripheralManager+Ext.h */,
+				0C47B2B31AEC600C00902891 /* CBPeripheralManager+Ext.m */,
+				0C47B2B41AEC600C00902891 /* CBUUID+Ext.h */,
+				0C47B2B51AEC600C00902891 /* CBUUID+Ext.m */,
+				0C47B2B91AEC602700902891 /* GCDSingleton.h */,
+				0C47B2BA1AEC602700902891 /* GCDUtilities.h */,
+				0C47B2BB1AEC602700902891 /* GCDUtilities.m */,
+				0C47B2BD1AEC603A00902891 /* EasedValue.h */,
+				0C47B2BE1AEC603A00902891 /* EasedValue.m */,
+				0C47B2A91AEC5F9C00902891 /* WatchList-Bridging-Header.h */,
+			);
+			path = Vicinity;
+			sourceTree = "<group>";
+		};
 		0C8624601AB91A290042CAA8 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +208,7 @@
 				0C8624721AB91A290042CAA8 /* Main.storyboard */,
 				0C8624751AB91A290042CAA8 /* Images.xcassets */,
 				0C8624771AB91A290042CAA8 /* LaunchScreen.xib */,
+				0C47B2A71AEC5F6D00902891 /* 3rdParty */,
 				0C86246C1AB91A290042CAA8 /* Supporting Files */,
 			);
 			path = WatchList;
@@ -391,11 +446,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C47B2B81AEC600C00902891 /* CBUUID+Ext.m in Sources */,
 				0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */,
 				0C8624911AB91E640042CAA8 /* README.md in Sources */,
+				0C47B2BC1AEC602700902891 /* GCDUtilities.m in Sources */,
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
+				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
+				0C47B2AC1AEC5F9D00902891 /* INBeaconService.m in Sources */,
+				0C47B2AF1AEC5FF400902891 /* CLBeacon+Ext.m in Sources */,
 				0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */,
+				0C47B2B61AEC600C00902891 /* CBCentralManager+Ext.m in Sources */,
 				0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */,
+				0C47B2B71AEC600C00902891 /* CBPeripheralManager+Ext.m in Sources */,
 				0C47B2A41AEACC0F00902891 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,10 +611,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = WatchList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WatchList/3rdParty/Vicinity/WatchList-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -561,10 +626,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = WatchList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WatchList/3rdParty/Vicinity/WatchList-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
