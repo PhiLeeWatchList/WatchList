@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class MainViewController: UIViewController, INBeaconServiceDelegate {
     
     
@@ -93,10 +92,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         
         if(sendNotification && !self.notificationSent) {
-            self.notificationSent = false
-            let notification: UILocalNotification = UILocalNotification();
+            self.notificationSent = true
+            let notification: UILocalNotification = UILocalNotification()
             
-            notification.alertBody = "You're friend is here!!!";
+            notification.alertBody = "You're friend is here!!!"
+            notification.soundName = UILocalNotificationDefaultSoundName
             /*
             If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
             If it's not, iOS will display the notification to the user.
