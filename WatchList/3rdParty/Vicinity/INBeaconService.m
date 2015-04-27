@@ -73,14 +73,25 @@
 }
 
 #pragma mark Singleton
-+ (INBeaconService *)singleton
-{
-    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
-        return [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
-    });
-}
+//+ (INBeaconService *)singleton
+//{
+//    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+//        return [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
+//    });
+//}
 #pragma mark -
 
+
++ (instancetype)singleton
+{
+    static INBeaconService *singleton = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        singleton = [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
+        // Do any other initialisation stuff here
+    });
+    return singleton;
+}
 
 - (id)initWithIdentifier:(NSString *)theIdentifier
 {
@@ -262,7 +273,7 @@
         //NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
         
         CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-        NSLog(@"service uuid: %@", [uuid representativeString]);
+        //NSLog(@"service uuid: %@", [uuid representativeString]);
         
         //NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
         
@@ -272,12 +283,12 @@
             //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
             if ([[[uuid representativeString] uppercaseString] isEqualToString:[self.testIdentifierArray[i] UUIDString]]) {
                 
-                NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+                //NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
                 
                 [self addNewFoundIdentifierArray:uuid];
                 
                 CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-                NSLog(@"...service uuid: %@", [uuid representativeString]);
+                //NSLog(@"...service uuid: %@", [uuid representativeString]);
             }
         }
     }
@@ -308,7 +319,7 @@
 //            [delegate service:self foundDeviceUUID:[self.testIdentifierArray[i] representativeString] withRange:identifierRange];
 //        }
 
-        for (int i; i<self.foundIdentifierArray.count; i++) {
+        for (int i=0; i<self.foundIdentifierArray.count; i++) {
             
             [delegate service:self foundDeviceUUID:[self.foundIdentifierArray[i] representativeString] withRange:identifierRange];
         }
@@ -391,10 +402,13 @@
 
 - (void) addNewFoundIdentifierArray:(CBUUID *) newIdentifier {
     if (self.foundIdentifierArray.count<=0) {
+        
+        NSLog(@"adding: %@", [newIdentifier UUIDString]);
         [self.foundIdentifierArray addObject:newIdentifier];
     }
     for (int i=0; i<self.foundIdentifierArray.count; i++) {
         if (![[newIdentifier UUIDString] isEqualToString:[self.foundIdentifierArray[i] UUIDString]]) {
+            NSLog(@"adding: %@", [newIdentifier UUIDString]);
             [self.foundIdentifierArray addObject:newIdentifier];
         }
     }
