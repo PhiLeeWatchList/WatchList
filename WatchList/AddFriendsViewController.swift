@@ -42,8 +42,8 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         return users.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> TableViewCell {
+        let cell = TableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         
         if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
             var arrayOfObjectsUnarchivedData = defaults.dataForKey("users")!
@@ -54,7 +54,8 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         }
         
         for (index, user) in enumerate(users) {
-            cell.textLabel?.text = user.first + " " + user.last
+            cell.initials?.text = Array(arrayLiteral: user.first)[0] + Array(arrayLiteral: user.last)[0]
+            cell.label?.text = user.first + " " + user.last
         }
 
         return cell

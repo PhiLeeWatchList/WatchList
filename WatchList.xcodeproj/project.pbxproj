@@ -34,6 +34,7 @@
 		0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */; };
 		9B4367911AEECD420001B432 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4367901AEECD420001B432 /* User.swift */; };
 		9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B42541AE8D53B0010F7EB /* tableRowController.swift */; };
+		9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		9B43678F1AEEC2150001B432 /* WatchList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WatchList.entitlements; sourceTree = "<group>"; };
 		9B4367901AEECD420001B432 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9B8B42541AE8D53B0010F7EB /* tableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tableRowController.swift; path = ../WatchList/tableRowController.swift; sourceTree = "<group>"; };
+		9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 				0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */,
 				0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */,
 				9B4367901AEECD420001B432 /* User.swift */,
+				9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */,
 				0C8624721AB91A290042CAA8 /* Main.storyboard */,
 				0C8624751AB91A290042CAA8 /* Images.xcassets */,
 				0C8624771AB91A290042CAA8 /* LaunchScreen.xib */,
@@ -455,6 +458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */,
 				0C47B2B81AEC600C00902891 /* CBUUID+Ext.m in Sources */,
 				0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */,
 				0C8624911AB91E640042CAA8 /* README.md in Sources */,
