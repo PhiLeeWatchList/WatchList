@@ -148,6 +148,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ref-a4-mPc" id="1NM-dL-9Bd"/>
+                                    <outlet property="delegate" destination="Ref-a4-mPc" id="KRq-OL-0AI"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

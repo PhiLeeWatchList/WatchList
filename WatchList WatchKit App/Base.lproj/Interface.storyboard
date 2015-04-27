@@ -16,10 +16,14 @@
                                 <tableRow identifier="tableRowController" id="l4l-QS-gFa" customClass="tableRowController" customModule="WatchList_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="XmC-YB-VoZ">
                                         <items>
-                                            <imageView width="40" height="40" alignment="left" image="lee" id="uEI-yB-wBY"/>
-                                            <label alignment="left" text="Name" numberOfLines="3" id="DhR-w7-wEI">
+                                            <group width="40" height="40" alignment="left" radius="20" spacing="0.0" id="7UY-kb-6ys" userLabel="ImageHolder">
+                                                <items>
+                                                    <imageView width="40" height="40" alignment="left" image="lee" contentMode="scaleAspectFit" id="uEI-yB-wBY"/>
+                                                </items>
+                                            </group>
+                                            <label width="0.70000000000000007" widthAdjustment="6" alignment="left" verticalAlignment="center" text="Name" numberOfLines="3" id="DhR-w7-wEI">
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                <fontDescription key="font" type="system" pointSize="10"/>
                                             </label>
                                         </items>
                                     </group>

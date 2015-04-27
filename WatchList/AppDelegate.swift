@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import Foundation
+
 //import CoreLocation //TODO: remove ibeacon
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDelegate { //TODO: remove ibeacon
-
+    
+    let guid = ""
+    let firstName = ""
+    let lastName = ""
+    
     var window: UIWindow?
     // var locationManager: CLLocationManager? //TODO: remove ibeacon
 
@@ -62,6 +68,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool
+    {
+        
+        let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)
+            
+            if let queryItems = components?.queryItems as? [NSURLQueryItem]
+            {
+                
+                var newUser = User(guid: queryItems[0].value!,first: queryItems[1].value!,last: queryItems[2].value!)
+                
+//                for (idx: Int, component: NSURLQueryItem) in enumerate(queryItems)
+//                {
+//                    println(component.value!)
+//                    
+//                    switch (idx) {
+//                        case 0 :self.guid = component.value!
+//                        case 1: self.firstName = component.value!
+//                        case 2: self.lastName = component.value!
+//                        default : println("default")
+//                    }
+//                    
+//                    
+//                }
+                
+                var users = [User]()
+                
+                let defaults = NSUserDefaults.standardUserDefaults()
+                
+                if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
+                    var arrayOfObjectsUnarchivedData = defaults.dataForKey("users")!
+                    var users = NSKeyedUnarchiver.unarchiveObjectWithData(arrayOfObjectsUnarchivedData) as! [User]
+                }
+                
+                users.append(newUser)
+                
+                var arrayOfObjectsData = NSKeyedArchiver.archivedDataWithRootObject(users)
+                
+                defaults.setObject(arrayOfObjectsData, forKey: "users")
+                
+                
+            }
+        
+        return true
+        
     }
     
     //TODO: remove ibeacon
