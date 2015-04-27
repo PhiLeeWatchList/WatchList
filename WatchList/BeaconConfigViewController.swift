@@ -42,6 +42,13 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
         
         self.layoutForDevices()
         
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        INBeaconService.singleton().stopBroadcasting()
+        
     }
     
     override func didReceiveMemoryWarning() {

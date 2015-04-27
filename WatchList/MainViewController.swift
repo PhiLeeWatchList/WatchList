@@ -72,8 +72,9 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         println("found device: \(uuid)")
         
         var textFieldString:String = "Your pack is not here. I has sad."
-        var nameString:String = "someone"
+        var nameString:String = self.whoHaveYouFound(uuid.uppercaseString)
         var sendNotification:Bool = false
+        
         
         println("found \(uuid) \(range)")
         let myRange = range.value
@@ -82,15 +83,15 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
              println("unknown")  //it looks like this essentially means "no detection"
         case 1:
             println("far")
-            textFieldString = "I found someone and they are within 60ft!"
+            textFieldString = "I found \(nameString) and they are within 60ft!"
             sendNotification = true
         case 2:
             println("near")
-            textFieldString = "I found someone and they are within 5ft!"
+            textFieldString = "I found \(nameString) and they are within 5ft!"
             sendNotification = true
         case 3:
             println("immediate")
-            textFieldString = "I found someone and they are within makeout distance!"
+            textFieldString = "I found \(nameString) and they are within makeout distance!"
             sendNotification = true
         default:
             println("Something else")
@@ -128,6 +129,26 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         }
     }
     
-    
+    func whoHaveYouFound(uuidString: String) -> String {
+        if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6150") {
+            return "Phil"
+        } else if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6151") {
+            return "Lee"
+        } else if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6152") {
+            return "Lisa"
+        }else if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6153") {
+            return "Phil's iPad"
+        }else if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6154") {
+            return "Jackie"
+        }else if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6155") {
+            return "Chris"
+        }else if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6156") {
+            return "Forrest"
+        }else if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6157") {
+            return "Janna"
+        }
+        
+        return "someone"
+    }
     
 }

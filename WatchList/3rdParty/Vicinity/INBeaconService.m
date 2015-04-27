@@ -47,6 +47,7 @@
 
 @property (nonatomic, strong) NSArray *testArray;
 @property (nonatomic, strong) NSMutableArray *testIdentifierArray;
+@property (nonatomic, strong) NSMutableArray *foundIdentifierArray;
 
 
 @end
@@ -99,6 +100,7 @@
                        @"CB284D88-5317-4FB4-9621-C5A3A49E6157"];
         
         self.testIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
+        self.foundIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
         for (int i; i<self.testArray.count; i++) {
             [self.testIdentifierArray addObject:[CBUUID UUIDWithString:self.testArray[i]]];
         }
@@ -117,6 +119,7 @@
 
 - (void)changeIdentifier:(NSString *)theIdentifier
 {
+    NSLog(@"change identifier: %@", theIdentifier);
     identifier = [CBUUID UUIDWithString:theIdentifier];
 }
 
@@ -181,6 +184,7 @@
 
 - (void)startBroadcasting
 {
+    NSLog(@"I'm Broadcasting: %@", [identifier UUIDString]);
     if (![self canBroadcast])
         return;
     
@@ -218,7 +222,7 @@
 {
     
     NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
-                                      CBAdvertisementDataServiceUUIDsKey:self.testIdentifierArray};
+                                      CBAdvertisementDataServiceUUIDsKey:@[identifier]};
     
     // Start advertising over BLE
     [peripheralManager startAdvertising:advertisingData];
@@ -258,17 +262,19 @@
         //NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
         
         CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-        //NSLog(@"service uuid: %@", [uuid representativeString]);
+        NSLog(@"service uuid: %@", [uuid representativeString]);
         
-        NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
+        //NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
         
         
         for (int i=0; i<self.testIdentifierArray.count; i++) {
             //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
-            NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
+            //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
             if ([[[uuid representativeString] uppercaseString] isEqualToString:[self.testIdentifierArray[i] UUIDString]]) {
                 
                 NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+                
+                [self addNewFoundIdentifierArray:uuid];
                 
                 CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
                 NSLog(@"...service uuid: %@", [uuid representativeString]);
@@ -297,9 +303,14 @@
         
         
         //TODO: report the correct id
-        for (int i; i<self.testIdentifierArray.count; i++) {
+//        for (int i; i<self.testIdentifierArray.count; i++) {
+//            
+//            [delegate service:self foundDeviceUUID:[self.testIdentifierArray[i] representativeString] withRange:identifierRange];
+//        }
+
+        for (int i; i<self.foundIdentifierArray.count; i++) {
             
-            [delegate service:self foundDeviceUUID:[self.testIdentifierArray[i] representativeString] withRange:identifierRange];
+            [delegate service:self foundDeviceUUID:[self.foundIdentifierArray[i] representativeString] withRange:identifierRange];
         }
         
 //        [delegate service:self foundDeviceUUID:[identifier representativeString] withRange:identifierRange];
@@ -375,6 +386,17 @@
             if ([delegate respondsToSelector:@selector(service:bluetoothAvailable:)])
                 [delegate service:self bluetoothAvailable:bluetoothIsEnabledAndAuthorized];
         }];
+    }
+}
+
+- (void) addNewFoundIdentifierArray:(CBUUID *) newIdentifier {
+    if (self.foundIdentifierArray.count<=0) {
+        [self.foundIdentifierArray addObject:newIdentifier];
+    }
+    for (int i=0; i<self.foundIdentifierArray.count; i++) {
+        if (![[newIdentifier UUIDString] isEqualToString:[self.foundIdentifierArray[i] UUIDString]]) {
+            [self.foundIdentifierArray addObject:newIdentifier];
+        }
     }
 }
 @end
