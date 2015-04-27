@@ -81,7 +81,7 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
         picker.mailComposeDelegate = self
         picker.setSubject("WatchList Friend ID")
         
-        picker.setMessageBody("Your friend \(self.firstText.text) has sent you a WatchList friend code!  They must really like you! Click the linke below from your iPhone mail and then \(self.firstText.text) will be able to see you around corners!!!!  Insane I know!!! <br><br> <a src=\"http://watchlist?udid=\(self.guid)&first=\(self.firstText.text)&last=\(self.lastText.text)\">\(self.firstText.text) \(self.lastText.text)</a> </b> <br> <br> <br>   full url: http://watchlist?udid=\(self.guid)&first=\(self.firstText.text)&last=\(self.lastText.text)", isHTML: true)
+        picker.setMessageBody("Your friend \(self.firstText.text) has sent you a WatchList friend code!  They must really like you! Click the linke below from your iPhone mail and then \(self.firstText.text) will be able to see you around corners!!!!  Insane I know!!! <br><br> <a src=\"watchlist://?udid=\(self.guid)&first=\(self.firstText.text)&last=\(self.lastText.text)\">\(self.firstText.text) \(self.lastText.text)</a> </b> <br> <br> <br>   full url: watchlist://?udid=\(self.guid)&first=\(self.firstText.text)&last=\(self.lastText.text)", isHTML: true)
         
         presentViewController(picker, animated: true, completion: nil)
     }
