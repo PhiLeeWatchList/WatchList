@@ -48,6 +48,7 @@ typedef enum {
 @interface INBeaconService : NSObject
 
 - (id)initWithIdentifier:(NSString *)theIdentifier;
+- (void)changeIdentifier:(NSString *)theIdentifier;
 
 - (void)addDelegate:(id<INBeaconServiceDelegate>)delegate;
 - (void)removeDelegate:(id<INBeaconServiceDelegate>)delegate;
