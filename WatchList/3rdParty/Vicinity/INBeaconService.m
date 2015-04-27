@@ -38,16 +38,22 @@
 #import "EasedValue.h"
 
 #define DEBUG_CENTRAL NO
-#define DEBUG_PERIPHERAL NO
+#define DEBUG_PERIPHERAL YES
 #define DEBUG_PROXIMITY NO
 
 #define UPDATE_INTERVAL 1.0f
 
 @interface INBeaconService() <CBPeripheralManagerDelegate, CBCentralManagerDelegate>
+
+@property (nonatomic, strong) NSArray *testArray;
+@property (nonatomic, strong) NSMutableArray *testIdentifierArray;
+
+
 @end
 
 @implementation INBeaconService
 {
+    //TODO: the identifier must be changed to handle transmit beacon vs. lookFor beacons
     CBUUID *identifier;
     INDetectorRange identifierRange;
     
@@ -62,6 +68,7 @@
     
     BOOL bluetoothIsEnabledAndAuthorized;
     NSTimer *authorizationTimer;
+    
 }
 
 #pragma mark Singleton
@@ -79,6 +86,24 @@
     if ((self = [super init])) {
         identifier = [CBUUID UUIDWithString:theIdentifier];
         
+        
+        self.testArray = [[NSArray alloc] init];
+        
+        self.testArray =  @[@"CB284D88-5317-4FB4-9621-C5A3A49E6150",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6151",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6152",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6153",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6154",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6155",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6156",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6157"];
+        
+        self.testIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
+        for (int i; i<self.testArray.count; i++) {
+            [self.testIdentifierArray addObject:[CBUUID UUIDWithString:self.testArray[i]]];
+        }
+        
+        
         delegates = [[NSMutableSet alloc] init];
         
         easedProximity = [[EasedValue alloc] init];
@@ -88,6 +113,11 @@
         [self startAuthorizationTimer];
     }
     return self;
+}
+
+- (void)changeIdentifier:(NSString *)theIdentifier
+{
+    identifier = [CBUUID UUIDWithString:theIdentifier];
 }
 
 - (void)addDelegate:(id<INBeaconServiceDelegate>)delegate
@@ -134,8 +164,7 @@
     
     NSDictionary *scanOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)};
     
-    
-    [centralManager scanForPeripheralsWithServices:@[identifier] options:scanOptions];
+    [centralManager scanForPeripheralsWithServices:self.testIdentifierArray options:scanOptions];
     _isDetecting = YES;
 }
 
@@ -189,7 +218,7 @@
 {
     
     NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
-                                      CBAdvertisementDataServiceUUIDsKey:@[identifier]};
+                                      CBAdvertisementDataServiceUUIDsKey:self.testIdentifierArray};
     
     // Start advertising over BLE
     [peripheralManager startAdvertising:advertisingData];
@@ -226,10 +255,25 @@
      advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     if (DEBUG_PERIPHERAL) {
-        NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
+        //NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
         
         CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-        NSLog(@"service uuid: %@", [uuid representativeString]);
+        //NSLog(@"service uuid: %@", [uuid representativeString]);
+        
+        NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
+        
+        
+        for (int i=0; i<self.testIdentifierArray.count; i++) {
+            //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
+            NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
+            if ([[[uuid representativeString] uppercaseString] isEqualToString:[self.testIdentifierArray[i] UUIDString]]) {
+                
+                NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+                
+                CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+                NSLog(@"...service uuid: %@", [uuid representativeString]);
+            }
+        }
     }
     
     identifierRange = [self convertRSSItoINProximity:[RSSI floatValue]];
@@ -251,7 +295,14 @@
 {
     [self performBlockOnDelegates:^(id<INBeaconServiceDelegate>delegate) {
         
-        [delegate service:self foundDeviceUUID:[identifier representativeString] withRange:identifierRange];
+        
+        //TODO: report the correct id
+        for (int i; i<self.testIdentifierArray.count; i++) {
+            
+            [delegate service:self foundDeviceUUID:[self.testIdentifierArray[i] representativeString] withRange:identifierRange];
+        }
+        
+//        [delegate service:self foundDeviceUUID:[identifier representativeString] withRange:identifierRange];
         
     } complete:^{
         // timeout the beacon to unknown position

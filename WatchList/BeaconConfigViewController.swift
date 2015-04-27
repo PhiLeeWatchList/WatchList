@@ -21,6 +21,15 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var messageLabel: UILabel!
     
+    @IBOutlet weak var switchPhil: UISwitch!
+    @IBOutlet weak var switchLee: UISwitch!
+    @IBOutlet weak var switchLisa: UISwitch!
+    @IBOutlet weak var switchJackie: UISwitch!
+    @IBOutlet weak var switchChris: UISwitch!
+    @IBOutlet weak var switchForrest: UISwitch!
+    @IBOutlet weak var switchiPad: UISwitch!
+    @IBOutlet weak var switchJanna: UISwitch!
+    
     var majorInt:UInt16 = 0
     var minorInt:UInt16 = 0
     var first:String = ""
@@ -103,5 +112,120 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    @IBAction func onSwitchPhil(sender: AnyObject) {
+        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6150")
+        self.storeNameToUserDefaults("Philip Starner")
+        
+        self.switchLee.setOn(false, animated: true)
+        self.switchLisa.setOn(false, animated: true)
+        self.switchiPad.setOn(false, animated: true)
+        self.switchChris.setOn(false, animated: true)
+        self.switchJackie.setOn(false, animated: true)
+        self.switchForrest.setOn(false, animated: true)
+        self.switchJanna.setOn(false, animated: true)
+    }
+    
+    @IBAction func onSwitchLee(sender: AnyObject) {
+        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6151")
+        self.storeNameToUserDefaults("Lee Strasheim")
+        
+        self.switchPhil.setOn(false, animated: true)
+        self.switchLisa.setOn(false, animated: true)
+        self.switchiPad.setOn(false, animated: true)
+        self.switchChris.setOn(false, animated: true)
+        self.switchJackie.setOn(false, animated: true)
+        self.switchForrest.setOn(false, animated: true)
+        self.switchJanna.setOn(false, animated: true)
+    }
+    
+    @IBAction func onSwitchLisa(sender: AnyObject) {
+        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6152")
+        self.storeNameToUserDefaults("Lisa Starner")
+        self.switchPhil.setOn(false, animated: true)
+        self.switchLee.setOn(false, animated: true)
+        self.switchiPad.setOn(false, animated: true)
+        self.switchChris.setOn(false, animated: true)
+        self.switchJackie.setOn(false, animated: true)
+        self.switchForrest.setOn(false, animated: true)
+        self.switchJanna.setOn(false, animated: true)
+    }
+    
+    @IBAction func onSwitchiPad(sender: AnyObject) {
+        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6153")
+        self.storeNameToUserDefaults("Phil's iPad")
+        self.switchPhil.setOn(false, animated: true)
+        self.switchLee.setOn(false, animated: true)
+        self.switchLisa.setOn(false, animated: true)
+        self.switchChris.setOn(false, animated: true)
+        self.switchJackie.setOn(false, animated: true)
+        self.switchForrest.setOn(false, animated: true)
+        self.switchJanna.setOn(false, animated: true)
+    }
+    
+    @IBAction func onSwitchJackie(sender: AnyObject) {
+        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6154")
+        self.storeNameToUserDefaults("Jackie Kelley")
+        self.switchPhil.setOn(false, animated: true)
+        self.switchLee.setOn(false, animated: true)
+        self.switchLisa.setOn(false, animated: true)
+        self.switchChris.setOn(false, animated: true)
+        self.switchiPad.setOn(false, animated: true)
+        self.switchForrest.setOn(false, animated: true)
+        self.switchJanna.setOn(false, animated: true)
+    }
+    
+    @IBAction func onSwitchChris(sender: AnyObject) {
+        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6155")
+        self.storeNameToUserDefaults("Chris Kelley")
+        self.switchPhil.setOn(false, animated: true)
+        self.switchLee.setOn(false, animated: true)
+        self.switchLisa.setOn(false, animated: true)
+        self.switchJackie.setOn(false, animated: true)
+        self.switchiPad.setOn(false, animated: true)
+        self.switchForrest.setOn(false, animated: true)
+        self.switchJanna.setOn(false, animated: true)
+    }
+    
+    @IBAction func onSwitchForrest(sender: AnyObject) {
+        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6156")
+        self.storeNameToUserDefaults("Forrest Stewart")
+        self.switchPhil.setOn(false, animated: true)
+        self.switchLee.setOn(false, animated: true)
+        self.switchLisa.setOn(false, animated: true)
+        self.switchJackie.setOn(false, animated: true)
+        self.switchiPad.setOn(false, animated: true)
+        self.switchChris.setOn(false, animated: true)
+        self.switchJanna.setOn(false, animated: true)
+    }
+    
+    @IBAction func onSwitchJanna(sender: AnyObject) {
+        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6157")
+        self.storeNameToUserDefaults("Janna Stewart")
+        self.switchPhil.setOn(false, animated: true)
+        self.switchLee.setOn(false, animated: true)
+        self.switchLisa.setOn(false, animated: true)
+        self.switchJackie.setOn(false, animated: true)
+        self.switchiPad.setOn(false, animated: true)
+        self.switchChris.setOn(false, animated: true)
+        self.switchForrest.setOn(false, animated: true)
+    }
+    
+    func storeUUIDToUserDefaults(userString: String) {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(userString, forKey: GlobalConstants.THIS_DEVICE_TRANSMIT_UUID)
+        
+        INBeaconService.singleton().changeIdentifier(userString)
+    }
+    
+    func storeNameToUserDefaults(userString: String) {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(userString, forKey: GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
+    }
+    
+    
     
 }

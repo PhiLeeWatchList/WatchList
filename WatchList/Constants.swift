@@ -10,4 +10,6 @@ import Foundation
 
 struct GlobalConstants {
     static let TRANSMIT_ON = "TRANSMIT_ON"
+    static let THIS_DEVICE_TRANSMIT_UUID = "THIS_DEVICE_TRANSMIT_UUID"
+    static let THIS_DEVICE_TRANSMIT_NAME = "THIS_DEVICE_TRANSMIT_NAME"
 }
