@@ -73,25 +73,25 @@
 }
 
 #pragma mark Singleton
-//+ (INBeaconService *)singleton
-//{
-//    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
-//        return [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
-//    });
-//}
++ (INBeaconService *)singleton
+{
+    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+        return [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
+    });
+}
 #pragma mark -
 
 
-+ (instancetype)singleton
-{
-    static INBeaconService *singleton = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        singleton = [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
-        // Do any other initialisation stuff here
-    });
-    return singleton;
-}
+//+ (instancetype)singleton
+//{
+//    static INBeaconService *singleton = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        singleton = [[self alloc] initWithIdentifier:SINGLETON_IDENTIFIER];
+//        // Do any other initialisation stuff here
+//    });
+//    return singleton;
+//}
 
 - (id)initWithIdentifier:(NSString *)theIdentifier
 {
