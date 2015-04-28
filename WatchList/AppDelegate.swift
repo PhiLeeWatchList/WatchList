@@ -14,9 +14,6 @@ import Foundation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDelegate { //TODO: remove ibeacon
     
-    let guid = ""
-    let firstName = ""
-    let lastName = ""
     
     var window: UIWindow?
     // var locationManager: CLLocationManager? //TODO: remove ibeacon
@@ -80,20 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
             {
                 
                 var newUser = User(guid: queryItems[0].value!,first: queryItems[1].value!,last: queryItems[2].value!)
-                
-//                for (idx: Int, component: NSURLQueryItem) in enumerate(queryItems)
-//                {
-//                    println(component.value!)
-//                    
-//                    switch (idx) {
-//                        case 0 :self.guid = component.value!
-//                        case 1: self.firstName = component.value!
-//                        case 2: self.lastName = component.value!
-//                        default : println("default")
-//                    }
-//                    
-//                    
-//                }
                 
                 var users = [User]()
                 
