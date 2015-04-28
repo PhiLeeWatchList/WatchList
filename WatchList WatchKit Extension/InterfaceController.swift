@@ -17,7 +17,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var noOneHereLabel: WKInterfaceLabel!
     
     var users = [String]()
-    
+    var initials = ""
     var tableCreated = false
     
     func refreshTable() {
@@ -28,6 +28,7 @@ class InterfaceController: WKInterfaceController {
             for (index, user) in enumerate(users) {
                 let row = table.rowControllerAtIndex(index) as! tableRowController
                 row.tableRowLabel.setText(user)
+                row.initials.setText(initials)
             }
             
             tableCreated = true
@@ -41,7 +42,15 @@ class InterfaceController: WKInterfaceController {
             let stringDate = dateFormatter.stringFromDate(NSDate())
             
             var user = notificationIdentifier + " arrived at " + stringDate
+            var fullName: String = "First Last"
+            let fullNameArr = fullName.componentsSeparatedByString(" ")
             
+            var firstName: String = fullNameArr[0]
+            var lastName: String = fullNameArr[1]
+            
+            var firstInitial = first(firstName)
+            var lastInitial = first(lastName)
+            var initials : String = String(firstInitial!) + String(lastInitial!)
             
             if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
                 users = NSUserDefaults.standardUserDefaults().objectForKey("users") as! [String]

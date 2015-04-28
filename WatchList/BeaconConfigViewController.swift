@@ -11,7 +11,7 @@ import CoreLocation
 import CoreBluetooth
 import MessageUI
 
-class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     
     
     @IBOutlet weak var newButton: UIButton!
@@ -42,6 +42,8 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
         
         self.layoutForDevices()
         
+        self.firstText.delegate = self;
+        self.lastText.delegate = self;
         
     }
     
@@ -233,6 +235,10 @@ class BeaconConfigViewController: UIViewController, MFMailComposeViewControllerD
         defaults.setObject(userString, forKey: GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
     
-    
+
 }
