@@ -106,7 +106,6 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     
     func randomBeaconValues() {
         
-        self.guidText.text = NSUUID().UUIDString;
         self.guid = self.guidText.text
         
 //        self.majorInt = UInt16(arc4random_uniform(65535))
@@ -126,6 +125,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBAction func onSwitchPhil(sender: AnyObject) {
         self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6150")
         self.storeNameToUserDefaults("Philip Starner")
+        self.firstText.text = "Philip"
+        self.lastText.text = "Starner"
         
         self.switchLee.setOn(false, animated: true)
         self.switchLisa.setOn(false, animated: true)
@@ -139,6 +140,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBAction func onSwitchLee(sender: AnyObject) {
         self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6151")
         self.storeNameToUserDefaults("Lee Strasheim")
+        self.firstText.text = "Lee"
+        self.lastText.text = "Strasheim"
         
         self.switchPhil.setOn(false, animated: true)
         self.switchLisa.setOn(false, animated: true)
@@ -152,6 +155,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBAction func onSwitchLisa(sender: AnyObject) {
         self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6152")
         self.storeNameToUserDefaults("Lisa Starner")
+        self.firstText.text = "Lisa"
+        self.lastText.text = "Starner"
         self.switchPhil.setOn(false, animated: true)
         self.switchLee.setOn(false, animated: true)
         self.switchiPad.setOn(false, animated: true)
@@ -164,6 +169,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBAction func onSwitchiPad(sender: AnyObject) {
         self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6153")
         self.storeNameToUserDefaults("Phil's iPad")
+        self.firstText.text = "Phil"
+        self.lastText.text = "iPad"
         self.switchPhil.setOn(false, animated: true)
         self.switchLee.setOn(false, animated: true)
         self.switchLisa.setOn(false, animated: true)
@@ -176,6 +183,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBAction func onSwitchJackie(sender: AnyObject) {
         self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6154")
         self.storeNameToUserDefaults("Jackie Kelley")
+        self.firstText.text = "Jackie"
+        self.lastText.text = "Kelley"
         self.switchPhil.setOn(false, animated: true)
         self.switchLee.setOn(false, animated: true)
         self.switchLisa.setOn(false, animated: true)
@@ -188,6 +197,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBAction func onSwitchChris(sender: AnyObject) {
         self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6155")
         self.storeNameToUserDefaults("Chris Kelley")
+        self.firstText.text = "Chris"
+        self.lastText.text = "Kelley"
         self.switchPhil.setOn(false, animated: true)
         self.switchLee.setOn(false, animated: true)
         self.switchLisa.setOn(false, animated: true)
@@ -200,6 +211,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBAction func onSwitchForrest(sender: AnyObject) {
         self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6156")
         self.storeNameToUserDefaults("Forrest Stewart")
+        self.firstText.text = "Forrest"
+        self.lastText.text = "Stewart"
         self.switchPhil.setOn(false, animated: true)
         self.switchLee.setOn(false, animated: true)
         self.switchLisa.setOn(false, animated: true)
@@ -212,6 +225,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBAction func onSwitchJanna(sender: AnyObject) {
         self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6157")
         self.storeNameToUserDefaults("Janna Stewart")
+        self.firstText.text = "Janna"
+        self.lastText.text = "Stewart"
         self.switchPhil.setOn(false, animated: true)
         self.switchLee.setOn(false, animated: true)
         self.switchLisa.setOn(false, animated: true)
