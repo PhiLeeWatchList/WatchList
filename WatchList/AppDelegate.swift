@@ -29,16 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
 //        
 //        //allow user to accept location
 //        self.locationManager!.requestAlwaysAuthorization()
-//        
-//        if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
-//        {
-//            //allow user to accept location when backgrounded
-//            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
-//        }
-//        else
-//        {
-//            //do iOS 7
-//        }
+        
+        if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
+        {
+            //allow user to accept location when backgrounded
+            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+        }
+        else
+        {
+            //do iOS 7
+        }
         
         
         

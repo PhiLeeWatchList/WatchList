@@ -403,14 +403,18 @@
 - (void) addNewFoundIdentifierArray:(CBUUID *) newIdentifier {
     if (self.foundIdentifierArray.count<=0) {
         
-        NSLog(@"adding: %@", [newIdentifier UUIDString]);
         [self.foundIdentifierArray addObject:newIdentifier];
     }
+    BOOL canAdd = YES;
     for (int i=0; i<self.foundIdentifierArray.count; i++) {
-        if (![[newIdentifier UUIDString] isEqualToString:[self.foundIdentifierArray[i] UUIDString]]) {
-            NSLog(@"adding: %@", [newIdentifier UUIDString]);
-            [self.foundIdentifierArray addObject:newIdentifier];
+        if ([[newIdentifier UUIDString] isEqualToString:[self.foundIdentifierArray[i] UUIDString]]) {
+            canAdd = NO;
         }
+    }
+    
+    if(canAdd) {
+        NSLog(@"adding: %@", [newIdentifier UUIDString]);
+        [self.foundIdentifierArray addObject:newIdentifier];
     }
 }
 @end

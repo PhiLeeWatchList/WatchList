@@ -103,7 +103,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         //send a single notification if friend is detected.
         if(sendNotification && !self.notificationSent) {
             let defaults = NSUserDefaults.standardUserDefaults()
-            let nameString = defaults.stringForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
+            //let nameString = defaults.stringForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
             
             self.notificationSent = true
             let notification: UILocalNotification = UILocalNotification()
