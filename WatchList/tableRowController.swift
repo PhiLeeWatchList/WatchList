@@ -13,6 +13,7 @@ class tableRowController: NSObject {
 
     @IBOutlet weak var tableRowLabel: WKInterfaceLabel!
     
+    @IBOutlet weak var initials: WKInterfaceLabel!
     
     
 }
