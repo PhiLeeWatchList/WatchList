@@ -34,6 +34,20 @@
                ReferencedContainer = "container:WatchList.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9B7E02AD1AF02B850001C924"
+               BuildableName = "DataBridgeTests.xctest"
+               BlueprintName = "DataBridgeTests"
+               ReferencedContainer = "container:WatchList.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,6 +63,16 @@
                BlueprintIdentifier = "0C86247D1AB91A290042CAA8"
                BuildableName = "WatchListTests.xctest"
                BlueprintName = "WatchListTests"
+               ReferencedContainer = "container:WatchList.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9B7E02AD1AF02B850001C924"
+               BuildableName = "DataBridgeTests.xctest"
+               BlueprintName = "DataBridgeTests"
                ReferencedContainer = "container:WatchList.xcodeproj">
             </BuildableReference>
          </TestableReference>

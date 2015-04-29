@@ -32,7 +32,18 @@
 		0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD591AE8466A001FB601 /* MainViewController.swift */; };
 		0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */; };
 		0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */; };
-		9B4367911AEECD420001B432 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4367901AEECD420001B432 /* User.swift */; };
+		9B4367911AEECD420001B432 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4367901AEECD420001B432 /* UserClass.swift */; };
+		9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
+		9B491DC31AF0665300C0DD8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DC21AF0665300C0DD8B /* User.swift */; };
+		9B491DC41AF067FC00C0DD8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DC21AF0665300C0DD8B /* User.swift */; };
+		9B491DC51AF0683A00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
+		9B491DC61AF0683C00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
+		9B7E02A91AF02B840001C924 /* DataBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7E02A81AF02B840001C924 /* DataBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B7E02AF1AF02B850001C924 /* DataBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; };
+		9B7E02B81AF02B850001C924 /* DataBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02B71AF02B850001C924 /* DataBridgeTests.swift */; };
+		9B7E02BB1AF02B850001C924 /* DataBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; };
+		9B7E02BC1AF02B850001C924 /* DataBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B7E02C51AF02BAE0001C924 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
 		9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B42541AE8D53B0010F7EB /* tableRowController.swift */; };
 		9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +70,27 @@
 			remoteGlobalIDString = 0C9FBD351AE6F690001FB601;
 			remoteInfo = "WatchList WatchKit Extension";
 		};
+		9B7E02B01AF02B850001C924 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C8624611AB91A290042CAA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B7E02A31AF02B840001C924;
+			remoteInfo = DataBridge;
+		};
+		9B7E02B21AF02B850001C924 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C8624611AB91A290042CAA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C8624681AB91A290042CAA8;
+			remoteInfo = WatchList;
+		};
+		9B7E02B91AF02B850001C924 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C8624611AB91A290042CAA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B7E02A31AF02B840001C924;
+			remoteInfo = DataBridge;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,6 +103,17 @@
 				0C9FBD511AE6F691001FB601 /* WatchList WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B7E02C01AF02B850001C924 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9B7E02BC1AF02B850001C924 /* DataBridge.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -118,7 +161,17 @@
 		0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconConfigViewController.swift; sourceTree = "<group>"; };
 		0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		9B43678F1AEEC2150001B432 /* WatchList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WatchList.entitlements; sourceTree = "<group>"; };
-		9B4367901AEECD420001B432 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9B4367901AEECD420001B432 /* UserClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
+		9B491DB81AF0523700C0DD8B /* WatchList WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WatchList WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		9B491DBA1AF05DBB00C0DD8B /* WatchList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchList.xcdatamodel; sourceTree = "<group>"; };
+		9B491DC21AF0665300C0DD8B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
+		9B7E02A41AF02B840001C924 /* DataBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B7E02A71AF02B840001C924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B7E02A81AF02B840001C924 /* DataBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBridge.h; sourceTree = "<group>"; };
+		9B7E02AE1AF02B850001C924 /* DataBridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataBridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B7E02B61AF02B850001C924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B7E02B71AF02B850001C924 /* DataBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBridgeTests.swift; sourceTree = "<group>"; };
+		9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9B8B42541AE8D53B0010F7EB /* tableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tableRowController.swift; path = ../WatchList/tableRowController.swift; sourceTree = "<group>"; };
 		9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B7E02BB1AF02B850001C924 /* DataBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +196,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B7E02A01AF02B840001C924 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B7E02AB1AF02B850001C924 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B7E02AF1AF02B850001C924 /* DataBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +256,8 @@
 				0C8624811AB91A290042CAA8 /* WatchListTests */,
 				0C9FBD371AE6F691001FB601 /* WatchList WatchKit Extension */,
 				0C9FBD471AE6F691001FB601 /* WatchList WatchKit App */,
+				9B7E02A51AF02B840001C924 /* DataBridge */,
+				9B7E02B41AF02B850001C924 /* DataBridgeTests */,
 				0C86246A1AB91A290042CAA8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -198,6 +269,8 @@
 				0C86247E1AB91A290042CAA8 /* WatchListTests.xctest */,
 				0C9FBD361AE6F690001FB601 /* WatchList WatchKit Extension.appex */,
 				0C9FBD431AE6F691001FB601 /* WatchList WatchKit App.app */,
+				9B7E02A41AF02B840001C924 /* DataBridge.framework */,
+				9B7E02AE1AF02B850001C924 /* DataBridgeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,13 +284,15 @@
 				0C9FBD591AE8466A001FB601 /* MainViewController.swift */,
 				0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */,
 				0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */,
-				9B4367901AEECD420001B432 /* User.swift */,
+				9B4367901AEECD420001B432 /* UserClass.swift */,
 				9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */,
+				9B491DC21AF0665300C0DD8B /* User.swift */,
 				0C8624721AB91A290042CAA8 /* Main.storyboard */,
 				0C8624751AB91A290042CAA8 /* Images.xcassets */,
 				0C8624771AB91A290042CAA8 /* LaunchScreen.xib */,
 				0C47B2A71AEC5F6D00902891 /* 3rdParty */,
 				0C86246C1AB91A290042CAA8 /* Supporting Files */,
+				9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */,
 			);
 			path = WatchList;
 			sourceTree = "<group>";
@@ -251,6 +326,7 @@
 		0C9FBD371AE6F691001FB601 /* WatchList WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9B491DB81AF0523700C0DD8B /* WatchList WatchKit Extension.entitlements */,
 				9B8B42541AE8D53B0010F7EB /* tableRowController.swift */,
 				0C9FBD3B1AE6F691001FB601 /* InterfaceController.swift */,
 				0C9FBD3D1AE6F691001FB601 /* NotificationController.swift */,
@@ -287,7 +363,53 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9B7E02A51AF02B840001C924 /* DataBridge */ = {
+			isa = PBXGroup;
+			children = (
+				9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */,
+				9B7E02A81AF02B840001C924 /* DataBridge.h */,
+				9B7E02A61AF02B840001C924 /* Supporting Files */,
+			);
+			path = DataBridge;
+			sourceTree = "<group>";
+		};
+		9B7E02A61AF02B840001C924 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9B7E02A71AF02B840001C924 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9B7E02B41AF02B850001C924 /* DataBridgeTests */ = {
+			isa = PBXGroup;
+			children = (
+				9B7E02B71AF02B850001C924 /* DataBridgeTests.swift */,
+				9B7E02B51AF02B850001C924 /* Supporting Files */,
+			);
+			path = DataBridgeTests;
+			sourceTree = "<group>";
+		};
+		9B7E02B51AF02B850001C924 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9B7E02B61AF02B850001C924 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9B7E02A11AF02B840001C924 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B7E02A91AF02B840001C924 /* DataBridge.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		0C8624681AB91A290042CAA8 /* WatchList */ = {
@@ -298,11 +420,13 @@
 				0C8624661AB91A290042CAA8 /* Frameworks */,
 				0C8624671AB91A290042CAA8 /* Resources */,
 				0C9FBD581AE6F691001FB601 /* Embed App Extensions */,
+				9B7E02C01AF02B850001C924 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				0C9FBD501AE6F691001FB601 /* PBXTargetDependency */,
+				9B7E02BA1AF02B850001C924 /* PBXTargetDependency */,
 			);
 			name = WatchList;
 			productName = WatchList;
@@ -360,6 +484,43 @@
 			productReference = 0C9FBD431AE6F691001FB601 /* WatchList WatchKit App.app */;
 			productType = "com.apple.product-type.application.watchapp";
 		};
+		9B7E02A31AF02B840001C924 /* DataBridge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B7E02BD1AF02B850001C924 /* Build configuration list for PBXNativeTarget "DataBridge" */;
+			buildPhases = (
+				9B7E029F1AF02B840001C924 /* Sources */,
+				9B7E02A01AF02B840001C924 /* Frameworks */,
+				9B7E02A11AF02B840001C924 /* Headers */,
+				9B7E02A21AF02B840001C924 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DataBridge;
+			productName = DataBridge;
+			productReference = 9B7E02A41AF02B840001C924 /* DataBridge.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9B7E02AD1AF02B850001C924 /* DataBridgeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B7E02C11AF02B850001C924 /* Build configuration list for PBXNativeTarget "DataBridgeTests" */;
+			buildPhases = (
+				9B7E02AA1AF02B850001C924 /* Sources */,
+				9B7E02AB1AF02B850001C924 /* Frameworks */,
+				9B7E02AC1AF02B850001C924 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B7E02B11AF02B850001C924 /* PBXTargetDependency */,
+				9B7E02B31AF02B850001C924 /* PBXTargetDependency */,
+			);
+			name = DataBridgeTests;
+			productName = DataBridgeTests;
+			productReference = 9B7E02AE1AF02B850001C924 /* DataBridgeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -371,9 +532,10 @@
 				TargetAttributes = {
 					0C8624681AB91A290042CAA8 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = RLFD42G2BX;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -386,9 +548,22 @@
 					};
 					0C9FBD351AE6F690001FB601 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = RLFD42G2BX;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					0C9FBD421AE6F691001FB601 = {
 						CreatedOnToolsVersion = 6.3;
+					};
+					9B7E02A31AF02B840001C924 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					9B7E02AD1AF02B850001C924 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 0C8624681AB91A290042CAA8;
 					};
 				};
 			};
@@ -409,6 +584,8 @@
 				0C86247D1AB91A290042CAA8 /* WatchListTests */,
 				0C9FBD351AE6F690001FB601 /* WatchList WatchKit Extension */,
 				0C9FBD421AE6F691001FB601 /* WatchList WatchKit App */,
+				9B7E02A31AF02B840001C924 /* DataBridge */,
+				9B7E02AD1AF02B850001C924 /* DataBridgeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -450,6 +627,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B7E02A21AF02B840001C924 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B7E02AC1AF02B850001C924 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -464,10 +655,12 @@
 				0C47B2BC1AEC602700902891 /* GCDUtilities.m in Sources */,
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
 				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
-				9B4367911AEECD420001B432 /* User.swift in Sources */,
+				9B491DC31AF0665300C0DD8B /* User.swift in Sources */,
+				9B4367911AEECD420001B432 /* UserClass.swift in Sources */,
 				0C47B2AC1AEC5F9D00902891 /* INBeaconService.m in Sources */,
 				0C47B2AF1AEC5FF400902891 /* CLBeacon+Ext.m in Sources */,
 				0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */,
+				9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */,
 				0C47B2B61AEC600C00902891 /* CBCentralManager+Ext.m in Sources */,
 				0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */,
 				0C47B2B71AEC600C00902891 /* CBPeripheralManager+Ext.m in Sources */,
@@ -487,9 +680,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B491DC41AF067FC00C0DD8B /* User.swift in Sources */,
 				9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */,
+				9B491DC51AF0683A00C0DD8B /* WatchList.xcdatamodeld in Sources */,
 				0C9FBD3E1AE6F691001FB601 /* NotificationController.swift in Sources */,
 				0C9FBD3C1AE6F691001FB601 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B7E029F1AF02B840001C924 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B7E02C51AF02BAE0001C924 /* CoreDataStack.swift in Sources */,
+				9B491DC61AF0683C00C0DD8B /* WatchList.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B7E02AA1AF02B850001C924 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B7E02B81AF02B850001C924 /* DataBridgeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +722,21 @@
 			isa = PBXTargetDependency;
 			target = 0C9FBD351AE6F690001FB601 /* WatchList WatchKit Extension */;
 			targetProxy = 0C9FBD4F1AE6F691001FB601 /* PBXContainerItemProxy */;
+		};
+		9B7E02B11AF02B850001C924 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B7E02A31AF02B840001C924 /* DataBridge */;
+			targetProxy = 9B7E02B01AF02B850001C924 /* PBXContainerItemProxy */;
+		};
+		9B7E02B31AF02B850001C924 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C8624681AB91A290042CAA8 /* WatchList */;
+			targetProxy = 9B7E02B21AF02B850001C924 /* PBXContainerItemProxy */;
+		};
+		9B7E02BA1AF02B850001C924 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B7E02A31AF02B840001C924 /* DataBridge */;
+			targetProxy = 9B7E02B91AF02B850001C924 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -632,7 +859,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "08912536-1969-44dc-80d9-4c17e9a77c86";
+				PROVISIONING_PROFILE = "ab07172e-2ba9-4d50-9f02-7d3cc7a312aa";
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchList/3rdParty/Vicinity/WatchList-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -651,7 +878,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "08912536-1969-44dc-80d9-4c17e9a77c86";
+				PROVISIONING_PROFILE = "ab07172e-2ba9-4d50-9f02-7d3cc7a312aa";
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchList/3rdParty/Vicinity/WatchList-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -694,7 +921,9 @@
 		0C9FBD521AE6F691001FB601 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "WatchList WatchKit Extension/WatchList WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -705,7 +934,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "198648d5-d3c7-4f01-a8cc-feccf1838150";
+				PROVISIONING_PROFILE = "b7ce63f0-3033-4e4a-9554-f2ce4df21e8c";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -713,14 +942,16 @@
 		0C9FBD531AE6F691001FB601 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "WatchList WatchKit Extension/WatchList WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "WatchList WatchKit Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "198648d5-d3c7-4f01-a8cc-feccf1838150";
+				PROVISIONING_PROFILE = "b7ce63f0-3033-4e4a-9554-f2ce4df21e8c";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -742,7 +973,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9efff390-0bc7-4e3e-9695-7679cca16e8e";
+				PROVISIONING_PROFILE = "877c8451-050d-4fe1-8556-f4783f3355d2";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchList WatchKit App/WatchList WatchKit App-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -764,11 +995,102 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9efff390-0bc7-4e3e-9695-7679cca16e8e";
+				PROVISIONING_PROFILE = "877c8451-050d-4fe1-8556-f4783f3355d2";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchList WatchKit App/WatchList WatchKit App-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		9B7E02BE1AF02B850001C924 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DataBridge/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9B7E02BF1AF02B850001C924 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = DataBridge/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9B7E02C21AF02B850001C924 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DataBridgeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatchList.app/WatchList";
+			};
+			name = Debug;
+		};
+		9B7E02C31AF02B850001C924 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = DataBridgeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatchList.app/WatchList";
 			};
 			name = Release;
 		};
@@ -820,7 +1142,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9B7E02BD1AF02B850001C924 /* Build configuration list for PBXNativeTarget "DataBridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B7E02BE1AF02B850001C924 /* Debug */,
+				9B7E02BF1AF02B850001C924 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B7E02C11AF02B850001C924 /* Build configuration list for PBXNativeTarget "DataBridgeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B7E02C21AF02B850001C924 /* Debug */,
+				9B7E02C31AF02B850001C924 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9B491DBA1AF05DBB00C0DD8B /* WatchList.xcdatamodel */,
+			);
+			currentVersion = 9B491DBA1AF05DBB00C0DD8B /* WatchList.xcdatamodel */;
+			path = WatchList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0C8624611AB91A290042CAA8 /* Project object */;
 }

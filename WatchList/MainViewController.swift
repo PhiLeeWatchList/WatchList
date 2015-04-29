@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import DataBridge
 
 class MainViewController: UIViewController, INBeaconServiceDelegate {
     
