@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import DataBridge
 
 class MainViewController: UIViewController, INBeaconServiceDelegate {
     
@@ -30,7 +32,6 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         //check to see if user defaults has transmit id
         self.checkUserDefualtsForTransmitSetting()
-        
         
     }
     

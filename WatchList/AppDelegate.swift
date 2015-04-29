@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Foundation
+import CoreData
+import DataBridge
 
 //import CoreLocation //TODO: remove ibeacon
 
@@ -65,6 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        
+        CoreDataStack.sharedInstance.saveContext()
+        
     }
 
     
@@ -76,29 +81,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
             if let queryItems = components?.queryItems as? [NSURLQueryItem]
             {
                 
-                var newUser = User(guid: queryItems[0].value!,first: queryItems[1].value!,last: queryItems[2].value!)
+                var context = CoreDataStack.sharedInstance.managedObjectContext!
                 
-                var users = [User]()
+                var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
                 
-                let defaults = NSUserDefaults.standardUserDefaults()
-                
-                if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
-                    var arrayOfObjectsUnarchivedData = defaults.dataForKey("users")!
-                    var users = NSKeyedUnarchiver.unarchiveObjectWithData(arrayOfObjectsUnarchivedData) as! [User]
-                }
-                
-                users.append(newUser)
-                
-                var arrayOfObjectsData = NSKeyedArchiver.archivedDataWithRootObject(users)
-                
-                defaults.setObject(arrayOfObjectsData, forKey: "users")
-                
-                
+                person.firstName = queryItems[1].value!
+                person.lastName = queryItems[2].value!
+                person.guid = queryItems[0].value!
+                context.save(nil)
+
             }
         
         return true
         
     }
+
+    
+    
+    
     
     //TODO: remove ibeacon
 //    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {

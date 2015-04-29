@@ -7,22 +7,20 @@
 //
 
 import UIKit
+import DataBridge
+import CoreData
 
 class AddFriendsViewController: UIViewController, UITableViewDelegate {
     
     var users = [User]()
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    var lastSelectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black;
         
-        if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
-            var arrayOfObjectsUnarchivedData = defaults.dataForKey("users")!
-            users = NSKeyedUnarchiver.unarchiveObjectWithData(arrayOfObjectsUnarchivedData) as! [User]
-        }
         
     }
     
@@ -33,35 +31,42 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
-            var arrayOfObjectsUnarchivedData = defaults.dataForKey("users")!
-            users = NSKeyedUnarchiver.unarchiveObjectWithData(arrayOfObjectsUnarchivedData) as! [User]
-            
-        }
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+        let users = context.executeFetchRequest(request, error: nil) as! [User]
         
         return users.count
+        
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TableViewCell
         
         
-        if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {
-            var arrayOfObjectsUnarchivedData = defaults.dataForKey("users")!
-            users = NSKeyedUnarchiver.unarchiveObjectWithData(arrayOfObjectsUnarchivedData) as! [User]
-            
-        } else {
-            users = []
-        }
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+        let users = context.executeFetchRequest(request, error: nil) as! [User]
         
-        for (index, user) in enumerate(users) {
-            var firstInitial = first(user.first)
-            var lastInitial = first(user.last)
+
+            var firstInitial = first(users[indexPath.row].firstName)
+            var lastInitial = first(users[indexPath.row].lastName)
             var initials : String = String(firstInitial!) + String(lastInitial!)
             cell.initials?.text = initials
-            cell.label?.text = user.first + " " + user.last
-        }
+            cell.label?.text = users[indexPath.row].firstName + " " + users[indexPath.row].lastName
+            cell.accessoryType = .Checkmark
 
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        if cell.accessoryType == UITableViewCellAccessoryType.None {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }

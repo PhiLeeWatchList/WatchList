@@ -8,7 +8,7 @@
 
 import UIKit
 
-class User : NSObject, NSCoding {
+class UserClass : NSObject, NSCoding {
     var guid : String
     var first : String
     var last : String
