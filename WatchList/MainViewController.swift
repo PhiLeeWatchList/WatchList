@@ -13,7 +13,18 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     
     @IBOutlet weak var transmitLabel: UILabel!
     @IBOutlet weak var transmitSwitch: UISwitch!
-    @IBOutlet weak var textField: UITextView!
+    //@IBOutlet weak var textField: UITextView!
+    @IBOutlet weak var userFieldView: UIView!
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    var userBubbleSize:CGFloat = 90.0  //change this per device
+    var labelSize:CGFloat = 20
+    
+    var animator: UIDynamicAnimator!
+    var snapBehavior: UISnapBehavior!
+    
+    var peopleHereArray = [UIView]()
+    var personAddedArray = [String]()
     
     var notificationSent:Bool = false
     
@@ -21,6 +32,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black;
+        
+        self.animator = UIDynamicAnimator(referenceView:userFieldView)
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -30,8 +43,6 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         //check to see if user defaults has transmit id
         self.checkUserDefualtsForTransmitSetting()
-        
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -71,7 +82,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         println("found device: \(uuid)")
         
-        var textFieldString:String = "Your pack is not here. I has sad."
+        var textFieldString:String = ""
         var nameString:String = self.whoHaveYouFound(uuid.uppercaseString)
         var sendNotification:Bool = false
         
@@ -83,25 +94,24 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
              println("unknown")  //it looks like this essentially means "no detection"
         case 1:
             println("far")
-            textFieldString = "I found \(nameString) and they are within 60ft!"
+            textFieldString = "I found \(nameString) within 60ft!"
             sendNotification = true
         case 2:
             println("near")
-            textFieldString = "I found \(nameString) and they are within 5ft!"
+            textFieldString = "I found \(nameString) within 5ft!"
             sendNotification = true
         case 3:
             println("immediate")
-            textFieldString = "I found \(nameString) and they are within makeout distance!"
+            textFieldString = "I found \(nameString) within 1ft!"
             sendNotification = true
         default:
             println("Something else")
         }
         
-        self.textField.text = textFieldString
+        self.messageLabel.text = textFieldString
         
-        
-        //send a single notification if friend is detected.
-        if(sendNotification && !self.notificationSent) {
+        //send a notification if friend is detected.
+        if(self.canAddUserToField(uuid)) {
             let defaults = NSUserDefaults.standardUserDefaults()
             //let nameString = defaults.stringForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
             
@@ -115,7 +125,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             If it's not, iOS will display the notification to the user.
             */
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+            personAddedArray.append(uuid)
+            self.addUserToView(nameString)
         }
+//        if(sendNotification && !self.notificationSent) {
+//        }
         
     }
     
@@ -129,6 +143,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         }
     }
     
+    
+    //TODO: remove temp until we get fully functional coredata user stuff.
     func whoHaveYouFound(uuidString: String) -> String {
         if(uuidString == "CB284D88-5317-4FB4-9621-C5A3A49E6150") {
             return "Phil"
@@ -150,5 +166,58 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         return "someone"
     }
+    
+    func addUserToView (name: String) {
+        var objectColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
+        
+        
+        var newUserLabel:UILabel = UILabel(frame: CGRectMake(0, userBubbleSize, userBubbleSize, labelSize))
+        newUserLabel.text = name
+        newUserLabel.textAlignment = NSTextAlignment.Center
+        newUserLabel.textColor = objectColor
+        
+        var newUserImageView:UIImageView = UIImageView(frame: CGRectMake(0, 0, userBubbleSize, userBubbleSize))
+        newUserImageView.layer.cornerRadius = newUserImageView.frame.size.width / 2
+        newUserImageView.layer.masksToBounds = true
+        newUserImageView.layer.borderColor = objectColor.CGColor
+        newUserImageView.layer.borderWidth = userBubbleSize/14
+        
+        
+        var newUserView:UIView = UIView(frame: CGRectMake(self.userFieldView.frame.width, (self.userFieldView.frame.height + userBubbleSize), userBubbleSize, userBubbleSize+labelSize))
+        newUserView.addSubview(newUserImageView)
+        newUserView.addSubview(newUserLabel)
+        newUserView.tag = self.peopleHereArray.count //do not tag until added
+        //add to the field view
+        userFieldView.addSubview(newUserView)
+        //add to array
+        peopleHereArray.append(newUserView)
+        
+        //pop this guy onscreen.
+        
+        self.snapTheNewUserOnScreen(newUserView)
+    }
+    
+    func snapTheNewUserOnScreen(userView: UIView) {
+        let point:CGPoint = CGPointMake(userBubbleSize/2.0, userBubbleSize/2.0)
+        
+        self.animator.removeBehavior(self.snapBehavior)
+        
+        self.snapBehavior = UISnapBehavior(item: userView, snapToPoint: point)
+        self.animator?.addBehavior(snapBehavior)
+        
+    }
+    
+    func canAddUserToField(newIdentifier: String) -> Bool {
+        var canAdd:Bool = true;
+        for (var i=0; i<self.personAddedArray.count; i++) {
+            if (newIdentifier == self.personAddedArray[i]) {
+                canAdd = false
+            }
+        }
+        
+        return canAdd
+
+    }
+    
     
 }
