@@ -68,6 +68,27 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         INBeaconService.singleton().startBroadcasting()
     }
     
+    @IBAction func onFakeUser(sender: AnyObject) {
+        var uuid:String = "BB284D88-5317-4FB4-9621-C5A3A49E61"
+        
+        var arrayCount:Int = self.personAddedArray.count;
+        var endString:String = ""
+        if (arrayCount<10) {
+            endString = "0\(arrayCount)"
+        } else {
+            endString = "\(arrayCount)"
+        }
+        
+        uuid = "\(uuid)\(endString)"
+        
+        if(self.canAddUserToField(uuid)) {
+            
+            self.addUserToView("dude\(endString)")
+            personAddedArray.append(uuid)
+        }
+    }
+    
+    
     @IBAction func onSwitchChange(sender: AnyObject) {
         if self.transmitSwitch.on {
             self.transmitLabel.text = "Your pack can see you!"
@@ -174,7 +195,6 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         var imageBgColor:UIColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1)
         var nameColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
         
-        
         var newUserLabel:UILabel = UILabel(frame: CGRectMake(0, userBubbleSize, userBubbleSize, labelSize))
         newUserLabel.text = name
         newUserLabel.textAlignment = NSTextAlignment.Center
@@ -203,7 +223,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     }
     
     func snapTheNewUserOnScreen(userView: UIView) {
-        let point:CGPoint = CGPointMake(userBubbleSize/2.0, userBubbleSize/2.0)
+        
+        let xOffset:CGFloat = userBubbleSize * CGFloat(self.personAddedArray.count);
+        println("count: \(xOffset)")
+        
+        let point:CGPoint = CGPointMake(userBubbleSize/2.0 + xOffset, userBubbleSize/2.0)
         
         self.animator.removeBehavior(self.snapBehavior)
         

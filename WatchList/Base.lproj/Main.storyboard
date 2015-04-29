@@ -93,9 +93,19 @@
                                 <color key="textColor" red="0.43880208329999998" green="0.57097800929999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JoK-h5-mff">
+                                <rect key="frame" x="514" y="74" width="70" height="30"/>
+                                <state key="normal" title="Fake User">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onFakeUser:" destination="Hz8-7N-gqa" eventType="touchUpInside" id="nqY-cA-LtR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="JoK-h5-mff" firstAttribute="top" secondItem="jcd-VF-ufV" secondAttribute="bottom" constant="8" id="1ct-N0-4jc"/>
                             <constraint firstItem="M0b-B3-EDS" firstAttribute="top" secondItem="rja-Oq-y4R" secondAttribute="bottom" constant="15" id="3Ka-1I-Og2"/>
                             <constraint firstItem="rja-Oq-y4R" firstAttribute="top" secondItem="Ey4-pi-jl4" secondAttribute="bottom" constant="25" id="3Yh-k4-bD8"/>
                             <constraint firstItem="M0b-B3-EDS" firstAttribute="trailing" secondItem="hkb-HG-2Bn" secondAttribute="trailingMargin" id="58P-Nt-z1j"/>
@@ -118,6 +128,7 @@
                             <constraint firstItem="Ey4-pi-jl4" firstAttribute="leading" secondItem="hkb-HG-2Bn" secondAttribute="leadingMargin" id="iYC-Qy-udJ"/>
                             <constraint firstItem="2qQ-fD-yuC" firstAttribute="top" secondItem="jcd-VF-ufV" secondAttribute="bottom" constant="8" id="lUU-Xb-QfA"/>
                             <constraint firstItem="gMz-bC-9Sm" firstAttribute="top" secondItem="M0b-B3-EDS" secondAttribute="bottom" constant="20" id="mRb-Zg-dJb"/>
+                            <constraint firstItem="JoK-h5-mff" firstAttribute="trailing" secondItem="hkb-HG-2Bn" secondAttribute="trailingMargin" id="sFH-82-H3e"/>
                             <constraint firstItem="ExG-97-M5U" firstAttribute="centerY" secondItem="eDe-oo-8oW" secondAttribute="centerY" id="t2s-hi-EqZ"/>
                         </constraints>
                         <variation key="default">
