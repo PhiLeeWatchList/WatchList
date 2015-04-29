@@ -168,19 +168,22 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     }
     
     func addUserToView (name: String) {
-        var objectColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
+        var imageBorderColor:UIColor = UIColor(red: 250.0/255.0, green: 250.0/255.0, blue: 250.0/255.0, alpha: 1)
+        var imageBgColor:UIColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1)
+        var nameColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
         
         
         var newUserLabel:UILabel = UILabel(frame: CGRectMake(0, userBubbleSize, userBubbleSize, labelSize))
         newUserLabel.text = name
         newUserLabel.textAlignment = NSTextAlignment.Center
-        newUserLabel.textColor = objectColor
+        newUserLabel.textColor = nameColor
         
         var newUserImageView:UIImageView = UIImageView(frame: CGRectMake(0, 0, userBubbleSize, userBubbleSize))
         newUserImageView.layer.cornerRadius = newUserImageView.frame.size.width / 2
         newUserImageView.layer.masksToBounds = true
-        newUserImageView.layer.borderColor = objectColor.CGColor
-        newUserImageView.layer.borderWidth = userBubbleSize/14
+        newUserImageView.layer.borderColor = imageBorderColor.CGColor
+        newUserImageView.layer.backgroundColor = imageBgColor.CGColor
+        newUserImageView.layer.borderWidth = userBubbleSize/18
         
         
         var newUserView:UIView = UIView(frame: CGRectMake(self.userFieldView.frame.width, (self.userFieldView.frame.height + userBubbleSize), userBubbleSize, userBubbleSize+labelSize))
