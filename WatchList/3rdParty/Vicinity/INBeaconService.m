@@ -195,10 +195,10 @@
 
 - (void)startBroadcasting
 {
-    NSLog(@"I'm Broadcasting: %@", [identifier UUIDString]);
     if (![self canBroadcast])
         return;
     
+    NSLog(@"I'm Broadcasting: %@", [identifier UUIDString]);
     [self startBluetoothBroadcast];
     
 }
@@ -232,7 +232,7 @@
 - (void)startAdvertising
 {
     
-    NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
+    NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"watchlist-peripheral",
                                       CBAdvertisementDataServiceUUIDsKey:@[identifier]};
     
     // Start advertising over BLE

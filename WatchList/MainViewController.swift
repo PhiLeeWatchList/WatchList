@@ -148,8 +148,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             If it's not, iOS will display the notification to the user.
             */
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-            personAddedArray.append(uuid)
             self.addUserToView(nameString)
+            personAddedArray.append(uuid)
         }
 //        if(sendNotification && !self.notificationSent) {
 //        }
