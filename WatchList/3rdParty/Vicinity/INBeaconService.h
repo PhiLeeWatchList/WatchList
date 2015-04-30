@@ -36,7 +36,7 @@ typedef enum {
     INDetectorRangeImmediate,
 } INDetectorRange;
 
-#define SINGLETON_IDENTIFIER @"CB284D88-5317-4FB4-9621-C5A3A49E6155"
+#define SINGLETON_IDENTIFIER @"CB284D88-5317-4FB4-9621-C5A3A49E6150"
 
 @class INBeaconService;
 @protocol INBeaconServiceDelegate <NSObject>
