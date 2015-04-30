@@ -270,10 +270,13 @@
      advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     if (DEBUG_PERIPHERAL) {
-        //NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
+        NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
         
         CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-        //NSLog(@"service uuid: %@", [uuid representativeString]);
+        if(uuid == nil) {
+            uuid = [advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] firstObject];
+        }
+        NSLog(@"service uuid: %@", [uuid representativeString]);
         
         //NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
         
@@ -281,7 +284,7 @@
         for (int i=0; i<self.testIdentifierArray.count; i++) {
             //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
             //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
-            if ([[[uuid representativeString] uppercaseString] isEqualToString:[self.testIdentifierArray[i] UUIDString]]) {
+            if ([[[uuid representativeString] uppercaseString] isEqualToString:[[self.testIdentifierArray[i] UUIDString] uppercaseString]]) {
                 
                 //NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
                 
