@@ -44,6 +44,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             menuBarButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        self.revealViewController().rearViewRevealWidth = 130
         
       
         
