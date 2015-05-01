@@ -269,34 +269,36 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+    if(uuid == nil) {
+        //check overflow if in background.
+        uuid = [advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] firstObject];
+    }
+    
     if (DEBUG_PERIPHERAL) {
         NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
-        
-        CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-        if(uuid == nil) {
-            uuid = [advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] firstObject];
-        }
         NSLog(@"service uuid: %@", [uuid representativeString]);
+    }
+    
+    
+    for (int i=0; i<self.testIdentifierArray.count; i++) {
+        //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
+        //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
         
-        //NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
-        
-        
-        for (int i=0; i<self.testIdentifierArray.count; i++) {
-            //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
-            //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
-            if ([[[uuid representativeString] uppercaseString] isEqualToString:[[self.testIdentifierArray[i] UUIDString] uppercaseString]]) {
-                
-                //NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
-                
-                [self addNewFoundIdentifierArray:uuid];
-                
-                CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-                //NSLog(@"...service uuid: %@", [uuid representativeString]);
-            }
+        //which friends are we currently looking for?
+        if ([[[uuid representativeString] uppercaseString] isEqualToString:[[self.testIdentifierArray[i] UUIDString] uppercaseString]]) {
+            
+            //NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+            
+            [self addNewFoundIdentifierToArray:uuid];
+            
+            //CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+            //NSLog(@"...service uuid: %@", [uuid representativeString]);
         }
     }
     
     identifierRange = [self convertRSSItoINProximity:[RSSI floatValue]];
+    
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
@@ -315,19 +317,10 @@
 {
     [self performBlockOnDelegates:^(id<INBeaconServiceDelegate>delegate) {
         
-        
-        //TODO: report the correct id
-//        for (int i; i<self.testIdentifierArray.count; i++) {
-//            
-//            [delegate service:self foundDeviceUUID:[self.testIdentifierArray[i] representativeString] withRange:identifierRange];
-//        }
-
         for (int i=0; i<self.foundIdentifierArray.count; i++) {
             
             [delegate service:self foundDeviceUUID:[self.foundIdentifierArray[i] representativeString] withRange:identifierRange];
         }
-        
-//        [delegate service:self foundDeviceUUID:[identifier representativeString] withRange:identifierRange];
         
     } complete:^{
         // timeout the beacon to unknown position
@@ -403,7 +396,7 @@
     }
 }
 
-- (void) addNewFoundIdentifierArray:(CBUUID *) newIdentifier {
+- (void) addNewFoundIdentifierToArray:(CBUUID *) newIdentifier {
     if (self.foundIdentifierArray.count<=0) {
         
         [self.foundIdentifierArray addObject:newIdentifier];
