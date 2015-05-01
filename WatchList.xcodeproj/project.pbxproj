@@ -35,8 +35,6 @@
 		6FCA823CDC61782C17C134DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6659FFF1CE1835731688002B /* libPods.a */; };
 		9B4367911AEECD420001B432 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4367901AEECD420001B432 /* UserClass.swift */; };
 		9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
-		9B491DC31AF0665300C0DD8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DC21AF0665300C0DD8B /* User.swift */; };
-		9B491DC41AF067FC00C0DD8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DC21AF0665300C0DD8B /* User.swift */; };
 		9B491DC51AF0683A00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
 		9B491DC61AF0683C00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
 		9B7E02A91AF02B840001C924 /* DataBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7E02A81AF02B840001C924 /* DataBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +44,7 @@
 		9B7E02BC1AF02B850001C924 /* DataBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B7E02C51AF02BAE0001C924 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
 		9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B42541AE8D53B0010F7EB /* tableRowController.swift */; };
+		9BAC10561AF32AB30093F419 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC10551AF32AB30093F419 /* User.swift */; };
 		9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -167,7 +166,6 @@
 		9B4367901AEECD420001B432 /* UserClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		9B491DB81AF0523700C0DD8B /* WatchList WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WatchList WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		9B491DBA1AF05DBB00C0DD8B /* WatchList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchList.xcdatamodel; sourceTree = "<group>"; };
-		9B491DC21AF0665300C0DD8B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
 		9B7E02A41AF02B840001C924 /* DataBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7E02A71AF02B840001C924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B7E02A81AF02B840001C924 /* DataBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBridge.h; sourceTree = "<group>"; };
@@ -176,6 +174,7 @@
 		9B7E02B71AF02B850001C924 /* DataBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBridgeTests.swift; sourceTree = "<group>"; };
 		9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9B8B42541AE8D53B0010F7EB /* tableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tableRowController.swift; path = ../WatchList/tableRowController.swift; sourceTree = "<group>"; };
+		9BAC10551AF32AB30093F419 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		ACD7BA99A6DC660F9101D519 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		ED251A3F227B042C86EF8C9E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -287,6 +286,7 @@
 		0C86246B1AB91A290042CAA8 /* WatchList */ = {
 			isa = PBXGroup;
 			children = (
+				9BAC10551AF32AB30093F419 /* User.swift */,
 				9B43678F1AEEC2150001B432 /* WatchList.entitlements */,
 				0C86246E1AB91A290042CAA8 /* AppDelegate.swift */,
 				0C47B2A31AEACC0F00902891 /* Constants.swift */,
@@ -295,7 +295,6 @@
 				0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */,
 				9B4367901AEECD420001B432 /* UserClass.swift */,
 				9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */,
-				9B491DC21AF0665300C0DD8B /* User.swift */,
 				0C8624721AB91A290042CAA8 /* Main.storyboard */,
 				0C8624751AB91A290042CAA8 /* Images.xcassets */,
 				0C8624771AB91A290042CAA8 /* LaunchScreen.xib */,
@@ -716,7 +715,7 @@
 				0C47B2BC1AEC602700902891 /* GCDUtilities.m in Sources */,
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
 				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
-				9B491DC31AF0665300C0DD8B /* User.swift in Sources */,
+				9BAC10561AF32AB30093F419 /* User.swift in Sources */,
 				9B4367911AEECD420001B432 /* UserClass.swift in Sources */,
 				0C47B2AC1AEC5F9D00902891 /* INBeaconService.m in Sources */,
 				0C47B2AF1AEC5FF400902891 /* CLBeacon+Ext.m in Sources */,
@@ -741,7 +740,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B491DC41AF067FC00C0DD8B /* User.swift in Sources */,
 				9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */,
 				9B491DC51AF0683A00C0DD8B /* WatchList.xcdatamodeld in Sources */,
 				0C9FBD3E1AE6F691001FB601 /* NotificationController.swift in Sources */,

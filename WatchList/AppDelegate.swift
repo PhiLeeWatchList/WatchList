@@ -88,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
                 person.firstName = queryItems[1].value!
                 person.lastName = queryItems[2].value!
                 person.guid = queryItems[0].value!
+                person.selected = false
                 context.save(nil)
 
             }

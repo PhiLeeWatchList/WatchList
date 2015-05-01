@@ -47,26 +47,34 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
         let users = context.executeFetchRequest(request, error: nil) as! [User]
-        
 
-            var firstInitial = first(users[indexPath.row].firstName)
-            var lastInitial = first(users[indexPath.row].lastName)
-            var initials : String = String(firstInitial!) + String(lastInitial!)
-            cell.initials?.text = initials
-            cell.label?.text = users[indexPath.row].firstName + " " + users[indexPath.row].lastName
-            cell.accessoryType = .Checkmark
+        var firstInitial = first(users[indexPath.row].firstName)
+        var lastInitial = first(users[indexPath.row].lastName)
+        var initials : String = String(firstInitial!) + String(lastInitial!)
+        cell.initials?.text = initials
+        cell.label?.text = users[indexPath.row].firstName + " " + users[indexPath.row].lastName
 
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)!
-        if cell.accessoryType == UITableViewCellAccessoryType.None {
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        
+        if cell.accessoryType == .None {
+            cell.accessoryType = .Checkmark
+            person.selected = true
         } else {
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.accessoryType = .None
+            person.selected = false
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        context.save(nil)
+        
+        
     }
 }
