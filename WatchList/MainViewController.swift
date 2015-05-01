@@ -45,14 +45,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        
-//        SWRevealViewController *revealViewController = self.revealViewController;
-//        if ( revealViewController )
-//        {
-//            [self.sidebarButton setTarget: self.revealViewController];
-//            [self.sidebarButton setAction: @selector( revealToggle: )];
-//            [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-//        }
+      
         
         //recieve turn on transmission toggle notification
         NSNotificationCenter.defaultCenter().addObserver(

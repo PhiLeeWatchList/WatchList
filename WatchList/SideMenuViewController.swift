@@ -47,9 +47,9 @@ class SideMenuViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let indexPath:NSIndexPath = self.tableView.indexPathForSelectedRow()!
-        let dest:UINavigationController = segue.destinationViewController as! UINavigationController
-        dest.title = menuItems[indexPath.item]
+//        let indexPath:NSIndexPath = self.tableView.indexPathForSelectedRow()!
+//        let dest:UINavigationController = segue.destinationViewController as! UINavigationController
+//        dest.title = menuItems[indexPath.item]
     }
     
     

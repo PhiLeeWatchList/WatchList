@@ -13,6 +13,7 @@ import MessageUI
 
 class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
     
+    @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
     @IBOutlet weak var newButton: UIButton!
     @IBOutlet weak var guidText: UITextField!
@@ -44,6 +45,12 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
         
         self.firstText.delegate = self;
         self.lastText.delegate = self;
+        
+        if self.revealViewController() != nil {
+            menuBarButton.target = self.revealViewController()
+            menuBarButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         
     }
     

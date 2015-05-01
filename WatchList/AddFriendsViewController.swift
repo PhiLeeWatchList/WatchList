@@ -12,6 +12,7 @@ import CoreData
 
 class AddFriendsViewController: UIViewController, UITableViewDelegate {
     
+    @IBOutlet weak var menuBarButton: UIBarButtonItem!
     var users = [User]()
     
     var lastSelectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -20,6 +21,12 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black;
+        
+        if self.revealViewController() != nil {
+            menuBarButton.target = self.revealViewController()
+            menuBarButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         
         
     }
