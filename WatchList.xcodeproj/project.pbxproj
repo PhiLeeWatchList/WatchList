@@ -44,6 +44,7 @@
 		9B7E02BB1AF02B850001C924 /* DataBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; };
 		9B7E02BC1AF02B850001C924 /* DataBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B7E02C51AF02BAE0001C924 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
+		9B883E1B1AF4177E0000EC53 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
 		9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B42541AE8D53B0010F7EB /* tableRowController.swift */; };
 		9BAC10561AF32AB30093F419 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC10551AF32AB30093F419 /* User.swift */; };
 		9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */; };
@@ -719,6 +720,7 @@
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
 				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
 				9BAC10561AF32AB30093F419 /* User.swift in Sources */,
+				9B883E1B1AF4177E0000EC53 /* CoreDataStack.swift in Sources */,
 				9B4367911AEECD420001B432 /* UserClass.swift in Sources */,
 				0C47B2AC1AEC5F9D00902891 /* INBeaconService.m in Sources */,
 				0C47B2AF1AEC5FF400902891 /* CLBeacon+Ext.m in Sources */,

@@ -87,22 +87,36 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     }
     
     @IBAction func onFakeUser(sender: AnyObject) {
-        var uuid:String = "BB284D88-5317-4FB4-9621-C5A3A49E61"
+ 
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+        let predicate = NSPredicate(format: "selected == true")
+        request.predicate = predicate
         
-        var arrayCount:Int = self.personAddedArray.count;
-        var endString:String = ""
-        if (arrayCount<10) {
-            endString = "0\(arrayCount)"
-        } else {
-            endString = "\(arrayCount)"
-        }
-        
-        uuid = "\(uuid)\(endString)"
-        
-        if(self.canAddUserToField(uuid)) {
+        var uuid = ""
+        if let users = context.executeFetchRequest(request, error: nil) as? [User] {
+            for user in users {
+                uuid = user.guid
             
-            self.addUserToView("dude\(endString)")
-            personAddedArray.append(uuid)
+        //      var uuid:String = "BB284D88-5317-4FB4-9621-C5A3A49E61"
+                
+                var arrayCount:Int = self.personAddedArray.count;
+                var endString:String = ""
+        //        if (arrayCount<10) {
+        //            endString = "0\(arrayCount)"
+        //        } else {
+        //            endString = "\(arrayCount)"
+        //        }
+                
+        //      uuid = "\(uuid)\(endString)"
+                var name = user.firstName + " " + user.lastName
+                if(self.canAddUserToField(uuid)) {
+                    self.addUserToView(name)
+                    
+                    //self.addUserToView("dude\(endString)")
+                    personAddedArray.append(uuid)
+                }
+            }
         }
     }
     

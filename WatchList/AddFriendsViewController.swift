@@ -33,6 +33,7 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
+        
         let users = context.executeFetchRequest(request, error: nil) as! [User]
         
         return users.count
@@ -46,35 +47,55 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
+        let sortDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
         let users = context.executeFetchRequest(request, error: nil) as! [User]
 
         var firstInitial = first(users[indexPath.row].firstName)
         var lastInitial = first(users[indexPath.row].lastName)
         var initials : String = String(firstInitial!) + String(lastInitial!)
-        cell.initials?.text = initials
-        cell.label?.text = users[indexPath.row].firstName + " " + users[indexPath.row].lastName
-
+        var name = users[indexPath.row].firstName + " " + users[indexPath.row].lastName
+        var guid = users[indexPath.row].guid
+        cell.initials!.text = initials
+        cell.name!.text = name
+        cell.guid!.text = guid
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
-        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell;
+        
+        var guid = cell.guid!.text
         
         if cell.accessoryType == .None {
             cell.accessoryType = .Checkmark
-            person.selected = true
+            saveUserData(guid!, selected: true)
         } else {
             cell.accessoryType = .None
-            person.selected = false
+            saveUserData(guid!, selected: false)
         }
-        
-        context.save(nil)
         
         
     }
+    
+    func saveUserData(guid: String, selected: Bool) {
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        
+        var fetchRequest = NSFetchRequest(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "guid = %@", guid)
+        
+        if let fetchResults = context.executeFetchRequest(fetchRequest, error: nil) as? [User] {
+            if fetchResults.count != 0{
+                
+                var managedObject = fetchResults[0]
+                managedObject.setValue(true, forKey: "selected")
+                
+                context.save(nil)
+            }
+        }
+    }
+    
+    
 }

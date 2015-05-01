@@ -17,4 +17,5 @@ class User: NSManagedObject {
     @NSManaged var lastName: String
     @NSManaged var selected: NSNumber
 
+
 }

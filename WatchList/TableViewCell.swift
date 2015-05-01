@@ -12,9 +12,13 @@ class TableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var initials: UILabel!
+
     
+    @IBOutlet weak var name: UILabel!
+
     
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var guid: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,5 +30,6 @@ class TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    
 }
