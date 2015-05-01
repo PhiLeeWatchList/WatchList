@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C32A3051AF315B400A7990B /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C32A3041AF315B400A7990B /* SideMenuViewController.swift */; };
 		0C47B2A21AEAAAAC00902891 /* AppIcon_180px.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C47B2A11AEAAAAC00902891 /* AppIcon_180px.png */; };
 		0C47B2A41AEACC0F00902891 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2A31AEACC0F00902891 /* Constants.swift */; };
 		0C47B2AC1AEC5F9D00902891 /* INBeaconService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C47B2AB1AEC5F9D00902891 /* INBeaconService.m */; };
@@ -120,9 +121,10 @@
 
 /* Begin PBXFileReference section */
 		0C32A3011AF1B65800A7990B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		0C32A3041AF315B400A7990B /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		0C47B2A11AEAAAAC00902891 /* AppIcon_180px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_180px.png; sourceTree = "<group>"; };
 		0C47B2A31AEACC0F00902891 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		0C47B2A91AEC5F9C00902891 /* WatchList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WatchList-Bridging-Header.h"; sourceTree = "<group>"; };
+		0C47B2A91AEC5F9C00902891 /* WatchList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "WatchList-Bridging-Header.h"; path = "3rdParty/Vicinity/WatchList-Bridging-Header.h"; sourceTree = "<group>"; };
 		0C47B2AA1AEC5F9D00902891 /* INBeaconService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INBeaconService.h; sourceTree = "<group>"; };
 		0C47B2AB1AEC5F9D00902891 /* INBeaconService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INBeaconService.m; sourceTree = "<group>"; };
 		0C47B2AD1AEC5FF400902891 /* CLBeacon+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+Ext.h"; sourceTree = "<group>"; };
@@ -248,7 +250,6 @@
 				0C47B2BB1AEC602700902891 /* GCDUtilities.m */,
 				0C47B2BD1AEC603A00902891 /* EasedValue.h */,
 				0C47B2BE1AEC603A00902891 /* EasedValue.m */,
-				0C47B2A91AEC5F9C00902891 /* WatchList-Bridging-Header.h */,
 			);
 			path = Vicinity;
 			sourceTree = "<group>";
@@ -288,9 +289,11 @@
 			children = (
 				9BAC10551AF32AB30093F419 /* User.swift */,
 				9B43678F1AEEC2150001B432 /* WatchList.entitlements */,
+				0C47B2A91AEC5F9C00902891 /* WatchList-Bridging-Header.h */,
 				0C86246E1AB91A290042CAA8 /* AppDelegate.swift */,
 				0C47B2A31AEACC0F00902891 /* Constants.swift */,
 				0C9FBD591AE8466A001FB601 /* MainViewController.swift */,
+				0C32A3041AF315B400A7990B /* SideMenuViewController.swift */,
 				0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */,
 				0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */,
 				9B4367901AEECD420001B432 /* UserClass.swift */,
@@ -724,6 +727,7 @@
 				0C47B2B61AEC600C00902891 /* CBCentralManager+Ext.m in Sources */,
 				0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */,
 				0C47B2B71AEC600C00902891 /* CBPeripheralManager+Ext.m in Sources */,
+				0C32A3051AF315B400A7990B /* SideMenuViewController.swift in Sources */,
 				0C47B2A41AEACC0F00902891 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,6 +13,8 @@ import DataBridge
 class MainViewController: UIViewController, INBeaconServiceDelegate {
     
     
+    @IBOutlet weak var menuBarButton: UIBarButtonItem!
+    
     @IBOutlet weak var transmitLabel: UILabel!
     @IBOutlet weak var transmitSwitch: UISwitch!
     //@IBOutlet weak var textField: UITextView!
@@ -37,6 +39,22 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         self.animator = UIDynamicAnimator(referenceView:userFieldView)
         
+        if self.revealViewController() != nil {
+            menuBarButton.target = self.revealViewController()
+            menuBarButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
+        
+//        SWRevealViewController *revealViewController = self.revealViewController;
+//        if ( revealViewController )
+//        {
+//            [self.sidebarButton setTarget: self.revealViewController];
+//            [self.sidebarButton setAction: @selector( revealToggle: )];
+//            [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+//        }
+        
+        //recieve turn on transmission toggle notification
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "UITransmitOnNotification:",
