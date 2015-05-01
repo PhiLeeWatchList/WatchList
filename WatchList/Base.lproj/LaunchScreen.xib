@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon_180px.png" translatesAutoresizingMaskIntoConstraints="NO" id="PJ9-FP-M7p">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_bg@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="PJ9-FP-M7p">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                     <constraints>
                         <constraint firstAttribute="width" priority="750" constant="480" id="XGL-1m-iwL"/>
@@ -49,6 +49,6 @@
         </view>
     </objects>
     <resources>
-        <image name="AppIcon_180px.png" width="180" height="180"/>
+        <image name="star_bg@3x.png" width="1242" height="2208"/>
     </resources>
 </document>

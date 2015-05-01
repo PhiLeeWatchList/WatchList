@@ -15,11 +15,13 @@ class SideMenuViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.backgroundColor =  UIColor(patternImage: UIImage(named: "star_bg.png")!)
         
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         
     }
     
