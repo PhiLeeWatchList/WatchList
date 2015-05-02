@@ -112,8 +112,9 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     }
     
     func randomBeaconValues() {
-        
-        self.guid = self.guidText.text
+        var uuid = NSUUID().UUIDString
+        self.guid = uuid
+        self.guidText.text = uuid
         
 //        self.majorInt = UInt16(arc4random_uniform(65535))
 //        self.minorInt = UInt16(arc4random_uniform(65535))
