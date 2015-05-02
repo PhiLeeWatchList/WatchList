@@ -96,6 +96,16 @@
 - (id)initWithIdentifier:(NSString *)theIdentifier
 {
     if ((self = [super init])) {
+        
+        //check user defaults for an ID
+        
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *storedUUID = [userDefaults objectForKey:@"THIS_DEVICE_TRANSMIT_UUID"];
+        
+        if (storedUUID != nil) {
+            theIdentifier = storedUUID;
+        }
+        
         identifier = [CBUUID UUIDWithString:theIdentifier];
         
         
