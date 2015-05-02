@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import DataBridge
+import Parse
 
 //import CoreLocation //TODO: remove ibeacon
 
@@ -30,6 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
 //        
 //        //allow user to accept location
 //        self.locationManager!.requestAlwaysAuthorization()
+        
+        
+        Parse.enableLocalDatastore()
+        
+        // Initialize Parse.
+        Parse.setApplicationId("qLkZlcrFiYuxh2g1r7GPeqpSz7ZJdm3BWsWshw9r",
+            clientKey: "exRqP3hYh1qh8RbGSzTclc7UHCx7JVsct7BGSnrw")
+        
+        // [Optional] Track statistics around application opens.
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
         
         if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
         {

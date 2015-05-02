@@ -10,7 +10,7 @@ import Foundation
 
 class SideMenuViewController: UITableViewController {
     
-    var menuItems: [String] = ["title", "settings","friends","about"]
+    var menuItems: [String] = ["title","login", "settings","friends","about"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +50,11 @@ class SideMenuViewController: UITableViewController {
 //        let indexPath:NSIndexPath = self.tableView.indexPathForSelectedRow()!
 //        let dest:UINavigationController = segue.destinationViewController as! UINavigationController
 //        dest.title = menuItems[indexPath.item]
+    }
+ 
+    @IBAction func headHome() {
+        println("Button seen.  Trigging exit segue manually...")
+        self.performSegueWithIdentifier("goBackHome", sender: self)
     }
     
     

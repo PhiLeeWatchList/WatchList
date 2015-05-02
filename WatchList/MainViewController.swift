@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 import DataBridge
+import Parse
+import Bolts
+import ParseUI
 
 class MainViewController: UIViewController, INBeaconServiceDelegate {
     
@@ -45,7 +48,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-      
+        let testObject = PFObject(className: "TestObject")
+        testObject["foo"] = "bar"
+        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            println("Object has been saved.")
+        }
         
         //recieve turn on transmission toggle notification
         NSNotificationCenter.defaultCenter().addObserver(
@@ -56,6 +63,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         //check to see if user defaults has transmit id
         self.checkUserDefualtsForTransmitSetting()
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -80,7 +89,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     }
     
     @IBAction func onFakeUser(sender: AnyObject) {
- 
+
+        
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
         let predicate = NSPredicate(format: "selected == true")
