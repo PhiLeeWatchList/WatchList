@@ -25,6 +25,8 @@ class LoginViewController: UIViewController, PFLogInViewControllerDelegate, PFSi
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        self.loginViewController.delegate = self
+        
         if PFUser.currentUser() == nil {
             self.loginViewController.fields = (PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton | PFLogInFields.SignUpButton | PFLogInFields.PasswordForgotten)
         
