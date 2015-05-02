@@ -46,7 +46,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         }
         self.revealViewController().rearViewRevealWidth = 130
         
-      
+        
         
         //recieve turn on transmission toggle notification
         NSNotificationCenter.defaultCenter().addObserver(
@@ -57,13 +57,15 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         //check to see if user defaults has transmit id
         self.checkUserDefualtsForTransmitSetting()
+        
+        
+        INBeaconService.singleton().addDelegate(self)
+        INBeaconService.singleton().startDetecting()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        INBeaconService.singleton().addDelegate(self)
-        INBeaconService.singleton().startDetecting()
         
     }
     
@@ -76,7 +78,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         println("got a transmit on notification")
         self.transmitSwitch.enabled = true
         self.transmitSwitch.setOn(true, animated: true)
-        self.transmitLabel.text = "Your pack can see you!"
+        self.transmitLabel.text = "On"
         INBeaconService.singleton().startBroadcasting()
     }
     
@@ -92,22 +94,21 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             for user in users {
                 uuid = user.guid
             
-        //      var uuid:String = "BB284D88-5317-4FB4-9621-C5A3A49E61"
-                
-                var arrayCount:Int = self.personAddedArray.count;
-                var endString:String = ""
-        //        if (arrayCount<10) {
-        //            endString = "0\(arrayCount)"
-        //        } else {
-        //            endString = "\(arrayCount)"
-        //        }
-                
-        //      uuid = "\(uuid)\(endString)"
+//              var uuid:String = "BB284D88-5317-4FB4-9621-C5A3A49E61"
+//                var arrayCount:Int = self.personAddedArray.count;
+//                var endString:String = ""
+//                if (arrayCount<10) {
+//                    endString = "0\(arrayCount)"
+//                } else {
+//                    endString = "\(arrayCount)"
+//                }
+//                
+//              uuid = "\(uuid)\(endString)"
                 var name = user.firstName + " " + user.lastName
                 if(self.canAddUserToField(uuid)) {
                     self.addUserToView(name)
                     
-                    //self.addUserToView("dude\(endString)")
+//                    self.addUserToView("dude\(endString)")
                     personAddedArray.append(uuid)
                 }
             }
@@ -117,11 +118,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     
     @IBAction func onSwitchChange(sender: AnyObject) {
         if self.transmitSwitch.on {
-            self.transmitLabel.text = "Your pack can see you!"
+            self.transmitLabel.text = "On"
             INBeaconService.singleton().startBroadcasting()
             
         } else {
-            self.transmitLabel.text = "You're in the dark."
+            self.transmitLabel.text = "Off"
             INBeaconService.singleton().stopBroadcasting()
         }
     }
@@ -177,8 +178,6 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             self.addUserToView(nameString)
             personAddedArray.append(uuid)
         }
-//        if(sendNotification && !self.notificationSent) {
-//        }
         
     }
     
