@@ -20,7 +20,6 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBOutlet weak var firstText: UITextField!
     @IBOutlet weak var lastText: UITextField!
     @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var messageLabel: UILabel!
     
     
     var majorInt:UInt16 = 0
