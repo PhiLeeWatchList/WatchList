@@ -20,7 +20,6 @@
 		0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C86246E1AB91A290042CAA8 /* AppDelegate.swift */; };
 		0C8624741AB91A290042CAA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624721AB91A290042CAA8 /* Main.storyboard */; };
 		0C8624761AB91A290042CAA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624751AB91A290042CAA8 /* Images.xcassets */; };
-		0C8624791AB91A290042CAA8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624771AB91A290042CAA8 /* LaunchScreen.xib */; };
 		0C8624851AB91A290042CAA8 /* WatchListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8624841AB91A290042CAA8 /* WatchListTests.swift */; };
 		0C8624911AB91E640042CAA8 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0C8624901AB91E630042CAA8 /* README.md */; };
 		0C9FBD3C1AE6F691001FB601 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD3B1AE6F691001FB601 /* InterfaceController.swift */; };
@@ -146,7 +145,6 @@
 		0C86246E1AB91A290042CAA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C8624731AB91A290042CAA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0C8624751AB91A290042CAA8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0C8624781AB91A290042CAA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0C86247E1AB91A290042CAA8 /* WatchListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatchListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C8624831AB91A290042CAA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C8624841AB91A290042CAA8 /* WatchListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListTests.swift; sourceTree = "<group>"; };
@@ -301,7 +299,6 @@
 				9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */,
 				0C8624721AB91A290042CAA8 /* Main.storyboard */,
 				0C8624751AB91A290042CAA8 /* Images.xcassets */,
-				0C8624771AB91A290042CAA8 /* LaunchScreen.xib */,
 				0C47B2A71AEC5F6D00902891 /* 3rdParty */,
 				0C86246C1AB91A290042CAA8 /* Supporting Files */,
 				9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */,
@@ -627,7 +624,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8624741AB91A290042CAA8 /* Main.storyboard in Resources */,
-				0C8624791AB91A290042CAA8 /* LaunchScreen.xib in Resources */,
 				0C033FC41AF442BE0005AA1C /* star_bg@3x.png in Resources */,
 				0C8624761AB91A290042CAA8 /* Images.xcassets in Resources */,
 			);
@@ -814,14 +810,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		0C8624771AB91A290042CAA8 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0C8624781AB91A290042CAA8 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 		0C9FBD4A1AE6F691001FB601 /* Interface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -917,6 +905,7 @@
 			baseConfigurationReference = ED251A3F227B042C86EF8C9E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchList/WatchList.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
@@ -937,6 +926,7 @@
 			baseConfigurationReference = ACD7BA99A6DC660F9101D519 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchList/WatchList.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
