@@ -11,7 +11,7 @@ import MobileCoreServices
 import Parse
 
 
-class SignupViewController: UIViewController, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class SignupViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
 
     var error = ""
@@ -35,8 +35,8 @@ class SignupViewController: UIViewController, UIActionSheetDelegate, UINavigatio
     }
     
     @IBAction func photoButton(sender: AnyObject) {
-        //showImagePickerActionSheet()
-        choosePhoto()
+        showImagePickerActionSheet()
+        //choosePhoto()
     }
     
     
@@ -129,13 +129,13 @@ class SignupViewController: UIViewController, UIActionSheetDelegate, UINavigatio
     func showImagePickerActionSheet(){
         var action : UIAlertController = UIAlertController(title: "Alert", message: "Select Option", preferredStyle: UIAlertControllerStyle.ActionSheet)
         action.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { alertAction in
-            self.takePhoto()
             self.dismissViewControllerAnimated(true, completion: nil)
+            self.takePhoto()
         }))
         
         action.addAction(UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler: { alertAction in
-            self.choosePhoto()
             self.dismissViewControllerAnimated(true, completion: nil)
+            self.choosePhoto()
         }))
         
         action.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {alertAction in
@@ -176,7 +176,7 @@ class SignupViewController: UIViewController, UIActionSheetDelegate, UINavigatio
             
         }
         else{
-            NSLog("No Camera.")
+            NSLog("No Photo Library.")
         }
     }
     
@@ -199,13 +199,21 @@ class SignupViewController: UIViewController, UIActionSheetDelegate, UINavigatio
         } else {
             imageToSave = originalImage
         }
-        self.image.layer.cornerRadius = 50
-        self.image.layer.masksToBounds = true
-        self.image.image = editedImage
         
-        self.hasImage = true
+        imageToSave!.resize(CGSizeMake(100, 100), completionHandler: { [weak self](resizedImage, data) -> () in
+
+            
+            self!.image.layer.cornerRadius = 50
+            self!.image.layer.masksToBounds = true
+            self!.image.image = resizedImage
+            
+            self!.hasImage = true
+            
+            self!.dismissViewControllerAnimated(true, completion: nil)
+            
+            })
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+
         
     }
     
@@ -213,6 +221,26 @@ class SignupViewController: UIViewController, UIActionSheetDelegate, UINavigatio
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    
 
 
 }
+
+
+extension UIImage {
+    public func resize(size:CGSize, completionHandler:(resizedImage:UIImage, data:NSData)->()) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
+            var newSize:CGSize = size
+            let rect = CGRectMake(0, 0, newSize.width, newSize.height)
+            UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+            self.drawInRect(rect)
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            let imageData = UIImageJPEGRepresentation(newImage, 0.5)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                completionHandler(resizedImage: newImage, data:imageData)
+            })
+        })
+    }
+}
+

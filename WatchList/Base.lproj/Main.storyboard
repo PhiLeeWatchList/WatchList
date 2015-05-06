@@ -379,7 +379,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="4MV-58-mPO"/>
+                    <navigationItem key="navigationItem" id="4MV-58-mPO">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="cwV-YQ-cMr"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="passwordField" destination="GFA-Xe-pMi" id="jjU-QF-qSh"/>
                         <outlet property="usernameField" destination="GvS-7M-F1t" id="QsA-hk-8qc"/>
@@ -1316,6 +1318,7 @@
         <!--Navigation Controller-->
         <scene sceneID="4Gd-w7-K3o">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gxe-rf-9kr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nku-qN-lFn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cZh-Lo-S2p">
@@ -1327,7 +1330,6 @@
                         <segue destination="UA1-Eb-5TG" kind="relationship" relationship="rootViewController" id="OxV-QB-WCC"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gxe-rf-9kr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-231" y="529"/>
         </scene>
