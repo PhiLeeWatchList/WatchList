@@ -20,11 +20,8 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     @IBOutlet weak var firstText: UITextField!
     @IBOutlet weak var lastText: UITextField!
     @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var messageLabel: UILabel!
     
     
-    var majorInt:UInt16 = 0
-    var minorInt:UInt16 = 0
     var first:String = ""
     var last:String = ""
     var guid:String = "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0"
@@ -108,12 +105,6 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
         self.guid = uuid
         self.guidText.text = uuid
         
-//        self.majorInt = UInt16(arc4random_uniform(65535))
-//        self.minorInt = UInt16(arc4random_uniform(65535))
-//        
-//        println("major: \(self.majorInt), minor \(self.minorInt)")
-//        self.firstText.text = String(self.majorInt)
-//        self.lastText.text = String(self.minorInt)
     }
     
     

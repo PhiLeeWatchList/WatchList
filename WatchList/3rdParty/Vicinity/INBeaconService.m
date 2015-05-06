@@ -46,8 +46,8 @@
 @interface INBeaconService() <CBPeripheralManagerDelegate, CBCentralManagerDelegate>
 
 @property (nonatomic, strong) NSArray *testArray;
-@property (nonatomic, strong) NSMutableArray *testIdentifierArray;
-@property (nonatomic, strong) NSMutableArray *foundIdentifierArray;
+@property (atomic, strong) NSMutableArray *testIdentifierArray;
+@property (atomic, strong) NSMutableArray *foundIdentifierArray;
 
 
 @end
@@ -109,23 +109,24 @@
         identifier = [CBUUID UUIDWithString:theIdentifier];
         
         
-        self.testArray = [[NSArray alloc] init];
+//        self.testArray = [[NSArray alloc] init];
+//        
+//        self.testArray =  @[@"CB284D88-5317-4FB4-9621-C5A3A49E6150",
+//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6151",
+//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6152",
+//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6153",
+//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6154",
+//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6155",
+//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6156",
+//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6157"];
+//        
+//        self.testIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
+//        self.foundIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
+//        for (int i; i<self.testArray.count; i++) {
+//            [self.testIdentifierArray addObject:[CBUUID UUIDWithString:self.testArray[i]]];
+//        }
         
-        self.testArray =  @[@"CB284D88-5317-4FB4-9621-C5A3A49E6150",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6151",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6152",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6153",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6154",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6155",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6156",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6157"];
-        
-        self.testIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
-        self.foundIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
-        for (int i; i<self.testArray.count; i++) {
-            [self.testIdentifierArray addObject:[CBUUID UUIDWithString:self.testArray[i]]];
-        }
-        
+        [self initTestIdentifierArray];
         
         delegates = [[NSMutableSet alloc] init];
         
@@ -136,6 +137,26 @@
         [self startAuthorizationTimer];
     }
     return self;
+}
+
+- (void) initTestIdentifierArray {
+    if ([self.testIdentifierArray count]<=0) {
+        NSArray  *aTestArray = [[NSArray alloc] init];
+        aTestArray =  @[@"CB284D88-5317-4FB4-9621-C5A3A49E6150",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6151",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6152",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6153",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6154",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6155",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6156",
+                       @"CB284D88-5317-4FB4-9621-C5A3A49E6157"];
+        
+        self.testIdentifierArray = [[NSMutableArray alloc] initWithCapacity:aTestArray.count];
+        self.foundIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
+        for (int i; i<aTestArray.count; i++) {
+            [self.testIdentifierArray addObject:[CBUUID UUIDWithString:aTestArray[i]]];
+        }
+    }
 }
 
 - (void)changeIdentifier:(NSString *)theIdentifier
@@ -285,25 +306,27 @@
         uuid = [advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] firstObject];
     }
     
-    if (DEBUG_PERIPHERAL) {
-        NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
-        NSLog(@"service uuid: %@", [uuid representativeString]);
-    }
+//    NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
+//    NSLog(@"service uuid: %@", [uuid representativeString]);
     
+    if ([self.testIdentifierArray count]<=0) {
+        [self initTestIdentifierArray];
+    }
     
     for (int i=0; i<self.testIdentifierArray.count; i++) {
         //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
-        //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
+        NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
         
         //which friends are we currently looking for?
         if ([[[uuid representativeString] uppercaseString] isEqualToString:[[self.testIdentifierArray[i] UUIDString] uppercaseString]]) {
             
-            //NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+            if (DEBUG_PERIPHERAL) {
+                NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+                CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+                NSLog(@"...service uuid: %@", [uuid representativeString]);
+            }
             
             [self addNewFoundIdentifierToArray:uuid];
-            
-            //CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-            //NSLog(@"...service uuid: %@", [uuid representativeString]);
         }
     }
     
