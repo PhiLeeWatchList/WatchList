@@ -1072,11 +1072,11 @@
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="pX7-jX-XOH"/>
+                                        <exclude reference="GTW-Z9-ryM"/>
                                         <exclude reference="ISG-lz-GbS"/>
                                         <exclude reference="IbL-vG-Nnn"/>
-                                        <exclude reference="GTW-Z9-ryM"/>
                                         <exclude reference="KDk-5c-WtW"/>
+                                        <exclude reference="pX7-jX-XOH"/>
                                         <exclude reference="z3y-36-IQn"/>
                                     </mask>
                                 </variation>
@@ -1105,11 +1105,11 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="Ade-fy-8Wf"/>
-                                        <exclude reference="Z2R-4V-Uu7"/>
                                         <exclude reference="Ej3-tP-0Ou"/>
-                                        <exclude reference="SCM-Ur-uc7"/>
-                                        <exclude reference="R9D-iu-NTV"/>
                                         <exclude reference="Qar-zK-avN"/>
+                                        <exclude reference="R9D-iu-NTV"/>
+                                        <exclude reference="SCM-Ur-uc7"/>
+                                        <exclude reference="Z2R-4V-Uu7"/>
                                     </mask>
                                 </variation>
                             </textField>
