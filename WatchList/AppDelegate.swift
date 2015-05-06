@@ -53,15 +53,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
             //do iOS 7
         }
         
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        var navigationBarAppearace = UINavigationBar.appearance()
         
-        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
+        navigationBarAppearace.tintColor = UIColor.whiteColor()
+        navigationBarAppearace.barTintColor = UIColor.blackColor()
         
-        person.firstName = "Lee"
-        person.lastName = "Strasheim"
-        person.guid = "1234-5678-1234-4321"
-        person.selected = false
-        context.save(nil)
+        
+        
+//        var context = CoreDataStack.sharedInstance.managedObjectContext!
+//        
+//        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
+//        
+//        person.firstName = "Lee"
+//        person.lastName = "Strasheim"
+//        person.guid = "1234-5678-1234-4321"
+//        person.selected = false
+//        context.save(nil)
         
         return true
     }

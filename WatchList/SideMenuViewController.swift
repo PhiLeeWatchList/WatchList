@@ -10,7 +10,7 @@ import Foundation
 
 class SideMenuViewController: UITableViewController {
     
-    var menuItems: [String] = ["title","login", "settings","friends","about"]
+    var menuItems: [String] = ["title","logout", "settings","friends","about"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
