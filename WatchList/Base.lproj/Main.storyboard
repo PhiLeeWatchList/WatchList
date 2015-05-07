@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nku-qN-lFn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UA1-Eb-5TG">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -456,7 +456,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="j78-M6-szY" kind="unwind" unwindAction="logoutFromMainMenu:" id="qwg-6g-UV0"/>
+                                    <segue destination="j78-M6-szY" kind="unwind" unwindAction="logoutFromMainMenu:" id="ptH-a5-Vry"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings" id="f8I-8G-5In">
@@ -704,7 +704,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onNewButton:" destination="Tlr-Nd-217" eventType="touchUpInside" id="g9Z-Te-laS"/>
+                                    <action selector="onNewButton:" destination="Tlr-Nd-217" eventType="touchUpInside" id="H57-ky-ERp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="112" placeholderIntrinsicHeight="32" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxV-eq-ora">
@@ -720,8 +720,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onDone:" destination="Tlr-Nd-217" eventType="touchUpInside" id="9gq-Ya-iL6"/>
-                                    <action selector="onNewButton:" destination="Tlr-Nd-217" eventType="touchUpInside" id="AiV-ro-mdq"/>
+                                    <action selector="onDone:" destination="Tlr-Nd-217" eventType="touchUpInside" id="ZkE-j7-JZK"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="E2C56DB5-DFFB-48D2-B060-D0F5A71096E0" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1e-y5-H8o">
@@ -1018,13 +1017,13 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="doneButton" destination="TxV-eq-ora" id="m4C-m7-9DP"/>
                         <outlet property="firstText" destination="5H6-ef-Q7e" id="O5X-xX-7BG"/>
                         <outlet property="guidText" destination="x1e-y5-H8o" id="HJq-qK-16E"/>
                         <outlet property="lastText" destination="SlB-Hi-mZB" id="tJI-6E-RA7"/>
                         <outlet property="menuBarButton" destination="GmK-ei-2tr" id="Epz-vm-JZs"/>
                         <outlet property="messageLabel" destination="0PN-LD-QEy" id="zEM-vH-vtQ"/>
-                        <outlet property="newButton" destination="RdR-g3-ekw" id="4Ix-tx-pjL"/>
+                        <outlet property="newButton" destination="RdR-g3-ekw" id="iWC-zs-mp2"/>
+                        <outlet property="shareButton" destination="TxV-eq-ora" id="ACI-Mr-Fi5"/>
                         <outlet property="switchChris" destination="hbl-9O-dGe" id="pol-MK-yp1"/>
                         <outlet property="switchForrest" destination="F9Z-gJ-Uc1" id="jld-my-j6Z"/>
                         <outlet property="switchJackie" destination="GpM-5N-TQY" id="62y-Kj-ba6"/>
@@ -1308,30 +1307,12 @@
                         <outlet property="image" destination="ql6-SR-i2l" id="spR-ft-87e"/>
                         <outlet property="passwordField" destination="NZ5-a9-DpX" id="vMZ-ke-7YH"/>
                         <outlet property="usernameField" destination="rKy-Pg-iUF" id="mOz-dx-flH"/>
-                        <segue destination="nku-qN-lFn" kind="show" identifier="loginView" id="2JQ-RH-Oxg"/>
+                        <segue destination="UA1-Eb-5TG" kind="show" identifier="loginView" id="NhU-nP-hJU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGc-Te-XqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1419" y="412"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4Gd-w7-K3o">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gxe-rf-9kr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nku-qN-lFn" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cZh-Lo-S2p">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="UA1-Eb-5TG" kind="relationship" relationship="rootViewController" id="OxV-QB-WCC"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="-231" y="529"/>
         </scene>
     </scenes>
     <resources>
@@ -1339,7 +1320,7 @@
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cgx-H9-egr"/>
+        <segue reference="aAy-qA-0u4"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.43880208333333331" green="0.57097800925925923" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

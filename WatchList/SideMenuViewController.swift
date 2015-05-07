@@ -15,7 +15,7 @@ class SideMenuViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor =  UIColor(patternImage: UIImage(named: "star_bg.png")!)
+        //self.tableView.backgroundColor =  UIColor(patternImage: UIImage(named: "star_bg.png")!)
         
     }
     
