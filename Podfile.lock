@@ -1,10 +1,13 @@
 PODS:
+  - IQKeyboardManager (3.2.3)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
+  - IQKeyboardManager
   - SWRevealViewController (~> 2.3)
 
 SPEC CHECKSUMS:
-  SWRevealViewController: f6d80638b8e12323e87ac79562345403a799cb77
+  IQKeyboardManager: 6ca5c54e3776eb54af4c7caf515833f3cd761d59
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.36.4

@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
 //        self.locationManager!.requestAlwaysAuthorization()
         
         
+        
         Parse.enableLocalDatastore()
         
         // Initialize Parse.

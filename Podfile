@@ -5,4 +5,5 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 pod 'SWRevealViewController', '~> 2.3'
 
+pod 'IQKeyboardManager'
 

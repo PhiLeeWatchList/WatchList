@@ -4,3 +4,4 @@
 
 #import "INBeaconService.h"
 #import "SWRevealViewController.h"
+#import "KeyboardManager.h"
