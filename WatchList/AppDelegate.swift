@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import DataBridge
+import Parse
 
 //import CoreLocation //TODO: remove ibeacon
 
@@ -31,6 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
 //        //allow user to accept location
 //        self.locationManager!.requestAlwaysAuthorization()
         
+        
+        Parse.enableLocalDatastore()
+        
+        // Initialize Parse.
+        Parse.setApplicationId("qLkZlcrFiYuxh2g1r7GPeqpSz7ZJdm3BWsWshw9r",
+            clientKey: "exRqP3hYh1qh8RbGSzTclc7UHCx7JVsct7BGSnrw")
+        
+        // [Optional] Track statistics around application opens.
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        
         if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
         {
             //allow user to accept location when backgrounded
@@ -41,15 +53,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
             //do iOS 7
         }
         
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        var navigationBarAppearace = UINavigationBar.appearance()
         
-        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
+        navigationBarAppearace.tintColor = UIColor.whiteColor()
+        navigationBarAppearace.barTintColor = UIColor.blackColor()
         
-        person.firstName = "Lee"
-        person.lastName = "Strasheim"
-        person.guid = "1234-5678-1234-4321"
-        person.selected = false
-        context.save(nil)
+        
+        
+//        var context = CoreDataStack.sharedInstance.managedObjectContext!
+//        
+//        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
+//        
+//        person.firstName = "Lee"
+//        person.lastName = "Strasheim"
+//        person.guid = "1234-5678-1234-4321"
+//        person.selected = false
+//        context.save(nil)
         
         return true
     }
@@ -92,10 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
                 var context = CoreDataStack.sharedInstance.managedObjectContext!
                 
                 var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
-                
-                person.firstName = queryItems[1].value!
-                person.lastName = queryItems[2].value!
-                person.guid = queryItems[0].value!
+                person.username = queryItems[0].value!
+                person.guid = queryItems[1].value!
+                person.id = ""
                 person.selected = false
                 context.save(nil)
 

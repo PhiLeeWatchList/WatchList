@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 import DataBridge
+import Parse
+import Bolts
+import ParseUI
 
 class MainViewController: UIViewController, INBeaconServiceDelegate {
     
@@ -20,22 +23,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     //@IBOutlet weak var textField: UITextView!
     @IBOutlet weak var userFieldView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var testSetupButton: UIButton!
     
-    @IBOutlet weak var popoverView: UIView!
-    @IBOutlet weak var messagePickView: UIView!
-    
-    @IBOutlet weak var switchPhil: UISwitch!
-    @IBOutlet weak var switchLee: UISwitch!
-    @IBOutlet weak var switchLisa: UISwitch!
-    @IBOutlet weak var switchJackie: UISwitch!
-    @IBOutlet weak var switchChris: UISwitch!
-    @IBOutlet weak var switchForrest: UISwitch!
-    @IBOutlet weak var switchiPad: UISwitch!
-    @IBOutlet weak var switchJanna: UISwitch!
-    
-    
-    var userBubbleSize:CGFloat = 60.0  //change this per device
+    var userBubbleSize:CGFloat = 90.0  //change this per device
     var labelSize:CGFloat = 20
     
     var animator: UIDynamicAnimator!
@@ -58,30 +47,31 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             menuBarButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        self.revealViewController().rearViewRevealWidth = 130
+        
+        let testObject = PFObject(className: "TestObject")
+        testObject["foo"] = "bar"
+        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            println("Object has been saved.")
+        }
+        
+        //recieve turn on transmission toggle notification
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "UITransmitOnNotification:",
+            name: GlobalConstants.TRANSMIT_ON,
+            object: nil)
         
         //check to see if user defaults has transmit id
         self.checkUserDefualtsForTransmitSetting()
         
         
-        INBeaconService.singleton().addDelegate(self)
-        INBeaconService.singleton().startDetecting()
-        
-        self.hidePopoverView()
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if (defaults.objectForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_UUID) != nil) {
-            self.testSetupButton.hidden = true
-        }
-        
-        
-        layoutForDevices()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        INBeaconService.singleton().addDelegate(self)
+        INBeaconService.singleton().startDetecting()
         
     }
     
@@ -90,28 +80,17 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func layoutForDevices() {
-        self.messagePickView.layer.cornerRadius = 6.0
-        self.messagePickView.layer.masksToBounds = true
-        
-    }
-    
-
-    
-    @IBAction func onTestSetup(sender: AnyObject) {
-        showMessagePickView()
-        self.testSetupButton.hidden = true
-    }
-    
-    func enableTransmitionButtonTurnOn(){
+    @objc func UITransmitOnNotification(notification: NSNotification){
+        println("got a transmit on notification")
         self.transmitSwitch.enabled = true
         self.transmitSwitch.setOn(true, animated: true)
-        self.transmitLabel.text = "On"
+        self.transmitLabel.text = "Your pack can see you!"
         INBeaconService.singleton().startBroadcasting()
     }
     
     @IBAction func onFakeUser(sender: AnyObject) {
- 
+
+        
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
         let predicate = NSPredicate(format: "selected == true")
@@ -122,21 +101,22 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             for user in users {
                 uuid = user.guid
             
-//              var uuid:String = "BB284D88-5317-4FB4-9621-C5A3A49E61"
-//                var arrayCount:Int = self.personAddedArray.count;
-//                var endString:String = ""
-//                if (arrayCount<10) {
-//                    endString = "0\(arrayCount)"
-//                } else {
-//                    endString = "\(arrayCount)"
-//                }
-//                
-//              uuid = "\(uuid)\(endString)"
+        //      var uuid:String = "BB284D88-5317-4FB4-9621-C5A3A49E61"
+                
+                var arrayCount:Int = self.personAddedArray.count;
+                var endString:String = ""
+        //        if (arrayCount<10) {
+        //            endString = "0\(arrayCount)"
+        //        } else {
+        //            endString = "\(arrayCount)"
+        //        }
+                
+        //      uuid = "\(uuid)\(endString)"
                 var name = user.firstName + " " + user.lastName
                 if(self.canAddUserToField(uuid)) {
                     self.addUserToView(name)
                     
-//                    self.addUserToView("dude\(endString)")
+                    //self.addUserToView("dude\(endString)")
                     personAddedArray.append(uuid)
                 }
             }
@@ -146,11 +126,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     
     @IBAction func onSwitchChange(sender: AnyObject) {
         if self.transmitSwitch.on {
-            self.transmitLabel.text = "On"
+            self.transmitLabel.text = "Your pack can see you!"
             INBeaconService.singleton().startBroadcasting()
             
         } else {
-            self.transmitLabel.text = "Off"
+            self.transmitLabel.text = "You're in the dark."
             INBeaconService.singleton().stopBroadcasting()
         }
     }
@@ -206,6 +186,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             self.addUserToView(nameString)
             personAddedArray.append(uuid)
         }
+//        if(sendNotification && !self.notificationSent) {
+//        }
         
     }
     
@@ -299,138 +281,6 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         return canAdd
 
-    }
-    
-    //MARK: switch stuff
-    @IBAction func onSwitchPhil(sender: AnyObject) {
-        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6150")
-        self.storeNameToUserDefaults("Philip Starner")
-        
-        self.switchLee.setOn(false, animated: true)
-        self.switchLisa.setOn(false, animated: true)
-        self.switchiPad.setOn(false, animated: true)
-        self.switchChris.setOn(false, animated: true)
-        self.switchJackie.setOn(false, animated: true)
-        self.switchForrest.setOn(false, animated: true)
-        self.switchJanna.setOn(false, animated: true)
-    }
-    
-    @IBAction func onSwitchLee(sender: AnyObject) {
-        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6151")
-        self.storeNameToUserDefaults("Lee Strasheim")
-        self.switchPhil.setOn(false, animated: true)
-        self.switchLisa.setOn(false, animated: true)
-        self.switchiPad.setOn(false, animated: true)
-        self.switchChris.setOn(false, animated: true)
-        self.switchJackie.setOn(false, animated: true)
-        self.switchForrest.setOn(false, animated: true)
-        self.switchJanna.setOn(false, animated: true)
-    }
-    
-    @IBAction func onSwitchLisa(sender: AnyObject) {
-        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6152")
-        self.storeNameToUserDefaults("Lisa Starner")
-        self.switchPhil.setOn(false, animated: true)
-        self.switchLee.setOn(false, animated: true)
-        self.switchiPad.setOn(false, animated: true)
-        self.switchChris.setOn(false, animated: true)
-        self.switchJackie.setOn(false, animated: true)
-        self.switchForrest.setOn(false, animated: true)
-        self.switchJanna.setOn(false, animated: true)
-    }
-    
-    @IBAction func onSwitchiPad(sender: AnyObject) {
-        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6153")
-        self.storeNameToUserDefaults("Phil's iPad")
-        self.switchPhil.setOn(false, animated: true)
-        self.switchLee.setOn(false, animated: true)
-        self.switchLisa.setOn(false, animated: true)
-        self.switchChris.setOn(false, animated: true)
-        self.switchJackie.setOn(false, animated: true)
-        self.switchForrest.setOn(false, animated: true)
-        self.switchJanna.setOn(false, animated: true)
-    }
-    
-    @IBAction func onSwitchJackie(sender: AnyObject) {
-        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6154")
-        self.storeNameToUserDefaults("Jackie Kelley")
-        self.switchPhil.setOn(false, animated: true)
-        self.switchLee.setOn(false, animated: true)
-        self.switchLisa.setOn(false, animated: true)
-        self.switchChris.setOn(false, animated: true)
-        self.switchiPad.setOn(false, animated: true)
-        self.switchForrest.setOn(false, animated: true)
-        self.switchJanna.setOn(false, animated: true)
-    }
-    
-    @IBAction func onSwitchChris(sender: AnyObject) {
-        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6155")
-        self.storeNameToUserDefaults("Chris Kelley")
-        self.switchPhil.setOn(false, animated: true)
-        self.switchLee.setOn(false, animated: true)
-        self.switchLisa.setOn(false, animated: true)
-        self.switchJackie.setOn(false, animated: true)
-        self.switchiPad.setOn(false, animated: true)
-        self.switchForrest.setOn(false, animated: true)
-        self.switchJanna.setOn(false, animated: true)
-    }
-    
-    @IBAction func onSwitchForrest(sender: AnyObject) {
-        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6156")
-        self.storeNameToUserDefaults("Forrest Stewart")
-        self.switchPhil.setOn(false, animated: true)
-        self.switchLee.setOn(false, animated: true)
-        self.switchLisa.setOn(false, animated: true)
-        self.switchJackie.setOn(false, animated: true)
-        self.switchiPad.setOn(false, animated: true)
-        self.switchChris.setOn(false, animated: true)
-        self.switchJanna.setOn(false, animated: true)
-    }
-    
-    @IBAction func onSwitchJanna(sender: AnyObject) {
-        self.storeUUIDToUserDefaults("CB284D88-5317-4FB4-9621-C5A3A49E6157")
-        self.storeNameToUserDefaults("Janna Stewart")
-        self.switchPhil.setOn(false, animated: true)
-        self.switchLee.setOn(false, animated: true)
-        self.switchLisa.setOn(false, animated: true)
-        self.switchJackie.setOn(false, animated: true)
-        self.switchiPad.setOn(false, animated: true)
-        self.switchChris.setOn(false, animated: true)
-        self.switchForrest.setOn(false, animated: true)
-    }
-    
-    @IBAction func onMessagePickDone(sender: AnyObject) {
-        
-        enableTransmitionButtonTurnOn()
-        self.hidePopoverView()
-    }
-    
-    
-    func storeUUIDToUserDefaults(userString: String) {
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(userString, forKey: GlobalConstants.THIS_DEVICE_TRANSMIT_UUID)
-        
-        INBeaconService.singleton().changeIdentifier(userString)
-    }
-    
-    func storeNameToUserDefaults(userString: String) {
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(userString, forKey: GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
-    }
-    
-    
-    //MARK: popover stuff
-    
-    func hidePopoverView() {
-        self.popoverView.hidden = true
-    }
-    
-    func showMessagePickView() {
-        self.view.bringSubviewToFront(self.popoverView)
-        self.popoverView.hidden = false
-        self.messagePickView.hidden = false
     }
     
     
