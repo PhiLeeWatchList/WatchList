@@ -520,7 +520,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Pr-3y-IaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="j78-M6-szY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1623" y="1116"/>
+            <point key="canvasLocation" x="475" y="1720"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="q1K-BW-FxM">
@@ -1339,7 +1339,7 @@
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aAy-qA-0u4"/>
+        <segue reference="cgx-H9-egr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.43880208333333331" green="0.57097800925925923" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

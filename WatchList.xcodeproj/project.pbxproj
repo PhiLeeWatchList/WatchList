@@ -47,7 +47,6 @@
 		9B7E02C51AF02BAE0001C924 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
 		9B883E1B1AF4177E0000EC53 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
 		9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B42541AE8D53B0010F7EB /* tableRowController.swift */; };
-		9BAC10561AF32AB30093F419 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC10551AF32AB30093F419 /* User.swift */; };
 		9BCB738B1AF4849C001C081C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738A1AF4849C001C081C /* Parse.framework */; };
 		9BCB738D1AF484A7001C081C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738C1AF484A7001C081C /* Bolts.framework */; };
 		9BCB73991AF4856F001C081C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738E1AF4856F001C081C /* AudioToolbox.framework */; };
@@ -65,6 +64,7 @@
 		9BCB73A71AF488D3001C081C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB73A61AF488D3001C081C /* Accounts.framework */; };
 		9BCB73A91AF48ABC001C081C /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB73A81AF48ABC001C081C /* ParseUI.framework */; };
 		9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCB73AA1AF492E1001C081C /* LoginViewController.swift */; };
+		9BD509E21AFAE39F00AD3C09 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD509E11AFAE39F00AD3C09 /* User.swift */; };
 		9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -196,7 +196,6 @@
 		9B7E02B71AF02B850001C924 /* DataBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBridgeTests.swift; sourceTree = "<group>"; };
 		9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9B8B42541AE8D53B0010F7EB /* tableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tableRowController.swift; path = ../WatchList/tableRowController.swift; sourceTree = "<group>"; };
-		9BAC10551AF32AB30093F419 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BCB738A1AF4849C001C081C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9BCB738C1AF484A7001C081C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9BCB738E1AF4856F001C081C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -214,6 +213,7 @@
 		9BCB73A61AF488D3001C081C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		9BCB73A81AF48ABC001C081C /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		9BCB73AA1AF492E1001C081C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9BD509E11AFAE39F00AD3C09 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		ACD7BA99A6DC660F9101D519 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		ED251A3F227B042C86EF8C9E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 		0C86246B1AB91A290042CAA8 /* WatchList */ = {
 			isa = PBXGroup;
 			children = (
-				9BAC10551AF32AB30093F419 /* User.swift */,
+				9BD509E11AFAE39F00AD3C09 /* User.swift */,
 				9B43678F1AEEC2150001B432 /* WatchList.entitlements */,
 				0C47B2A91AEC5F9C00902891 /* WatchList-Bridging-Header.h */,
 				0C86246E1AB91A290042CAA8 /* AppDelegate.swift */,
@@ -789,7 +789,6 @@
 				0C47B2BC1AEC602700902891 /* GCDUtilities.m in Sources */,
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
 				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
-				9BAC10561AF32AB30093F419 /* User.swift in Sources */,
 				9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */,
 				9B883E1B1AF4177E0000EC53 /* CoreDataStack.swift in Sources */,
 				9B4367911AEECD420001B432 /* UserClass.swift in Sources */,
@@ -803,6 +802,7 @@
 				0C47B2B71AEC600C00902891 /* CBPeripheralManager+Ext.m in Sources */,
 				0C32A3051AF315B400A7990B /* SideMenuViewController.swift in Sources */,
 				0C47B2A41AEACC0F00902891 /* Constants.swift in Sources */,
+				9BD509E21AFAE39F00AD3C09 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

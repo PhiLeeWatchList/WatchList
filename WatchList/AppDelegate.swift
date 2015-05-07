@@ -111,10 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
                 var context = CoreDataStack.sharedInstance.managedObjectContext!
                 
                 var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
-                
-                person.firstName = queryItems[1].value!
-                person.lastName = queryItems[2].value!
-                person.guid = queryItems[0].value!
+                person.username = queryItems[0].value!
+                person.guid = queryItems[1].value!
+                person.id = ""
                 person.selected = false
                 context.save(nil)
 

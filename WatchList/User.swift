@@ -1,9 +1,9 @@
 //
 //  User.swift
-//  WatchList
+//  
 //
-//  Created by Lee Strasheim on 4/30/15.
-//  Copyright (c) 2015 PhiLee. All rights reserved.
+//  Created by Lee Strasheim on 5/6/15.
+//
 //
 
 import Foundation
@@ -16,6 +16,7 @@ class User: NSManagedObject {
     @NSManaged var image: NSData
     @NSManaged var lastName: String
     @NSManaged var selected: NSNumber
-
+    @NSManaged var id: String
+    @NSManaged var username: String
 
 }

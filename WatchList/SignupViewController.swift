@@ -57,10 +57,16 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
             let imageFile = PFFile(name:"profile.png", data:imageData)
             imageFile.saveInBackgroundWithBlock { (success, error) -> Void in
             
+                var username = self.usernameField.text
+                username = username.lowercaseString
+                
+                var email = self.emailField.text
+                email = email.lowercaseString
+                
                 var user = PFUser()
-                user.username = self.usernameField.text
+                user.username = username
                 user.password = self.passwordField.text
-                user.email = self.emailField.text
+                user.email = email
                 user.setObject(imageFile, forKey: "profilepic")
                 
                 user.signUpInBackgroundWithBlock {
