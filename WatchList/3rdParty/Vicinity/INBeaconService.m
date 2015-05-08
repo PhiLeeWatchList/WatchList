@@ -3,9 +3,9 @@
 //  Vicinity
 //
 //  Created by Ben Ford on 10/28/13.
-//  
+//
 //  The MIT License (MIT)
-// 
+//
 //  Copyright (c) 2013 Instrument Marketing Inc
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -46,8 +46,8 @@
 @interface INBeaconService() <CBPeripheralManagerDelegate, CBCentralManagerDelegate>
 
 @property (nonatomic, strong) NSArray *testArray;
-@property (atomic, strong) NSMutableArray *testIdentifierArray;
-@property (atomic, strong) NSMutableArray *foundIdentifierArray;
+@property (nonatomic, strong) NSMutableArray *testIdentifierArray;
+@property (nonatomic, strong) NSMutableArray *foundIdentifierArray;
 
 
 @end
@@ -96,37 +96,26 @@
 - (id)initWithIdentifier:(NSString *)theIdentifier
 {
     if ((self = [super init])) {
-        
-        //check user defaults for an ID
-        
-        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *storedUUID = [userDefaults objectForKey:@"THIS_DEVICE_TRANSMIT_UUID"];
-        
-        if (storedUUID != nil) {
-            theIdentifier = storedUUID;
-        }
-        
         identifier = [CBUUID UUIDWithString:theIdentifier];
         
         
-//        self.testArray = [[NSArray alloc] init];
-//        
-//        self.testArray =  @[@"CB284D88-5317-4FB4-9621-C5A3A49E6150",
-//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6151",
-//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6152",
-//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6153",
-//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6154",
-//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6155",
-//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6156",
-//                       @"CB284D88-5317-4FB4-9621-C5A3A49E6157"];
-//        
-//        self.testIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
-//        self.foundIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
-//        for (int i; i<self.testArray.count; i++) {
-//            [self.testIdentifierArray addObject:[CBUUID UUIDWithString:self.testArray[i]]];
-//        }
+        self.testArray = [[NSArray alloc] init];
         
-        [self initTestIdentifierArray];
+        self.testArray =  @[@"CB284D88-5317-4FB4-9621-C5A3A49E6150",
+                            @"CB284D88-5317-4FB4-9621-C5A3A49E6151",
+                            @"CB284D88-5317-4FB4-9621-C5A3A49E6152",
+                            @"CB284D88-5317-4FB4-9621-C5A3A49E6153",
+                            @"CB284D88-5317-4FB4-9621-C5A3A49E6154",
+                            @"CB284D88-5317-4FB4-9621-C5A3A49E6155",
+                            @"CB284D88-5317-4FB4-9621-C5A3A49E6156",
+                            @"CB284D88-5317-4FB4-9621-C5A3A49E6157"];
+        
+        self.testIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
+        self.foundIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
+        for (int i; i<self.testArray.count; i++) {
+            [self.testIdentifierArray addObject:[CBUUID UUIDWithString:self.testArray[i]]];
+        }
+        
         
         delegates = [[NSMutableSet alloc] init];
         
@@ -137,26 +126,6 @@
         [self startAuthorizationTimer];
     }
     return self;
-}
-
-- (void) initTestIdentifierArray {
-    if ([self.testIdentifierArray count]<=0) {
-        NSArray  *aTestArray = [[NSArray alloc] init];
-        aTestArray =  @[@"CB284D88-5317-4FB4-9621-C5A3A49E6150",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6151",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6152",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6153",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6154",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6155",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6156",
-                       @"CB284D88-5317-4FB4-9621-C5A3A49E6157"];
-        
-        self.testIdentifierArray = [[NSMutableArray alloc] initWithCapacity:aTestArray.count];
-        self.foundIdentifierArray = [[NSMutableArray alloc] initWithCapacity:self.testArray.count];
-        for (int i; i<aTestArray.count; i++) {
-            [self.testIdentifierArray addObject:[CBUUID UUIDWithString:aTestArray[i]]];
-        }
-    }
 }
 
 - (void)changeIdentifier:(NSString *)theIdentifier
@@ -226,10 +195,10 @@
 
 - (void)startBroadcasting
 {
+    NSLog(@"I'm Broadcasting: %@", [identifier UUIDString]);
     if (![self canBroadcast])
         return;
     
-    NSLog(@"I'm Broadcasting: %@", [identifier UUIDString]);
     [self startBluetoothBroadcast];
     
 }
@@ -263,7 +232,7 @@
 - (void)startAdvertising
 {
     
-    NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"watchlist-peripheral",
+    NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
                                       CBAdvertisementDataServiceUUIDsKey:@[identifier]};
     
     // Start advertising over BLE
@@ -300,38 +269,31 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-    if(uuid == nil) {
-        //check overflow if in background.
-        uuid = [advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] firstObject];
-    }
-    
-//    NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
-//    NSLog(@"service uuid: %@", [uuid representativeString]);
-    
-    if ([self.testIdentifierArray count]<=0) {
-        [self initTestIdentifierArray];
-    }
-    
-    for (int i=0; i<self.testIdentifierArray.count; i++) {
-        //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
-        NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
+    if (DEBUG_PERIPHERAL) {
+        //NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
         
-        //which friends are we currently looking for?
-        if ([[[uuid representativeString] uppercaseString] isEqualToString:[[self.testIdentifierArray[i] UUIDString] uppercaseString]]) {
-            
-            if (DEBUG_PERIPHERAL) {
-                NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+        CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+        //NSLog(@"service uuid: %@", [uuid representativeString]);
+        
+        //NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
+        
+        
+        for (int i=0; i<self.testIdentifierArray.count; i++) {
+            //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
+            //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
+            if ([[[uuid representativeString] uppercaseString] isEqualToString:[self.testIdentifierArray[i] UUIDString]]) {
+                
+                //NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+                
+                [self addNewFoundIdentifierArray:uuid];
+                
                 CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-                NSLog(@"...service uuid: %@", [uuid representativeString]);
+                //NSLog(@"...service uuid: %@", [uuid representativeString]);
             }
-            
-            [self addNewFoundIdentifierToArray:uuid];
         }
     }
     
     identifierRange = [self convertRSSItoINProximity:[RSSI floatValue]];
-    
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
@@ -350,10 +312,19 @@
 {
     [self performBlockOnDelegates:^(id<INBeaconServiceDelegate>delegate) {
         
+        
+        //TODO: report the correct id
+        //        for (int i; i<self.testIdentifierArray.count; i++) {
+        //
+        //            [delegate service:self foundDeviceUUID:[self.testIdentifierArray[i] representativeString] withRange:identifierRange];
+        //        }
+        
         for (int i=0; i<self.foundIdentifierArray.count; i++) {
             
             [delegate service:self foundDeviceUUID:[self.foundIdentifierArray[i] representativeString] withRange:identifierRange];
         }
+        
+        //        [delegate service:self foundDeviceUUID:[identifier representativeString] withRange:identifierRange];
         
     } complete:^{
         // timeout the beacon to unknown position
@@ -429,7 +400,7 @@
     }
 }
 
-- (void) addNewFoundIdentifierToArray:(CBUUID *) newIdentifier {
+- (void) addNewFoundIdentifierArray:(CBUUID *) newIdentifier {
     if (self.foundIdentifierArray.count<=0) {
         
         [self.foundIdentifierArray addObject:newIdentifier];
