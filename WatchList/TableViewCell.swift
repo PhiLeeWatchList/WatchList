@@ -11,7 +11,8 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     
-    @IBOutlet weak var initials: UILabel!
+
+    @IBOutlet weak var photo: UIImageView!
 
     
     @IBOutlet weak var name: UILabel!
@@ -23,6 +24,11 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.photo.image = UIImage(named: "logo")
+        self.photo.layer.cornerRadius = 20
+        self.photo.layer.borderWidth = 1
+        self.photo.layer.borderColor = UIColor.whiteColor().CGColor
+        self.photo.layer.masksToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

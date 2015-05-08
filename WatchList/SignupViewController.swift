@@ -80,7 +80,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                         
                         println("logged in")
                         
-                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        self.performSegueWithIdentifier("signupToMainView", sender: self)
                         
                     } else {
                         

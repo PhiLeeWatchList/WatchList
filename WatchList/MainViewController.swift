@@ -48,11 +48,6 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        let testObject = PFObject(className: "TestObject")
-        testObject["foo"] = "bar"
-        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("Object has been saved.")
-        }
         
         //recieve turn on transmission toggle notification
         NSNotificationCenter.defaultCenter().addObserver(
@@ -64,6 +59,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         //check to see if user defaults has transmit id
         self.checkUserDefualtsForTransmitSetting()
         
+        self.updateFriends()
         
     }
     
@@ -112,7 +108,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         //        }
                 
         //      uuid = "\(uuid)\(endString)"
-                var name = user.firstName + " " + user.lastName
+                var name = user.username
                 if(self.canAddUserToField(uuid)) {
                     self.addUserToView(name)
                     
@@ -133,6 +129,83 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             self.transmitLabel.text = "You're in the dark."
             INBeaconService.singleton().stopBroadcasting()
         }
+    }
+    
+    func updateFriends() {
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+        let users = context.executeFetchRequest(request, error: nil) as! [User]
+        for user in users {
+            println("User id for \(user.username) is \(user.id)")
+            if user.id == "" {
+                self.updateUserFromParse(user.username)
+            }
+        }
+    }
+    
+    func updateUserFromParse(username:String) {
+        var query = PFUser.query()
+        query!.whereKey("username", equalTo:username)
+        query!.getFirstObjectInBackgroundWithBlock { (object:PFObject?, error:NSError?) -> Void in
+            if error == nil {
+                // The find succeeded.
+                println("Successfully retrieved user \(object).")
+                var user = object as! PFUser
+                self.getImageFromParse(user)
+
+                
+            } else {
+                // Log details of the failure
+                println("Error: \(error!) \(error!.userInfo!)")
+            }
+            
+        }
+        
+    }
+
+    func getImageFromParse(object: PFUser) {
+        
+        let thumbNail = object["profilepic"] as! PFFile
+        
+        //println(thumbNail)
+        
+        thumbNail.getDataInBackgroundWithBlock({
+            (imageData: NSData?, error: NSError?) -> Void in
+            if (error == nil) {
+                self.updateCoreDataUser(object,image: imageData!)
+                //println(imageData)
+            } else {
+                var username = object["username"] as! String
+                println("Error getting image data for \(username).")
+            }
+            
+        })
+
+    }
+    
+    
+    func updateCoreDataUser(user:PFUser, image:NSData) {
+        let user = user
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let fetchRequest : NSFetchRequest = NSFetchRequest(entityName: "User")
+        let predicate = NSPredicate(format: "username == %@",user.username!)
+        fetchRequest.predicate = predicate
+        
+        var error : NSError? = nil
+        var results = context.executeFetchRequest(fetchRequest, error: &error) as! [User]
+        if error != nil {
+            println("An error occurred loading the data")
+        } else {
+            println("user id is \(user.objectId).")
+            let result = results[0]
+            result.id = user.objectId!
+            result.image = image
+            var saveError : NSError? = nil
+            if !context.save(&saveError) {
+                println("Could not update record")
+            }
+        }
+
     }
     
     

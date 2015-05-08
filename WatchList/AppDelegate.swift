@@ -59,17 +59,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
         navigationBarAppearace.tintColor = UIColor.whiteColor()
         navigationBarAppearace.barTintColor = UIColor.blackColor()
         
+        let userArray = ["lee","sue","ted"]
+        
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+        let savedUsers = context.executeFetchRequest(request, error: nil) as! [User]
+        var savedUsernames = [String]()
+        for username in savedUsers {
+            savedUsernames.append(username.username)
+        }
         
         
-//        var context = CoreDataStack.sharedInstance.managedObjectContext!
-//        
-//        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
-//        
-//        person.firstName = "Lee"
-//        person.lastName = "Strasheim"
-//        person.guid = "1234-5678-1234-4321"
-//        person.selected = false
-//        context.save(nil)
+        for user in userArray {
+            if contains(savedUsernames,user) {
+                println("User \(user) already exists")
+            } else {
+                var context = CoreDataStack.sharedInstance.managedObjectContext!
+                var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
+                person.username = user
+                person.guid = "BB284D88-5317-4FB4-9621-C5A3A49E61"
+                person.id = ""
+                person.selected = false
+                context.save(nil)
+            }
+        }
+        
+        
+        
         
         return true
     }
@@ -108,15 +124,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
             
             if let queryItems = components?.queryItems as? [NSURLQueryItem]
             {
-                
                 var context = CoreDataStack.sharedInstance.managedObjectContext!
+                let request = NSFetchRequest(entityName: "User")
+                let savedUsers = context.executeFetchRequest(request, error: nil) as! [User]
+                var savedUsernames = [String]()
+                for username in savedUsers {
+                    savedUsernames.append(username.username)
+                }
                 
-                var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
-                person.username = queryItems[0].value!
-                person.guid = queryItems[1].value!
-                person.id = ""
-                person.selected = false
-                context.save(nil)
+                for saved in savedUsernames {
+                    if contains(savedUsernames, queryItems[0].value!) {
+                        println("User \(queryItems[0].value!) already exists")
+                    } else {
+                        var context = CoreDataStack.sharedInstance.managedObjectContext!
+                        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
+                        person.username = queryItems[0].value!
+                        person.guid = queryItems[1].value!
+                        person.id = ""
+                        person.selected = false
+                        context.save(nil)
+                    }
+                }
 
             }
         

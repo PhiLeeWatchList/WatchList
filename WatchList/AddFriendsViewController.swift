@@ -54,16 +54,14 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
-        let sortDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "username", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         let users = context.executeFetchRequest(request, error: nil) as! [User]
 
-        var firstInitial = first(users[indexPath.row].firstName)
-        var lastInitial = first(users[indexPath.row].lastName)
-        var initials : String = String(firstInitial!) + String(lastInitial!)
-        var name = users[indexPath.row].firstName + " " + users[indexPath.row].lastName
+        var name = users[indexPath.row].username
         var guid = users[indexPath.row].guid
-        cell.initials!.text = initials
+        var imageData = users[indexPath.row].image
+        cell.photo.image = UIImage(data: imageData)
         cell.name!.text = name
         cell.guid!.text = guid
         return cell
@@ -74,30 +72,30 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell;
         
-        var guid = cell.guid!.text
+        var name = cell.name!.text
         
         if cell.accessoryType == .None {
             cell.accessoryType = .Checkmark
-            saveUserData(guid!, selected: true)
+            saveUserData(name!, selected: true)
         } else {
             cell.accessoryType = .None
-            saveUserData(guid!, selected: false)
+            saveUserData(name!, selected: false)
         }
         
         
     }
     
-    func saveUserData(guid: String, selected: Bool) {
+    func saveUserData(name: String, selected: Bool) {
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         
         var fetchRequest = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "guid = %@", guid)
+        fetchRequest.predicate = NSPredicate(format: "username = %@", name)
         
         if let fetchResults = context.executeFetchRequest(fetchRequest, error: nil) as? [User] {
             if fetchResults.count != 0{
                 
                 var managedObject = fetchResults[0]
-                managedObject.setValue(true, forKey: "selected")
+                managedObject.setValue(selected, forKey: "selected")
                 
                 context.save(nil)
             }
