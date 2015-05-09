@@ -61,9 +61,17 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
         var name = users[indexPath.row].username
         var guid = users[indexPath.row].guid
         var imageData = users[indexPath.row].image
+        var selected = users[indexPath.row].selected
+        println("user \(name) selected value is \(selected)")
+        
         cell.photo.image = UIImage(data: imageData)
         cell.name!.text = name
         cell.guid!.text = guid
+        if selected == true {
+            cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
+        }
         return cell
     }
     
@@ -87,17 +95,19 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate {
     
     func saveUserData(name: String, selected: Bool) {
         var context = CoreDataStack.sharedInstance.managedObjectContext!
-        
+            
         var fetchRequest = NSFetchRequest(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "username = %@", name)
         
         if let fetchResults = context.executeFetchRequest(fetchRequest, error: nil) as? [User] {
             if fetchResults.count != 0{
                 
-                var managedObject = fetchResults[0]
-                managedObject.setValue(selected, forKey: "selected")
-                
-                context.save(nil)
+                var result = fetchResults[0]
+                result.selected = selected                
+                var saveError : NSError? = nil
+                if !context.save(&saveError) {
+                    println("Could not update record")
+                }
             }
         }
     }

@@ -52,6 +52,8 @@ class LoginViewController: UIViewController {
                     
                     println("logged in")
                     
+                    
+                    
                     self.performSegueWithIdentifier("mainView", sender: self)
                     
                 } else {
