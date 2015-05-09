@@ -89,8 +89,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        INBeaconService.singleton().addDelegate(self)
-        INBeaconService.singleton().startDetecting()
+//        INBeaconService.singleton().addDelegate(self)
+//        INBeaconService.singleton().startDetecting()
         
     }
     
