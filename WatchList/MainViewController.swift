@@ -119,35 +119,24 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     }
     
     @IBAction func onFakeUser(sender: AnyObject) {
-
         
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
         let predicate = NSPredicate(format: "selected == true")
         request.predicate = predicate
         
-        var uuid = ""
         if let users = context.executeFetchRequest(request, error: nil) as? [User] {
             for user in users {
-                uuid = user.guid
-            
-        //      var uuid:String = "BB284D88-5317-4FB4-9621-C5A3A49E61"
-                
-                var arrayCount:Int = self.personAddedArray.count;
-                var endString:String = ""
-        //        if (arrayCount<10) {
-        //            endString = "0\(arrayCount)"
-        //        } else {
-        //            endString = "\(arrayCount)"
-        //        }
-                
-        //      uuid = "\(uuid)\(endString)"
-                var name = user.username
+                println("show user \(user.username), guid is \(user.guid)")
+                let uuid = user.guid
+                let name = user.username
+                let imageData = user.image
                 if(self.canAddUserToField(uuid)) {
-                    self.addUserToView(name)
-                    
-                    //self.addUserToView("dude\(endString)")
-                    personAddedArray.append(uuid)
+                    println("Can add user \(name)")
+                    self.addUserToView(name,imageData: imageData)
+                    self.personAddedArray.append(uuid)
+                } else {
+                    println("Can't add user \(name)")
                 }
             }
         }
@@ -230,10 +219,12 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         if error != nil {
             println("An error occurred loading the data")
         } else {
-            println("user id is \(user.objectId).")
+            let guid = user["guid"] as! String
+            println("user guid is \(guid).")
             let result = results[0]
             result.id = user.objectId!
             result.image = image
+            result.guid = guid
             var saveError : NSError? = nil
             if !context.save(&saveError) {
                 println("Could not update record")
@@ -277,21 +268,46 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
         //send a notification if friend is detected.
         if(self.canAddUserToField(uuid)) {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            //let nameString = defaults.stringForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
+            var context = CoreDataStack.sharedInstance.managedObjectContext!
+            let request = NSFetchRequest(entityName: "User")
+            let predicate = NSPredicate(format: "guid == %@",uuid)
+            request.predicate = predicate
+
+            if let users = context.executeFetchRequest(request, error: nil) as? [User] {
+                for user in users {
+                    nameString = user.username
+                    var imageData = user.image
+                    self.notificationSent = true
+                    let notification: UILocalNotification = UILocalNotification()
+                    
+                    notification.alertBody = "\(nameString) is here!!!"
+                    notification.soundName = UILocalNotificationDefaultSoundName
+                    /*
+                    If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
+                    If it's not, iOS will display the notification to the user.
+                    */
+                    UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+                    self.addUserToView(nameString, imageData:imageData)
+                    personAddedArray.append(uuid)
+                    
+                }
+            }
             
-            self.notificationSent = true
-            let notification: UILocalNotification = UILocalNotification()
-            
-            notification.alertBody = "\(nameString) is here!!!"
-            notification.soundName = UILocalNotificationDefaultSoundName
-            /*
-            If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
-            If it's not, iOS will display the notification to the user.
-            */
-            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-            self.addUserToView(nameString)
-            personAddedArray.append(uuid)
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            //let nameString = defaults.stringForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
+//            
+//            self.notificationSent = true
+//            let notification: UILocalNotification = UILocalNotification()
+//            
+//            notification.alertBody = "\(nameString) is here!!!"
+//            notification.soundName = UILocalNotificationDefaultSoundName
+//            /*
+//            If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
+//            If it's not, iOS will display the notification to the user.
+//            */
+//            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+//            self.addUserToView(nameString)
+//            personAddedArray.append(uuid)
         }
 //        if(sendNotification && !self.notificationSent) {
 //        }
@@ -332,7 +348,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         return "someone"
     }
     
-    func addUserToView (name: String) {
+    func addUserToView (name: String, imageData:NSData) {
         var imageBorderColor:UIColor = UIColor(red: 250.0/255.0, green: 250.0/255.0, blue: 250.0/255.0, alpha: 1)
         var imageBgColor:UIColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1)
         var nameColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
@@ -348,16 +364,16 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         newUserImageView.layer.borderColor = imageBorderColor.CGColor
         newUserImageView.layer.backgroundColor = imageBgColor.CGColor
         newUserImageView.layer.borderWidth = userBubbleSize/18
-        
+        newUserImageView.image = UIImage(data: imageData)
         
         var newUserView:UIView = UIView(frame: CGRectMake(self.userFieldView.frame.width, (self.userFieldView.frame.height + userBubbleSize), userBubbleSize, userBubbleSize+labelSize))
         newUserView.addSubview(newUserImageView)
         newUserView.addSubview(newUserLabel)
         newUserView.tag = self.peopleHereArray.count //do not tag until added
         //add to the field view
-        userFieldView.addSubview(newUserView)
+        self.userFieldView.addSubview(newUserView)
         //add to array
-        peopleHereArray.append(newUserView)
+        self.peopleHereArray.append(newUserView)
         
         //pop this guy onscreen.
         

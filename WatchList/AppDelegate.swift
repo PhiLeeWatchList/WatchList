@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
         navigationBarAppearace.tintColor = UIColor.whiteColor()
         navigationBarAppearace.barTintColor = UIColor.blackColor()
         
-        let userArray = ["lee","sue","ted"]
+        let userArray = ["lee","phil","chris"]
         
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
         for username in savedUsers {
             savedUsernames.append(username.username)
         }
-        
+
         
         for user in userArray {
             if contains(savedUsernames,user) {
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
                 var context = CoreDataStack.sharedInstance.managedObjectContext!
                 var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
                 person.username = user
-                person.guid = "BB284D88-5317-4FB4-9621-C5A3A49E61"
+                person.guid = ""
                 person.id = ""
                 person.selected = false
                 context.save(nil)
