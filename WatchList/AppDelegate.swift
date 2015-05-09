@@ -11,28 +11,28 @@ import CoreData
 import DataBridge
 import Parse
 
-//import CoreLocation //TODO: remove ibeacon
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDelegate { //TODO: remove ibeacon
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     
     
     var window: UIWindow?
-    // var locationManager: CLLocationManager? //TODO: remove ibeacon
+     var locationManager: CLLocationManager?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         application.statusBarHidden = true
         
-        //TODO: remove ibeacon
-//        self.locationManager = CLLocationManager()
-//        self.locationManager!.delegate = self
-//        
-//        //allow user to accept location
-//        self.locationManager!.requestAlwaysAuthorization()
+        self.locationManager = CLLocationManager()
+        self.locationManager!.delegate = self
         
-        
+        //allow user to accept location
+        self.locationManager!.requestAlwaysAuthorization()
+        self.locationManager!.requestWhenInUseAuthorization()
+        self.locationManager!.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager!.startUpdatingLocation()
         
         Parse.enableLocalDatastore()
         
@@ -153,9 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
     }
 
     
-    
-    
-    
     //TODO: remove ibeacon
 //    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
 //        /*
@@ -182,20 +179,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //CLLocationManagerDeleg
 //        */
 //        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
 //    }
-//    
-//    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-//        
-//        // If the application is in the foreground, we will notify the user of the region's state via an alert.
-//        
-//        let alertController = UIAlertController(title: "Detection!", message:
-//            notification.alertBody, preferredStyle: UIAlertControllerStyle.Alert)
-//        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
-//        
-//        
-//        self.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
-//        
-//    }
 
+
+    //CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        var location:CLLocation = locations[locations.count-1] as! CLLocation
+        
+        println("locations = \(locations)")
+//        txtLatitude.text = "\(location.coordinate.latitude)";
+//        txtLongitude.text = "\(location.coordinate.longitude)";
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println(error)
+//        txtLatitude.text = "Can't get your location!"
+    }
 
 }
 
