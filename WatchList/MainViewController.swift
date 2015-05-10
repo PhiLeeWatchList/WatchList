@@ -226,6 +226,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             if !context.save(&saveError) {
                 println("Could not update record")
             }
+            self.storeUUIDToUserDefaults(guid)
+            self.storeNameToUserDefaults(user.username!)
         }
 
     }
