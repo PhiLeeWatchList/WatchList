@@ -18,21 +18,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     
     var window: UIWindow?
-     var locationManager: CLLocationManager?
+    var locationManager: CLLocationManager?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         application.statusBarHidden = true
         
-        self.locationManager = CLLocationManager()
-        self.locationManager!.delegate = self
+        locationManager = CLLocationManager()
+        locationManager!.delegate = self
         
         //allow user to accept location
-        self.locationManager!.requestAlwaysAuthorization()
-        self.locationManager!.requestWhenInUseAuthorization()
-        self.locationManager!.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager!.startUpdatingLocation()
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            locationManager!.requestAlwaysAuthorization()
+            locationManager!.requestWhenInUseAuthorization()
+        }
+        
+        self.locationManager!.desiredAccuracy = kCLLocationAccuracyBestForNavigation//kCLLocationAccuracyBest
+        if CLLocationManager.locationServicesEnabled() {
+            println("starting up location updates")
+            locationManager!.startUpdatingLocation()
+        } else {
+            println("NOT starting up location updates")
+            
+        }
         
         Parse.enableLocalDatastore()
         
@@ -193,6 +202,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println(error)
 //        txtLatitude.text = "Can't get your location!"
+    }
+    
+    func locationManager(manager: CLLocationManager!,
+        didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    {
+        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+            manager.startUpdatingLocation()
+            // ...
+        }
     }
 
 }
