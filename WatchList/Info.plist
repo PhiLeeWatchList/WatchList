@@ -50,9 +50,9 @@
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<true/>
+	<string>Can Watchlist use location?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<true/>
+	<string>Can Watchlist use location when not in use?</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
