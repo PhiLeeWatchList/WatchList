@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             clientKey: "exRqP3hYh1qh8RbGSzTclc7UHCx7JVsct7BGSnrw")
         
         // [Optional] Track statistics around application opens.
-        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        // PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
         
         if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))

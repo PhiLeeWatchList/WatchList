@@ -10,8 +10,6 @@ import UIKit
 import CoreData
 import DataBridge
 import Parse
-import Bolts
-import ParseUI
 
 class MainViewController: UIViewController, INBeaconServiceDelegate {
     
