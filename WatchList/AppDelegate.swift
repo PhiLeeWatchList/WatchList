@@ -11,37 +11,19 @@ import CoreData
 import DataBridge
 import Parse
 
-import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     var window: UIWindow?
-    var locationManager: CLLocationManager?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         application.statusBarHidden = true
         
-        locationManager = CLLocationManager()
-        locationManager!.delegate = self
         
-        //allow user to accept location
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
-            locationManager!.requestAlwaysAuthorization()
-            locationManager!.requestWhenInUseAuthorization()
-        }
-        
-        self.locationManager!.desiredAccuracy = kCLLocationAccuracyBestForNavigation//kCLLocationAccuracyBest
-        if CLLocationManager.locationServicesEnabled() {
-            println("starting up location updates")
-            locationManager!.startUpdatingLocation()
-        } else {
-            println("NOT starting up location updates")
-            
-        }
         
         Parse.enableLocalDatastore()
         
@@ -190,28 +172,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 //    }
 
 
-    //CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var location:CLLocation = locations[locations.count-1] as! CLLocation
-        
-        println("locations = \(locations)")
-//        txtLatitude.text = "\(location.coordinate.latitude)";
-//        txtLongitude.text = "\(location.coordinate.longitude)";
-    }
-    
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println(error)
-//        txtLatitude.text = "Can't get your location!"
-    }
-    
-    func locationManager(manager: CLLocationManager!,
-        didChangeAuthorizationStatus status: CLAuthorizationStatus)
-    {
-        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
-            manager.startUpdatingLocation()
-            // ...
-        }
-    }
+
 
 }
 

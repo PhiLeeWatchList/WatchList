@@ -10,8 +10,9 @@ import UIKit
 import CoreData
 import DataBridge
 import Parse
+import CoreLocation
 
-class MainViewController: UIViewController, INBeaconServiceDelegate {
+class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationManagerDelegate {
     
     
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
@@ -46,6 +47,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
     
     var notificationSent:Bool = false
     
+    var locationManager: CLLocationManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,7 +79,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
             self.testSetupButton.hidden = true
         }
 
-        
+        self.startLocationManager()
         
         layoutForDevices()
         
@@ -100,6 +103,22 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         
     }
     
+    func startLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager!.delegate = self
+        
+        //allow user to accept location
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            locationManager!.requestAlwaysAuthorization()
+            locationManager!.requestWhenInUseAuthorization()
+        }
+        
+        self.locationManager!.desiredAccuracy = kCLLocationAccuracyNearestTenMeters//kCLLocationAccuracyBest
+        self.locationManager!.distanceFilter = 5.0
+        
+
+    }
+    
     
     @IBAction func onTestSetup(sender: AnyObject) {
         showMessagePickView()
@@ -110,7 +129,14 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         self.transmitSwitch.enabled = true
         self.transmitSwitch.setOn(true, animated: true)
         self.transmitLabel.text = "On"
-        INBeaconService.singleton().startBroadcasting()
+        locationManager!.startUpdatingLocation()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            println("starting up location updates")
+            locationManager!.startUpdatingLocation()
+        } else {
+            println("NOT starting up location updates")
+        }
     }
     
     @IBAction func onFakeUser(sender: AnyObject) {
@@ -142,10 +168,17 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         if self.transmitSwitch.on {
             self.transmitLabel.text = "On"
             INBeaconService.singleton().startBroadcasting()
+            if CLLocationManager.locationServicesEnabled() {
+                println("starting up location updates")
+                locationManager!.startUpdatingLocation()
+            } else {
+                println("NOT starting up location updates")
+            }
             
         } else {
             self.transmitLabel.text = "Off"
             INBeaconService.singleton().stopBroadcasting()
+            locationManager!.stopUpdatingLocation()
         }
     }
     
@@ -533,6 +566,28 @@ class MainViewController: UIViewController, INBeaconServiceDelegate {
         self.view.bringSubviewToFront(self.popoverView)
         self.popoverView.hidden = false
         self.messagePickView.hidden = false
+    }
+    
+    //CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        var location:CLLocation = locations[locations.count-1] as! CLLocation
+        
+        println("locations = \(locations)")
+        //        txtLatitude.text = "\(location.coordinate.latitude)";
+        //        txtLongitude.text = "\(location.coordinate.longitude)";
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println(error)
+        //        txtLatitude.text = "Can't get your location!"
+    }
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    {
+        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+            manager.startUpdatingLocation()
+            // ...
+        }
     }
     
     
