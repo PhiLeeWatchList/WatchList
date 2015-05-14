@@ -33,6 +33,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Can Watchlist use location?</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Can Watchlist use location when not in use?</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
@@ -49,10 +53,6 @@
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Can Watchlist use location?</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Can Watchlist use location when not in use?</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

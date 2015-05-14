@@ -114,9 +114,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         }
         
         self.locationManager!.desiredAccuracy = kCLLocationAccuracyNearestTenMeters//kCLLocationAccuracyBest
-        self.locationManager!.distanceFilter = 5.0
+        self.locationManager!.distanceFilter = 1.0
         
-
     }
     
     
@@ -129,13 +128,15 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         self.transmitSwitch.enabled = true
         self.transmitSwitch.setOn(true, animated: true)
         self.transmitLabel.text = "On"
-        locationManager!.startUpdatingLocation()
         
-        if CLLocationManager.locationServicesEnabled() {
-            println("starting up location updates")
-            locationManager!.startUpdatingLocation()
-        } else {
-            println("NOT starting up location updates")
+        if (self.locationManager != nil) {
+            
+            if CLLocationManager.locationServicesEnabled() {
+                println("starting up location updates")
+                locationManager!.startUpdatingLocation()
+            } else {
+                println("NOT starting up location updates")
+            }
         }
     }
     
@@ -168,11 +169,15 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         if self.transmitSwitch.on {
             self.transmitLabel.text = "On"
             INBeaconService.singleton().startBroadcasting()
-            if CLLocationManager.locationServicesEnabled() {
-                println("starting up location updates")
-                locationManager!.startUpdatingLocation()
-            } else {
-                println("NOT starting up location updates")
+            
+            if (self.locationManager != nil) {
+                
+                if CLLocationManager.locationServicesEnabled() {
+                    println("starting up location updates")
+                    locationManager!.startUpdatingLocation()
+                } else {
+                    println("NOT starting up location updates")
+                }
             }
             
         } else {
@@ -265,9 +270,6 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     
     
     func service(service: INBeaconService!, foundDeviceUUID uuid: String!, withRange range: INDetectorRange) {
-        
-        println("found device: \(uuid)")
-        
         var textFieldString:String = ""
         var nameString:String = self.whoHaveYouFound(uuid.uppercaseString)
         var sendNotification:Bool = false
@@ -300,9 +302,9 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         if(self.canAddUserToField(uuid)) {
             var context = CoreDataStack.sharedInstance.managedObjectContext!
             let request = NSFetchRequest(entityName: "User")
-            let predicate = NSPredicate(format: "guid == %@",uuid)
+            let predicate = NSPredicate(format: "selected == true")
             request.predicate = predicate
-
+            
             if let users = context.executeFetchRequest(request, error: nil) as? [User] {
                 for user in users {
                     nameString = user.username
@@ -575,6 +577,16 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         println("locations = \(locations)")
         //        txtLatitude.text = "\(location.coordinate.latitude)";
         //        txtLongitude.text = "\(location.coordinate.longitude)";
+        
+        //attempt to start up beacon detection and broadcast
+        INBeaconService.singleton().removeDelegate(self)
+        INBeaconService.singleton().stopBroadcasting()
+        INBeaconService.singleton().stopDetecting()
+        
+        INBeaconService.singleton().addDelegate(self)
+        INBeaconService.singleton().startDetecting()
+//
+        INBeaconService.singleton().startBroadcasting()
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {

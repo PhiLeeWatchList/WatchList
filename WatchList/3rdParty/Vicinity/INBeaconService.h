@@ -66,5 +66,6 @@ typedef enum {
 - (void)startBroadcasting;
 - (void)stopBroadcasting;
 
+
 - (BOOL)hasBluetooth;
 @end

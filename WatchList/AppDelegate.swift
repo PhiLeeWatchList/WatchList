@@ -23,8 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.statusBarHidden = true
         
-        
-        
         Parse.enableLocalDatastore()
         
         // Initialize Parse.
