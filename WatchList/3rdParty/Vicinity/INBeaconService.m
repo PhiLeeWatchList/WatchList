@@ -37,7 +37,7 @@
 #import "GCDSingleton.h"
 #import "EasedValue.h"
 
-#define DEBUG_CENTRAL NO
+#define DEBUG_CENTRAL YES
 #define DEBUG_PERIPHERAL YES
 #define DEBUG_PROXIMITY NO
 
@@ -175,6 +175,7 @@
 
 - (void)startScanning
 {
+    NSLog(@"I'm scanning: %@", self.testIdentifierArray);
     
     NSDictionary *scanOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)};
     
@@ -212,10 +213,14 @@
     peripheralManager = nil;
 }
 
+
+
 - (void)startDetectingBeacons
 {
     if (!centralManager)
-        centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];//centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    
+    //centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{ CBCentralManagerOptionRestoreIdentifierKey: @"watchlistCentralManager" }];
     
     detectorTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self
                                                    selector:@selector(reportRangesToDelegates:) userInfo:nil repeats:YES];
@@ -225,14 +230,14 @@
 {
     // start broadcasting if it's stopped
     if (!peripheralManager) {
-        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
     }
 }
 
 - (void)startAdvertising
 {
     
-    NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"vicinity-peripheral",
+    NSDictionary *advertisingData = @{CBAdvertisementDataLocalNameKey:@"watchlist-peripheral",
                                       CBAdvertisementDataServiceUUIDsKey:@[identifier]};
     
     // Start advertising over BLE
@@ -269,27 +274,32 @@
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    
+    CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+    if(uuid == nil) {
+        //check overflow if in background.
+        uuid = [advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey] firstObject];
+    }
+    
     if (DEBUG_PERIPHERAL) {
-        //NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
-        
-        CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-        //NSLog(@"service uuid: %@", [uuid representativeString]);
-        
-        //NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
-        
-        
-        for (int i=0; i<self.testIdentifierArray.count; i++) {
-            //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
-            //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
-            if ([[[uuid representativeString] uppercaseString] isEqualToString:[self.testIdentifierArray[i] UUIDString]]) {
-                
-                //NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
-                
-                [self addNewFoundIdentifierArray:uuid];
-                
-                CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
-                //NSLog(@"...service uuid: %@", [uuid representativeString]);
-            }
+        NSLog(@"did discover peripheral: %@, data: %@, %1.2f", [peripheral.identifier UUIDString], advertisementData, [RSSI floatValue]);
+        NSLog(@"service uuid: %@", [uuid representativeString]);
+    }
+    
+    //NSLog(@"testIdentifierArray count %lu", (unsigned long)self.testIdentifierArray.count);
+    
+    
+    for (int i=0; i<self.testIdentifierArray.count; i++) {
+        //NSLog(@"peripheral: %@ testArray: %@", [peripheral.identifier UUIDString], testArray[i]);
+        //NSLog(@"service uuid: %@ testUUID: %@", [uuid representativeString], [self.testIdentifierArray[i] UUIDString]);
+        if ([[[uuid representativeString] uppercaseString] isEqualToString:[self.testIdentifierArray[i] UUIDString]]) {
+            
+            //NSLog(@"...did discover peripheral: %@, data: %@, %1.2f", [self.testIdentifierArray[i] UUIDString], advertisementData, [RSSI floatValue]);
+            
+            [self addNewFoundIdentifierArray:uuid];
+            
+            //CBUUID *uuid = [advertisementData[CBAdvertisementDataServiceUUIDsKey] firstObject];
+            //NSLog(@"...service uuid: %@", [uuid representativeString]);
         }
     }
     
@@ -306,6 +316,13 @@
     }
     
 }
+
+- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict {
+    
+//    NSArray *centralManagerIdentifiers =
+//    launchOptions[UIApplicationLaunchOptionsBluetoothCentralsKey];
+}
+
 #pragma mark -
 
 - (void)reportRangesToDelegates:(NSTimer *)timer
