@@ -396,7 +396,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         newUserImageView.layer.borderWidth = userBubbleSize/18
         newUserImageView.image = UIImage(data: imageData)
         
-        var newUserView:UIView = UIView(frame: CGRectMake(self.userFieldView.frame.width, (self.userFieldView.frame.height + userBubbleSize), userBubbleSize, userBubbleSize+labelSize))
+        var newUserView:UIView = UIView(frame: CGRectMake(0,0, userBubbleSize, userBubbleSize+labelSize))
         newUserView.addSubview(newUserImageView)
         newUserView.addSubview(newUserLabel)
         newUserView.tag = self.peopleHereArray.count //do not tag until added
@@ -412,8 +412,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     
     func snapTheNewUserOnScreen(userView: UIView) {
         
-        let xOffset:CGFloat = userBubbleSize * CGFloat(self.personAddedArray.count);
-        println("count: \(xOffset)")
+        let xOffset:CGFloat = userBubbleSize * CGFloat(self.userFieldView.subviews.count-1);
+        println("count: \(self.userFieldView.subviews.count-1)")
         
         let point:CGPoint = CGPointMake(userBubbleSize/2.0 + xOffset, userBubbleSize/2.0)
         
