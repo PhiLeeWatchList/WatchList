@@ -51,9 +51,7 @@ class LoginViewController: UIViewController {
                 if signupError == nil {
                     
                     println("logged in")
-                    
-                    
-                    
+    
                     self.performSegueWithIdentifier("mainView", sender: self)
                     
                 } else {

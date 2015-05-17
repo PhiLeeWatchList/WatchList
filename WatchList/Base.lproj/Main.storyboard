@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dLs-0x-8jN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UA1-Eb-5TG">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -17,6 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="hybrid" translatesAutoresizingMaskIntoConstraints="NO" id="Bur-7P-IHr">
+                                <rect key="frame" x="0.0" y="100" width="600" height="456"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="456" id="BAj-nn-YwM"/>
+                                    <constraint firstAttribute="width" constant="600" id="K0X-yI-n2L"/>
+                                </constraints>
+                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0I-ue-Qqj" userLabel="popoverView">
                                 <rect key="frame" x="-4" y="0.0" width="608" height="556"/>
                                 <subviews>
@@ -214,7 +221,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M0b-B3-EDS" userLabel="userFieldView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M0b-B3-EDS" userLabel="userFieldView">
                                 <rect key="frame" x="16" y="155" width="568" height="381"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -255,6 +262,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Bur-7P-IHr" firstAttribute="leading" secondItem="hkb-HG-2Bn" secondAttribute="leadingMargin" constant="-16" id="0UN-y7-UEc"/>
                             <constraint firstItem="JoK-h5-mff" firstAttribute="top" secondItem="jcd-VF-ufV" secondAttribute="bottom" constant="8" id="1ct-N0-4jc"/>
                             <constraint firstItem="M0b-B3-EDS" firstAttribute="top" secondItem="rja-Oq-y4R" secondAttribute="bottom" constant="15" id="3Ka-1I-Og2"/>
                             <constraint firstItem="M0b-B3-EDS" firstAttribute="trailing" secondItem="hkb-HG-2Bn" secondAttribute="trailingMargin" id="58P-Nt-z1j"/>
@@ -262,10 +270,13 @@
                             <constraint firstItem="jcd-VF-ufV" firstAttribute="leading" secondItem="hkb-HG-2Bn" secondAttribute="leadingMargin" constant="-24" id="DYM-Ve-Wx8"/>
                             <constraint firstItem="ExG-97-M5U" firstAttribute="leading" secondItem="eDe-oo-8oW" secondAttribute="trailing" constant="8" id="EAp-2t-EM2"/>
                             <constraint firstItem="rja-Oq-y4R" firstAttribute="leading" secondItem="hkb-HG-2Bn" secondAttribute="leadingMargin" id="IfT-gZ-WV8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Bur-7P-IHr" secondAttribute="trailing" constant="-16" id="KEn-a9-4tF"/>
                             <constraint firstItem="rja-Oq-y4R" firstAttribute="trailing" secondItem="hkb-HG-2Bn" secondAttribute="trailingMargin" id="Kle-8n-Uaq"/>
                             <constraint firstItem="M0b-B3-EDS" firstAttribute="leading" secondItem="hkb-HG-2Bn" secondAttribute="leadingMargin" id="NiX-mS-UGE"/>
+                            <constraint firstItem="Bur-7P-IHr" firstAttribute="top" secondItem="jcd-VF-ufV" secondAttribute="bottom" constant="34" id="Q8d-mn-mcl"/>
                             <constraint firstItem="g0I-ue-Qqj" firstAttribute="leading" secondItem="hkb-HG-2Bn" secondAttribute="leadingMargin" constant="-20" id="R5W-8f-KGj"/>
                             <constraint firstItem="jcd-VF-ufV" firstAttribute="top" secondItem="ob6-Q0-o8L" secondAttribute="bottom" constant="63" id="TTl-vO-Hkv"/>
+                            <constraint firstItem="gMz-bC-9Sm" firstAttribute="top" secondItem="Bur-7P-IHr" secondAttribute="bottom" id="UkL-aI-n89"/>
                             <constraint firstItem="ExG-97-M5U" firstAttribute="trailing" secondItem="hkb-HG-2Bn" secondAttribute="trailingMargin" id="XHS-ZM-AsR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jcd-VF-ufV" secondAttribute="trailing" constant="-24" id="bK7-oW-mc6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g0I-ue-Qqj" secondAttribute="trailing" constant="-20" id="bSJ-VC-bmJ"/>
@@ -287,6 +298,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
+                        <outlet property="mapView" destination="Bur-7P-IHr" id="OrO-qL-N8k"/>
                         <outlet property="menuBarButton" destination="1FI-4t-nM4" id="Lwc-tv-np8"/>
                         <outlet property="messageLabel" destination="rja-Oq-y4R" id="iI7-zj-iLa"/>
                         <outlet property="messagePickView" destination="FWe-ec-nvE" id="Xtz-IR-GlN"/>

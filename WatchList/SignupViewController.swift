@@ -84,7 +84,17 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                         
                         println("logged in")
                         
-                        self.performSegueWithIdentifier("signupToMainView", sender: self)
+                        var wolfpack = PFObject(className:"WolfPack")
+                        wolfpack["username"] = username
+                        wolfpack["userId"] = user.objectId
+                        wolfpack.saveInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                self.performSegueWithIdentifier("signupToMainView", sender: self)
+                            } else {
+                                println("Problem creating WolfPack object")
+                            }
+                        }
                         
                     } else {
                         

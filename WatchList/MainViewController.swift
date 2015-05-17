@@ -11,9 +11,11 @@ import CoreData
 import DataBridge
 import Parse
 import CoreLocation
+import MapKit
 
-class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationManagerDelegate {
+class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
@@ -78,6 +80,24 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         if (defaults.objectForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_UUID) != nil) {
             self.testSetupButton.hidden = true
         }
+        
+        // 34.153725, -118.336573 Morton's, Burbank CA
+
+        var latitude:CLLocationDegrees = 34.153725
+        
+        var longitude:CLLocationDegrees = -118.336573
+        
+        var latDelta:CLLocationDegrees = 0.01
+        
+        var lonDelta:CLLocationDegrees = 0.01
+        
+        var span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta,lonDelta)
+        
+        var location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        
+        var region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        
+        mapView.setRegion(region, animated: true)
 
         self.startLocationManager()
         
@@ -267,6 +287,21 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         }
 
     }
+
+    func updateMap(places: [AnyObject]) {
+        mapView.removeAnnotations(self.mapView.annotations)
+        for place in places {
+            var annotation = MKPointAnnotation()
+            var point = place["location"] as! PFGeoPoint
+            var lat = point.latitude
+            var lon = point.longitude
+            var userLocation = CLLocationCoordinate2DMake(lat, lon)
+            annotation.coordinate = userLocation
+            annotation.title = place["username"] as! String
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
     
     
     func service(service: INBeaconService!, foundDeviceUUID uuid: String!, withRange range: INDetectorRange) {
@@ -574,7 +609,41 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var location:CLLocation = locations[locations.count-1] as! CLLocation
         
-        println("locations = \(locations)")
+        var geoPoint = PFGeoPoint(location: location)
+    
+        var user = PFUser.currentUser()
+        var username = user?.username
+        var query = PFQuery(className:"WolfPack")
+        query.whereKey("username", equalTo:username!)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                // The find succeeded.
+                println("Successfully retrieved \(objects!.count).")
+                // Do something with the found objects
+                if let objects = objects as? [PFObject] {
+                    for object in objects {
+                        object["location"] = geoPoint
+                        object.saveInBackgroundWithBlock({ (success, error) -> Void in
+                            if error == nil {
+                                var query = PFQuery(className:"WolfPack")
+                                query.whereKey("location", nearGeoPoint:geoPoint)
+                                query.limit = 10
+                                var placesObjects = query.findObjects()
+                                self.updateMap(placesObjects!)
+                            }
+                        })
+                    }
+                }
+            } else {
+                // Log details of the failure
+                println("Error: \(error!) \(error!.userInfo!)")
+            }
+        }
+        
+        
         //        txtLatitude.text = "\(location.coordinate.latitude)";
         //        txtLongitude.text = "\(location.coordinate.longitude)";
         
