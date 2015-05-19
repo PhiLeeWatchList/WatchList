@@ -98,7 +98,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         var region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         
         mapView.setRegion(region, animated: true)
-
+        
         self.startLocationManager()
         
         layoutForDevices()
@@ -301,6 +301,82 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             mapView.addAnnotation(annotation)
         }
     }
+    
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        
+        if annotation is MKUserLocation {
+            //return nil so map view draws "blue dot" for standard user location
+            return nil
+        }
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+        if pinView == nil {
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            
+            var imageBorderColor:UIColor = UIColor(red: 186.0/255.0, green: 207.0/255.0, blue: 255.0/255.0, alpha: 1)
+            var imageBgColor:UIColor = UIColor(red: 40.0/255.0, green: 0.0/255.0, blue: 221.0/255.0, alpha: 1)
+            let tempSize:CGFloat = 30.0
+            
+            var newUserImageView:UIImageView = UIImageView(frame: CGRectMake(0, 0, tempSize, tempSize))
+            newUserImageView.layer.cornerRadius = newUserImageView.frame.size.width / 2
+            newUserImageView.layer.masksToBounds = true
+            newUserImageView.layer.borderColor = imageBorderColor.CGColor
+            newUserImageView.layer.backgroundColor = imageBgColor.CGColor
+            newUserImageView.layer.borderWidth = tempSize/8
+            newUserImageView.image = UIImage(data: self.getUserImageData("chris")!)
+            
+            var newUserView:UIView = UIView(frame: CGRectMake(0,0, userBubbleSize, userBubbleSize+labelSize))
+            newUserView.addSubview(newUserImageView)
+            //add to the field view
+            pinView!.addSubview(newUserView)
+            pinView!.annotation = annotation
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    
+    
+//    - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+//    {
+//    // If it's the user location, just return nil.
+//    if ([annotation isKindOfClass:[MKUserLocation class]])
+//    return nil;
+//    
+//    // Handle any custom annotations.
+//    if ([annotation isKindOfClass:[MKPointAnnotation class]])
+//    {
+//    // Try to dequeue an existing pin view first.
+//    MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
+//    if (!pinView)
+//    {
+//    // If an existing pin view was not available, create one.
+//    pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
+//    pinView.canShowCallout = YES;
+//    pinView.image = [UIImage imageNamed:@"pizza_slice_32.png"];
+//    pinView.calloutOffset = CGPointMake(0, 32);
+//    
+//    // Add a detail disclosure button to the callout.
+//    UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+//    pinView.rightCalloutAccessoryView = rightButton;
+//    
+//    // Add an image to the left callout.
+//    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pizza_slice_32.png"]];
+//    pinView.leftCalloutAccessoryView = iconView;
+//    } else {
+//    pinView.annotation = annotation;
+//    }
+//    return pinView;
+//    }
+//    return nil;
+//    }
     
     
     
@@ -592,6 +668,26 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         defaults.setObject(userString, forKey: GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
     }
     
+    //MARK: corelocation queries
+    
+    func getUserImageData(username: String) -> NSData? {
+        
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+//        let predicate = NSPredicate(format: "selected == true")
+//        request.predicate = predicate
+        
+        if let users = context.executeFetchRequest(request, error: nil) as? [User] {
+            for user in users {
+                if (user.username == username) {
+                    return user.image
+                }
+            }
+        }
+        
+        return nil
+    }
+    
     
     //MARK: popover stuff
     
@@ -648,11 +744,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         //        txtLongitude.text = "\(location.coordinate.longitude)";
         
         //attempt to start up beacon detection and broadcast
-        INBeaconService.singleton().removeDelegate(self)
+//        INBeaconService.singleton().removeDelegate(self)
         INBeaconService.singleton().stopBroadcasting()
         INBeaconService.singleton().stopDetecting()
         
-        INBeaconService.singleton().addDelegate(self)
+//        INBeaconService.singleton().addDelegate(self)
         INBeaconService.singleton().startDetecting()
 //
         INBeaconService.singleton().startBroadcasting()
