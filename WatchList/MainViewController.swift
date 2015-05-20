@@ -298,6 +298,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             var userLocation = CLLocationCoordinate2DMake(lat, lon)
             annotation.coordinate = userLocation
             annotation.title = place["username"] as! String
+            
             mapView.addAnnotation(annotation)
         }
     }
@@ -319,7 +320,13 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             
             var imageBorderColor:UIColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1)
             var imageBgColor:UIColor = UIColor(red: 40.0/255.0, green: 0.0/255.0, blue: 221.0/255.0, alpha: 1)
+            var nameColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
             let tempSize:CGFloat = 40.0
+            
+            var newUserLabel:UILabel = UILabel(frame: CGRectMake(0, tempSize, tempSize, labelSize))
+            newUserLabel.text = annotation?.title
+            newUserLabel.textAlignment = NSTextAlignment.Center
+            newUserLabel.textColor = nameColor
             
             var newUserImageView:UIImageView = UIImageView(frame: CGRectMake(0, 0, tempSize, tempSize))
             newUserImageView.layer.cornerRadius = newUserImageView.frame.size.width / 2
@@ -327,13 +334,21 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             newUserImageView.layer.borderColor = imageBorderColor.CGColor
             newUserImageView.layer.backgroundColor = imageBgColor.CGColor
             newUserImageView.layer.borderWidth = tempSize/8
-            newUserImageView.image = UIImage(named: "logo")//UIImage(data: self.getUserImageData("chris")!)
+            if(newUserLabel.text != nil) {
+                if let user:User = self.getUser(newUserLabel.text!) {
+                    let imageData:NSData = user.image
+                    newUserImageView.image = UIImage(data: imageData)//UIImage(data: self.getUserImageData("chris")!)
+                }
+            }
+            //newUserImageView.image = UIImage(named: "logo")//UIImage(data: self.getUserImageData("chris")!)
             
-            var newUserView:UIView = UIView(frame: CGRectMake(0,0, userBubbleSize, userBubbleSize+labelSize))
+            var newUserView:UIView = UIView(frame: CGRectMake(0,0, tempSize, tempSize+labelSize))
             newUserView.addSubview(newUserImageView)
+            newUserView.addSubview(newUserLabel)
             //add to the field view
             pinView!.addSubview(newUserView)
-            pinView!.annotation = annotation
+            
+            //pinView!.annotation = annotation
         }
         else {
             pinView!.annotation = annotation
@@ -674,13 +689,26 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         
         var context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
-//        let predicate = NSPredicate(format: "selected == true")
-//        request.predicate = predicate
         
         if let users = context.executeFetchRequest(request, error: nil) as? [User] {
             for user in users {
                 if (user.username == username) {
                     return user.image
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    func getUser(username: String) -> User? {
+        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let request = NSFetchRequest(entityName: "User")
+        
+        if let users = context.executeFetchRequest(request, error: nil) as? [User] {
+            for user in users {
+                if (user.username == username) {
+                    return user
                 }
             }
         }
@@ -727,6 +755,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
                                 var query = PFQuery(className:"WolfPack")
                                 query.whereKey("location", nearGeoPoint:geoPoint)
                                 query.limit = 10
+                                
+                                println("user: \(user?.username)  email: \(user?.email)")
                                 query.findObjectsInBackgroundWithBlock({ (places: [AnyObject]?, error: NSError?) -> Void in
                                     self.updateMap(places!)
                                 })

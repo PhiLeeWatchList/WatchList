@@ -34,7 +34,6 @@
 		6FCA823CDC61782C17C134DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6659FFF1CE1835731688002B /* libPods.a */; };
 		9B0622861AF977DF002E161B /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0622851AF977DF002E161B /* SignupViewController.swift */; };
 		9B35DE1D1AF5943A009E37B8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B35DE1C1AF5943A009E37B8 /* AssetsLibrary.framework */; };
-		9B4367911AEECD420001B432 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4367901AEECD420001B432 /* UserClass.swift */; };
 		9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
 		9B491DC51AF0683A00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
 		9B491DC61AF0683C00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
@@ -182,7 +181,6 @@
 		9B0622851AF977DF002E161B /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		9B35DE1C1AF5943A009E37B8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		9B43678F1AEEC2150001B432 /* WatchList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WatchList.entitlements; sourceTree = "<group>"; };
-		9B4367901AEECD420001B432 /* UserClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		9B491DB81AF0523700C0DD8B /* WatchList WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WatchList WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		9B491DBA1AF05DBB00C0DD8B /* WatchList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchList.xcdatamodel; sourceTree = "<group>"; };
 		9B7E02A41AF02B840001C924 /* DataBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -348,7 +346,6 @@
 				0C32A3041AF315B400A7990B /* SideMenuViewController.swift */,
 				0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */,
 				0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */,
-				9B4367901AEECD420001B432 /* UserClass.swift */,
 				9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */,
 				9B0622851AF977DF002E161B /* SignupViewController.swift */,
 				9BCB73AA1AF492E1001C081C /* LoginViewController.swift */,
@@ -787,7 +784,6 @@
 				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
 				9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */,
 				9B883E1B1AF4177E0000EC53 /* CoreDataStack.swift in Sources */,
-				9B4367911AEECD420001B432 /* UserClass.swift in Sources */,
 				0C47B2AC1AEC5F9D00902891 /* INBeaconService.m in Sources */,
 				0C47B2AF1AEC5FF400902891 /* CLBeacon+Ext.m in Sources */,
 				0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */,
