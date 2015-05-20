@@ -21,6 +21,7 @@
 		0C8624761AB91A290042CAA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C8624751AB91A290042CAA8 /* Images.xcassets */; };
 		0C8624851AB91A290042CAA8 /* WatchListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8624841AB91A290042CAA8 /* WatchListTests.swift */; };
 		0C8624911AB91E640042CAA8 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0C8624901AB91E630042CAA8 /* README.md */; };
+		0C92A7501B0D133500DB0FBA /* WLAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C92A74F1B0D133500DB0FBA /* WLAnnotationView.swift */; };
 		0C9FBD3C1AE6F691001FB601 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD3B1AE6F691001FB601 /* InterfaceController.swift */; };
 		0C9FBD3E1AE6F691001FB601 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD3D1AE6F691001FB601 /* NotificationController.swift */; };
 		0C9FBD401AE6F691001FB601 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C9FBD3F1AE6F691001FB601 /* Images.xcassets */; };
@@ -164,6 +165,7 @@
 		0C8624831AB91A290042CAA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C8624841AB91A290042CAA8 /* WatchListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListTests.swift; sourceTree = "<group>"; };
 		0C8624901AB91E630042CAA8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0C92A74F1B0D133500DB0FBA /* WLAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WLAnnotationView.swift; sourceTree = "<group>"; };
 		0C9FBD361AE6F690001FB601 /* WatchList WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchList WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9FBD391AE6F691001FB601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C9FBD3A1AE6F691001FB601 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */,
 				9B0622851AF977DF002E161B /* SignupViewController.swift */,
 				9BCB73AA1AF492E1001C081C /* LoginViewController.swift */,
+				0C92A74F1B0D133500DB0FBA /* WLAnnotationView.swift */,
 				0C8624721AB91A290042CAA8 /* Main.storyboard */,
 				0C8624751AB91A290042CAA8 /* Images.xcassets */,
 				0C47B2A71AEC5F6D00902891 /* 3rdParty */,
@@ -795,6 +798,7 @@
 				0C32A3051AF315B400A7990B /* SideMenuViewController.swift in Sources */,
 				0C47B2A41AEACC0F00902891 /* Constants.swift in Sources */,
 				9BD509E21AFAE39F00AD3C09 /* User.swift in Sources */,
+				0C92A7501B0D133500DB0FBA /* WLAnnotationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

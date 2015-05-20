@@ -317,16 +317,31 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         if pinView == nil {
             pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
+            pinView!.enabled = true
             
             var imageBorderColor:UIColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1)
             var imageBgColor:UIColor = UIColor(red: 40.0/255.0, green: 0.0/255.0, blue: 221.0/255.0, alpha: 1)
-            var nameColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
+            var textColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
             let tempSize:CGFloat = 40.0
             
-            var newUserLabel:UILabel = UILabel(frame: CGRectMake(0, tempSize, tempSize, labelSize))
-            newUserLabel.text = annotation?.title
+            var newUserLabel:UILabel = UILabel(frame: CGRectMake(0, 0, tempSize, tempSize))//(frame: CGRectMake(0, tempSize, tempSize, labelSize))
+            
+            newUserLabel.layer.cornerRadius = newUserLabel.frame.size.width / 2
+            newUserLabel.layer.masksToBounds = true
+            newUserLabel.layer.borderColor = imageBorderColor.CGColor
+            newUserLabel.layer.borderWidth = tempSize/8
+            //let labelString:String = annotation?.title//.substringWithRange(Range<String.Index>(start: 0, end: 1))
+//            newUserLabel.text = annotation?.title//labelString
+            
+            if let txt = annotation?.title {
+                let labelString:String = annotation.title!
+                newUserLabel.text  = labelString.substringWithRange(Range<String.Index>(start: labelString.startIndex, end: advance(labelString.startIndex, 1))).uppercaseString
+            }
+            
+            
             newUserLabel.textAlignment = NSTextAlignment.Center
-            newUserLabel.textColor = nameColor
+            newUserLabel.textColor = .whiteColor()
+            newUserLabel.backgroundColor = textColor
             
             var newUserImageView:UIImageView = UIImageView(frame: CGRectMake(0, 0, tempSize, tempSize))
             newUserImageView.layer.cornerRadius = newUserImageView.frame.size.width / 2
@@ -334,66 +349,40 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             newUserImageView.layer.borderColor = imageBorderColor.CGColor
             newUserImageView.layer.backgroundColor = imageBgColor.CGColor
             newUserImageView.layer.borderWidth = tempSize/8
-            if(newUserLabel.text != nil) {
-                if let user:User = self.getUser(newUserLabel.text!) {
-                    let imageData:NSData = user.image
-                    newUserImageView.image = UIImage(data: imageData)//UIImage(data: self.getUserImageData("chris")!)
+            if(annotation.title! != nil) {
+                if let user:User = self.getUser(annotation.title!) {
+                    if let imageData:NSData = user.image {
+                        newUserImageView.image = UIImage(data: imageData)
+                    }
                 }
             }
+            
+            
             //newUserImageView.image = UIImage(named: "logo")//UIImage(data: self.getUserImageData("chris")!)
             
             var newUserView:UIView = UIView(frame: CGRectMake(0,0, tempSize, tempSize+labelSize))
             newUserView.addSubview(newUserImageView)
-            newUserView.addSubview(newUserLabel)
+            if(newUserImageView.image == nil) {
+                newUserView.addSubview(newUserLabel)
+            }
             //add to the field view
             pinView!.addSubview(newUserView)
             
-            //pinView!.annotation = annotation
+            pinView!.annotation = annotation
         }
         else {
             pinView!.annotation = annotation
         }
         
+        
+        pinView!.image = UIImage(named: "blank_pin")
+        
         return pinView
     }
     
-    
-    
-//    - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
-//    {
-//    // If it's the user location, just return nil.
-//    if ([annotation isKindOfClass:[MKUserLocation class]])
-//    return nil;
-//    
-//    // Handle any custom annotations.
-//    if ([annotation isKindOfClass:[MKPointAnnotation class]])
-//    {
-//    // Try to dequeue an existing pin view first.
-//    MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
-//    if (!pinView)
-//    {
-//    // If an existing pin view was not available, create one.
-//    pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
-//    pinView.canShowCallout = YES;
-//    pinView.image = [UIImage imageNamed:@"pizza_slice_32.png"];
-//    pinView.calloutOffset = CGPointMake(0, 32);
-//    
-//    // Add a detail disclosure button to the callout.
-//    UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-//    pinView.rightCalloutAccessoryView = rightButton;
-//    
-//    // Add an image to the left callout.
-//    UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pizza_slice_32.png"]];
-//    pinView.leftCalloutAccessoryView = iconView;
-//    } else {
-//    pinView.annotation = annotation;
-//    }
-//    return pinView;
-//    }
-//    return nil;
-//    }
-    
-    
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+        view.canShowCallout = true
+    }
     
     func service(service: INBeaconService!, foundDeviceUUID uuid: String!, withRange range: INDetectorRange) {
 //        var textFieldString:String = ""

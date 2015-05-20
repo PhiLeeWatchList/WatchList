@@ -13,7 +13,7 @@ class User: NSManagedObject {
 
     @NSManaged var firstName: String
     @NSManaged var guid: String
-    @NSManaged var image: NSData
+    @NSManaged var image: NSData!
     @NSManaged var lastName: String
     @NSManaged var selected: NSNumber
     @NSManaged var id: String
