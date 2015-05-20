@@ -727,8 +727,10 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
                                 var query = PFQuery(className:"WolfPack")
                                 query.whereKey("location", nearGeoPoint:geoPoint)
                                 query.limit = 10
-                                var placesObjects = query.findObjects()
-                                self.updateMap(placesObjects!)
+                                query.findObjectsInBackgroundWithBlock({ (places: [AnyObject]?, error: NSError?) -> Void in
+                                    self.updateMap(places!)
+                                })
+                                
                             }
                         })
                     }
