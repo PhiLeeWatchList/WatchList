@@ -631,6 +631,7 @@
 				TargetAttributes = {
 					0C8624681AB91A290042CAA8 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = RLFD42G2BX;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -981,7 +982,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchList/WatchList.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1006,7 +1007,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchList/WatchList.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

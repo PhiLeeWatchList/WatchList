@@ -305,61 +305,61 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     
     
     func service(service: INBeaconService!, foundDeviceUUID uuid: String!, withRange range: INDetectorRange) {
-        var textFieldString:String = ""
-        var nameString:String = self.whoHaveYouFound(uuid.uppercaseString)
-        var sendNotification:Bool = false
+//        var textFieldString:String = ""
+//        var nameString:String = self.whoHaveYouFound(uuid.uppercaseString)
+//        var sendNotification:Bool = false
+//        
+//        
+//        println("found \(uuid) \(range)")
+//        let myRange = range.value
+//        switch myRange {
+//        case 0:
+//             println("unknown")  //it looks like this essentially means "no detection"
+//        case 1:
+//            println("far")
+//            textFieldString = "I found \(nameString) within 60ft!"
+//            sendNotification = true
+//        case 2:
+//            println("near")
+//            textFieldString = "I found \(nameString) within 5ft!"
+//            sendNotification = true
+//        case 3:
+//            println("immediate")
+//            textFieldString = "I found \(nameString) within 1ft!"
+//            sendNotification = true
+//        default:
+//            println("Something else")
+//        }
+//        
+//        self.messageLabel.text = textFieldString
+//        
+//        //send a notification if friend is detected.
+//        if(self.canAddUserToField(uuid)) {
+//            var context = CoreDataStack.sharedInstance.managedObjectContext!
+//            let request = NSFetchRequest(entityName: "User")
+//            let predicate = NSPredicate(format: "selected == true")
+//            request.predicate = predicate
+//            
+//            if let users = context.executeFetchRequest(request, error: nil) as? [User] {
+//                for user in users {
+//                    nameString = user.username
+//                    var imageData = user.image
+//                    self.notificationSent = true
+//                    let notification: UILocalNotification = UILocalNotification()
+//                    
+//                    notification.alertBody = "\(nameString) is here!!!"
+//                    notification.soundName = UILocalNotificationDefaultSoundName
+//                    /*
+//                    If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
+//                    If it's not, iOS will display the notification to the user.
+//                    */
+//                    UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+//                    self.addUserToView(nameString, imageData:imageData)
+//                    personAddedArray.append(uuid)
+//                    
+//                }
+//            }
         
-        
-        println("found \(uuid) \(range)")
-        let myRange = range.value
-        switch myRange {
-        case 0:
-             println("unknown")  //it looks like this essentially means "no detection"
-        case 1:
-            println("far")
-            textFieldString = "I found \(nameString) within 60ft!"
-            sendNotification = true
-        case 2:
-            println("near")
-            textFieldString = "I found \(nameString) within 5ft!"
-            sendNotification = true
-        case 3:
-            println("immediate")
-            textFieldString = "I found \(nameString) within 1ft!"
-            sendNotification = true
-        default:
-            println("Something else")
-        }
-        
-        self.messageLabel.text = textFieldString
-        
-        //send a notification if friend is detected.
-        if(self.canAddUserToField(uuid)) {
-            var context = CoreDataStack.sharedInstance.managedObjectContext!
-            let request = NSFetchRequest(entityName: "User")
-            let predicate = NSPredicate(format: "selected == true")
-            request.predicate = predicate
-            
-            if let users = context.executeFetchRequest(request, error: nil) as? [User] {
-                for user in users {
-                    nameString = user.username
-                    var imageData = user.image
-                    self.notificationSent = true
-                    let notification: UILocalNotification = UILocalNotification()
-                    
-                    notification.alertBody = "\(nameString) is here!!!"
-                    notification.soundName = UILocalNotificationDefaultSoundName
-                    /*
-                    If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
-                    If it's not, iOS will display the notification to the user.
-                    */
-                    UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-                    self.addUserToView(nameString, imageData:imageData)
-                    personAddedArray.append(uuid)
-                    
-                }
-            }
-            
 //            let defaults = NSUserDefaults.standardUserDefaults()
 //            //let nameString = defaults.stringForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_NAME)
 //            
@@ -375,7 +375,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
 //            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
 //            self.addUserToView(nameString)
 //            personAddedArray.append(uuid)
-        }
+//        }
 //        if(sendNotification && !self.notificationSent) {
 //        }
         
@@ -608,6 +608,13 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     //CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var location:CLLocation = locations[locations.count-1] as! CLLocation
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        
+        let currentSpan = self.mapView.region.span
+        
+        let region = MKCoordinateRegion(center: center, span: currentSpan)
+        
+        self.mapView.setRegion(region, animated: true)
         
         var geoPoint = PFGeoPoint(location: location)
     
@@ -631,8 +638,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
                                 var query = PFQuery(className:"WolfPack")
                                 query.whereKey("location", nearGeoPoint:geoPoint)
                                 query.limit = 10
-                                var placesObjects = query.findObjects()
-                                self.updateMap(placesObjects!)
+                                query.findObjectsInBackgroundWithTarget(self, selector: "updateMap")
                             }
                         })
                     }
