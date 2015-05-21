@@ -313,71 +313,78 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         
         let reuseId = "pin"
         
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-        if pinView == nil {
-            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.canShowCallout = true
-            pinView!.enabled = true
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? WLAnnotationView
+        if annotationView == nil {
+            annotationView = WLAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            annotationView!.canShowCallout = true
+            annotationView!.enabled = true
+//
+//            var imageBorderColor:UIColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1)
+//            var imageBgColor:UIColor = UIColor(red: 40.0/255.0, green: 0.0/255.0, blue: 221.0/255.0, alpha: 1)
+//            var textColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
+//            let tempSize:CGFloat = 40.0
             
-            var imageBorderColor:UIColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1)
-            var imageBgColor:UIColor = UIColor(red: 40.0/255.0, green: 0.0/255.0, blue: 221.0/255.0, alpha: 1)
-            var textColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
-            let tempSize:CGFloat = 40.0
+            annotationView!.size = 40.0
+            annotationView!.centerLabel = UILabel(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
             
-            var newUserLabel:UILabel = UILabel(frame: CGRectMake(0, 0, tempSize, tempSize))//(frame: CGRectMake(0, tempSize, tempSize, labelSize))
-            
-            newUserLabel.layer.cornerRadius = newUserLabel.frame.size.width / 2
-            newUserLabel.layer.masksToBounds = true
-            newUserLabel.layer.borderColor = imageBorderColor.CGColor
-            newUserLabel.layer.borderWidth = tempSize/8
+            annotationView!.centerLabel.layer.cornerRadius = annotationView!.centerLabel.frame.size.width / 2
+            annotationView!.centerLabel.layer.masksToBounds = true
+            annotationView!.centerLabel.layer.borderColor = annotationView!.borderColor.CGColor
+            annotationView!.centerLabel.layer.borderWidth = annotationView!.size/8
             //let labelString:String = annotation?.title//.substringWithRange(Range<String.Index>(start: 0, end: 1))
-//            newUserLabel.text = annotation?.title//labelString
+//            annotationView!.centerLabel.text = annotation?.title//labelString
             
-            if let txt = annotation?.title {
-                let labelString:String = annotation.title!
-                newUserLabel.text  = labelString.substringWithRange(Range<String.Index>(start: labelString.startIndex, end: advance(labelString.startIndex, 1))).uppercaseString
-            }
+            annotationView!.centerLabel.textAlignment = NSTextAlignment.Center
+            annotationView!.centerLabel.textColor = .whiteColor()
+            annotationView!.centerLabel.backgroundColor = annotationView!.bgColor
+//
+            annotationView!.centerImage = UIImageView(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
+            annotationView!.centerImage.layer.cornerRadius = annotationView!.centerImage.frame.size.width / 2
+            annotationView!.centerImage.layer.masksToBounds = true
+            annotationView!.centerImage.layer.borderColor =  annotationView!.borderColor.CGColor
+            annotationView!.centerImage.layer.borderWidth = annotationView!.size/8
             
+//            //newUserImageView.image = UIImage(named: "logo")//UIImage(data: self.getUserImageData("chris")!)
+//            
+            var newUserView:UIView = UIView(frame: CGRectMake(0,0, annotationView!.size, annotationView!.size))
+            newUserView.addSubview(annotationView!.centerImage)
             
-            newUserLabel.textAlignment = NSTextAlignment.Center
-            newUserLabel.textColor = .whiteColor()
-            newUserLabel.backgroundColor = textColor
-            
-            var newUserImageView:UIImageView = UIImageView(frame: CGRectMake(0, 0, tempSize, tempSize))
-            newUserImageView.layer.cornerRadius = newUserImageView.frame.size.width / 2
-            newUserImageView.layer.masksToBounds = true
-            newUserImageView.layer.borderColor = imageBorderColor.CGColor
-            newUserImageView.layer.backgroundColor = imageBgColor.CGColor
-            newUserImageView.layer.borderWidth = tempSize/8
-            if(annotation.title! != nil) {
-                if let user:User = self.getUser(annotation.title!) {
-                    if let imageData:NSData = user.image {
-                        newUserImageView.image = UIImage(data: imageData)
-                    }
+            //add a label if we don't have user or a user.image returned
+            if let user:User = self.getUser(annotation.title!) {
+                if (user.image == nil) {
+                    newUserView.addSubview(annotationView!.centerLabel)
                 }
+            } else {
+                newUserView.addSubview(annotationView!.centerLabel)
             }
             
-            
-            //newUserImageView.image = UIImage(named: "logo")//UIImage(data: self.getUserImageData("chris")!)
-            
-            var newUserView:UIView = UIView(frame: CGRectMake(0,0, tempSize, tempSize+labelSize))
-            newUserView.addSubview(newUserImageView)
-            if(newUserImageView.image == nil) {
-                newUserView.addSubview(newUserLabel)
-            }
             //add to the field view
-            pinView!.addSubview(newUserView)
-            
-            pinView!.annotation = annotation
+            annotationView!.addSubview(newUserView)
+//
+            annotationView!.annotation = annotation
         }
         else {
-            pinView!.annotation = annotation
+            annotationView!.annotation = annotation
         }
         
+        //we must use some image to allow callout
+        annotationView!.image = UIImage(named: "blank_pin")
         
-        pinView!.image = UIImage(named: "blank_pin")
+        //because we are deque reusing, we need to always set the image and label.
+        if(annotation.title! != nil) {
+            if let user:User = self.getUser(annotation.title!) {
+                if let imageData:NSData = user.image {
+                    annotationView!.centerImage.image = UIImage(data: imageData)
+                }
+            }
+        }
+        if let txt = annotation?.title {
+            let labelString:String = annotation.title!
+            annotationView!.centerLabel.text  = labelString.substringWithRange(Range<String.Index>(start: labelString.startIndex, end: advance(labelString.startIndex, 1))).uppercaseString
+        }
         
-        return pinView
+        return annotationView
     }
     
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
