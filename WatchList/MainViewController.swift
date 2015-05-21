@@ -316,14 +316,9 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? WLAnnotationView
         if annotationView == nil {
             annotationView = WLAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             annotationView!.canShowCallout = true
             annotationView!.enabled = true
-//
-//            var imageBorderColor:UIColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1)
-//            var imageBgColor:UIColor = UIColor(red: 40.0/255.0, green: 0.0/255.0, blue: 221.0/255.0, alpha: 1)
-//            var textColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
-//            let tempSize:CGFloat = 40.0
+
             
             annotationView!.size = 40.0
             annotationView!.centerLabel = UILabel(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
@@ -332,21 +327,17 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             annotationView!.centerLabel.layer.masksToBounds = true
             annotationView!.centerLabel.layer.borderColor = annotationView!.borderColor.CGColor
             annotationView!.centerLabel.layer.borderWidth = annotationView!.size/8
-            //let labelString:String = annotation?.title//.substringWithRange(Range<String.Index>(start: 0, end: 1))
-//            annotationView!.centerLabel.text = annotation?.title//labelString
             
             annotationView!.centerLabel.textAlignment = NSTextAlignment.Center
             annotationView!.centerLabel.textColor = .whiteColor()
             annotationView!.centerLabel.backgroundColor = annotationView!.bgColor
-//
+            
             annotationView!.centerImage = UIImageView(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
             annotationView!.centerImage.layer.cornerRadius = annotationView!.centerImage.frame.size.width / 2
             annotationView!.centerImage.layer.masksToBounds = true
             annotationView!.centerImage.layer.borderColor =  annotationView!.borderColor.CGColor
             annotationView!.centerImage.layer.borderWidth = annotationView!.size/8
             
-//            //newUserImageView.image = UIImage(named: "logo")//UIImage(data: self.getUserImageData("chris")!)
-//            
             var newUserView:UIView = UIView(frame: CGRectMake(0,0, annotationView!.size, annotationView!.size))
             newUserView.addSubview(annotationView!.centerImage)
             
@@ -361,7 +352,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             
             //add to the field view
             annotationView!.addSubview(newUserView)
-//
+            
             annotationView!.annotation = annotation
         }
         else {
