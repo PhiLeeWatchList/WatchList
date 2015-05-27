@@ -182,6 +182,12 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
                 }
             }
         }
+        
+        let delay = 4.5 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.sendTestAlert()
+        }
     }
     
     
@@ -467,6 +473,18 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         {
             self.transmitSwitch.enabled = true
         }
+    }
+    
+    func sendTestAlert() {
+        let notification: UILocalNotification = UILocalNotification()
+        
+        notification.alertBody = "Test Alert!!!"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        /*
+        If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
+        If it's not, iOS will display the notification to the user.
+        */
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
     
     
