@@ -89,14 +89,21 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+    }
+
+    
+    override func viewWillAppear(animated: Bool) {
         var currentUser = PFUser.currentUser()
         println(currentUser)
         if currentUser != nil {
             self.performSegueWithIdentifier("mainView", sender: self)
         }
-
+        
     }
-
+    
+    
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         

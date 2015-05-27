@@ -87,10 +87,13 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                         var wolfpack = PFObject(className:"WolfPack")
                         wolfpack["username"] = username
                         wolfpack["userId"] = user.objectId
+                        wolfpack["profilepic"] = imageFile
                         wolfpack.saveInBackgroundWithBlock {
                             (success: Bool, error: NSError?) -> Void in
                             if (success) {
-                                self.performSegueWithIdentifier("signupToMainView", sender: self)
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.performSegueWithIdentifier("signupToMainView", sender: self)
+                                }
                             } else {
                                 println("Problem creating WolfPack object")
                             }
