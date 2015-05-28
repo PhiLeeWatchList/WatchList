@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UA1-Eb-5TG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UA1-Eb-5TG">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -826,7 +826,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cmk-I2-fkB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1723" y="2880"/>
+            <point key="canvasLocation" x="1754" y="2880"/>
         </scene>
         <!--Friends-->
         <scene sceneID="f0A-7k-5BN">
@@ -892,7 +892,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Friends" id="anS-FL-KEw">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="8AJ-ba-pL1"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="8AJ-ba-pL1">
+                            <color key="tintColor" red="0.43880208329999998" green="0.57097800929999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
@@ -903,7 +905,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5tC-yE-d5A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2455" y="2872"/>
+            <point key="canvasLocation" x="2403" y="2880"/>
         </scene>
         <!--Watch List-->
         <scene sceneID="sMI-ia-867">
@@ -966,8 +968,8 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2n-J8-iXd">
-                                                    <rect key="frame" x="513" y="29.5" width="60.5" height="21.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2n-J8-iXd">
+                                                    <rect key="frame" x="513" y="30" width="61" height="22"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1031,7 +1033,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C9x-cS-aN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2416" y="1483"/>
+            <point key="canvasLocation" x="2403" y="1483"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fVA-XX-MLr">
@@ -1066,7 +1068,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dJc-5Q-a4M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1723" y="2183"/>
+            <point key="canvasLocation" x="1754" y="2183"/>
         </scene>
         <!--Beacon Setup-->
         <scene sceneID="4Vv-BI-n1l">
@@ -1215,7 +1217,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Beacon Setup" id="MAx-ie-9Zi">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="GmK-ei-2tr"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="GmK-ei-2tr">
+                            <color key="tintColor" red="0.43880208329999998" green="0.57097800929999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
@@ -1231,7 +1235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gug-fB-IvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2450" y="2183"/>
+            <point key="canvasLocation" x="2403" y="2183"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="L5J-GQ-EPz">
