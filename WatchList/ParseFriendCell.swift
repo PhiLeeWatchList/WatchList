@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class CustomCell: PFTableViewCell {
+class ParseFriendCell: PFTableViewCell {
 
 
     @IBOutlet weak var profileImage: PFImageView!
