@@ -16,7 +16,7 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     var locationManager: CLLocationManager?
-    
+    var user = PFUser.currentUser()
     var currentLocation = CLLocation(latitude: 0,longitude: 0)
     
     override func viewDidLoad() {
@@ -78,8 +78,10 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery{
+        let geoPoint = PFGeoPoint(location: currentLocation)
         var query = PFQuery(className: "WolfPack")
-        query.orderByAscending("username")
+        query.whereKey("location", nearGeoPoint:geoPoint)
+        query.whereKey("username", notEqualTo: user!.username!)
         return query
     }
     
@@ -97,10 +99,14 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         if let location = object?["location"] as? PFGeoPoint {
             let point = PFGeoPoint(location: currentLocation)
             let distance = location.distanceInMilesTo(point)
-            let formatter = NSNumberFormatter()
-            formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-            formatter.locale = NSLocale(localeIdentifier: "en_US")
-            cell?.location?.text = formatter.stringFromNumber(distance)! + " miles away"
+            var message = "Here!"
+            if distance > 0.01  {
+                let formatter = NSNumberFormatter()
+                formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                formatter.locale = NSLocale(localeIdentifier: "en_US")
+                message = formatter.stringFromNumber(distance)! + " miles away"
+            }
+            cell?.location?.text = message
         }
         
         
@@ -157,16 +163,7 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
                         object["location"] = geoPoint
                         object.saveInBackgroundWithBlock({ (success, error) -> Void in
                             if error == nil {
-                                var query = PFQuery(className:"WolfPack")
-                                query.whereKey("location", nearGeoPoint:geoPoint)
-                                query.limit = 10
-                                
-                                println("user: \(user?.username)  email: \(user?.email)")
-                                query.findObjectsInBackgroundWithBlock({ (places: [AnyObject]?, error: NSError?) -> Void in
-                                    //self.updateMap(places!)
-                                    self.tableView.reloadData()
-                                })
-                                
+                                self.loadObjects()
                             }
                         })
                     }
