@@ -17,6 +17,8 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     var locationManager: CLLocationManager?
     
+    var currentLocation = CLLocation(latitude: 0,longitude: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,8 +94,13 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         if let nameEnglish = object?["username"] as? String {
             cell?.name?.text = nameEnglish
         }
-        if let location = object?["location"] as? String {
-            cell?.location?.text = location
+        if let location = object?["location"] as? PFGeoPoint {
+            let point = PFGeoPoint(location: currentLocation)
+            let distance = location.distanceInMilesTo(point)
+            let formatter = NSNumberFormatter()
+            formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+            formatter.locale = NSLocale(localeIdentifier: "en_US")
+            cell?.location?.text = formatter.stringFromNumber(distance)! + " miles away"
         }
         
         
@@ -129,6 +136,8 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var location:CLLocation = locations[locations.count-1] as! CLLocation
         
+        currentLocation = location
+        
         var geoPoint = PFGeoPoint(location: location)
         
         var user = PFUser.currentUser()
@@ -155,6 +164,7 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
                                 println("user: \(user?.username)  email: \(user?.email)")
                                 query.findObjectsInBackgroundWithBlock({ (places: [AnyObject]?, error: NSError?) -> Void in
                                     //self.updateMap(places!)
+                                    self.tableView.reloadData()
                                 })
                                 
                             }
