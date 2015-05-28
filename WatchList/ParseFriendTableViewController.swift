@@ -92,6 +92,10 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
             cell = ParseFriendCell(style: UITableViewCellStyle.Default, reuseIdentifier: "CustomCell")
         }
         
+        cell?.cellView?.layer.borderColor = UIColor.grayColor().CGColor
+        cell?.cellView?.layer.borderWidth = 2
+        cell?.cellView?.layer.cornerRadius = 10
+        
         // Extract values from the PFObject to display in the table cell
         if let nameEnglish = object?["username"] as? String {
             cell?.name?.text = nameEnglish
@@ -100,11 +104,23 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
             let point = PFGeoPoint(location: currentLocation)
             let distance = location.distanceInMilesTo(point)
             var message = "Here!"
-            if distance > 0.01  {
-                let formatter = NSNumberFormatter()
-                formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-                formatter.locale = NSLocale(localeIdentifier: "en_US")
+            let formatter = NSNumberFormatter()
+            formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+            formatter.locale = NSLocale(localeIdentifier: "en_US")
+            
+            if (distance > 0.01 && distance < 0.05)  {
+                let feet = distance * 5280.0
+                formatter.maximumFractionDigits = 0
+                message = formatter.stringFromNumber(feet)! + " feet away"
+                cell?.cellView?.layer.backgroundColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1).CGColor
+            } else if distance > 0.05 {
+                formatter.maximumFractionDigits = 2
                 message = formatter.stringFromNumber(distance)! + " miles away"
+                cell?.cellView?.layer.backgroundColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1).CGColor
+            }
+            
+            if message == "Here!" {
+                cell?.cellView?.layer.backgroundColor = UIColor(red: 120/255.0, green: 120/255.0, blue: 120/255.0, alpha: 0.5).CGColor
             }
             cell?.location?.text = message
         }

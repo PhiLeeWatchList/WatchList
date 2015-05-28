@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
         {
             //allow user to accept location when backgrounded
-            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Sound | .Alert | .Badge, categories: nil))
         }
         else
         {
