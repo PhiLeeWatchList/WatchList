@@ -17,6 +17,7 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     var locationManager: CLLocationManager?
     var user = PFUser.currentUser()
+    var name = ""
     var currentLocation = CLLocation(latitude: 0,longitude: 0)
     
     override func viewDidLoad() {
@@ -98,6 +99,7 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         
         // Extract values from the PFObject to display in the table cell
         if let nameEnglish = object?["username"] as? String {
+            name = nameEnglish
             cell?.name?.text = nameEnglish
         }
         if let location = object?["location"] as? PFGeoPoint {
@@ -121,6 +123,16 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
             
             if message == "Here!" {
                 cell?.cellView?.layer.backgroundColor = UIColor(red: 120/255.0, green: 120/255.0, blue: 120/255.0, alpha: 0.5).CGColor
+                let notification: UILocalNotification = UILocalNotification()
+                
+                notification.alertBody = "\(name) is here!"
+                notification.soundName = UILocalNotificationDefaultSoundName
+                /*
+                If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
+                If it's not, iOS will display the notification to the user.
+                */
+                UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+                
             }
             cell?.location?.text = message
         }
