@@ -67,12 +67,15 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                 var email = self.emailField.text
                 email = email.lowercaseString
                 
+                var trackingArray = [""]
+                
                 var user = PFUser()
                 user.username = username
                 user.password = self.passwordField.text
                 user.email = email
                 user.setObject(imageFile, forKey: "profilepic")
                 user.setObject(uuid, forKey: "guid")
+                user.setObject(trackingArray, forKey: "tracking")
                 
                 user.signUpInBackgroundWithBlock {
                     (success, signupError) -> Void in
@@ -88,6 +91,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                         wolfpack["username"] = username
                         wolfpack["userId"] = user.objectId
                         wolfpack["profilepic"] = imageFile
+                        
                         wolfpack.saveInBackgroundWithBlock {
                             (success: Bool, error: NSError?) -> Void in
                             if (success) {

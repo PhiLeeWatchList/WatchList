@@ -67,6 +67,8 @@
 		9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCB73AA1AF492E1001C081C /* LoginViewController.swift */; };
 		9BD509E21AFAE39F00AD3C09 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD509E11AFAE39F00AD3C09 /* User.swift */; };
 		9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */; };
+		9BF8DD0D1B179557004782B3 /* ParseSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8DD0C1B179557004782B3 /* ParseSelectFriendsViewController.swift */; };
+		9BF8DD0F1B179976004782B3 /* ParseSelectFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8DD0E1B179976004782B3 /* ParseSelectFriendCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +219,8 @@
 		9BD509E11AFAE39F00AD3C09 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BD509E31AFAEDFB00AD3C09 /* WatchList-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WatchList-Bridging-Header.h"; sourceTree = "<group>"; };
 		9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		9BF8DD0C1B179557004782B3 /* ParseSelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseSelectFriendsViewController.swift; sourceTree = "<group>"; };
+		9BF8DD0E1B179976004782B3 /* ParseSelectFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseSelectFriendCell.swift; sourceTree = "<group>"; };
 		ACD7BA99A6DC660F9101D519 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		ED251A3F227B042C86EF8C9E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -363,6 +367,8 @@
 				0C47B2A71AEC5F6D00902891 /* 3rdParty */,
 				0C86246C1AB91A290042CAA8 /* Supporting Files */,
 				9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */,
+				9BF8DD0C1B179557004782B3 /* ParseSelectFriendsViewController.swift */,
+				9BF8DD0E1B179976004782B3 /* ParseSelectFriendCell.swift */,
 			);
 			path = WatchList;
 			sourceTree = "<group>";
@@ -790,6 +796,7 @@
 				0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */,
 				0C8624911AB91E640042CAA8 /* README.md in Sources */,
 				0C47B2BC1AEC602700902891 /* GCDUtilities.m in Sources */,
+				9BF8DD0D1B179557004782B3 /* ParseSelectFriendsViewController.swift in Sources */,
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
 				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
 				9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */,
@@ -797,6 +804,7 @@
 				0C47B2AC1AEC5F9D00902891 /* INBeaconService.m in Sources */,
 				0C47B2AF1AEC5FF400902891 /* CLBeacon+Ext.m in Sources */,
 				0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */,
+				9BF8DD0F1B179976004782B3 /* ParseSelectFriendCell.swift in Sources */,
 				9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */,
 				9B0622861AF977DF002E161B /* SignupViewController.swift in Sources */,
 				0C47B2B61AEC600C00902891 /* CBCentralManager+Ext.m in Sources */,

@@ -24,7 +24,7 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black;
-        
+
         
         if self.revealViewController() != nil {
             menuBarButton.target = self.revealViewController()
@@ -72,7 +72,6 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         
         // Configure the PFQueryTableView
         self.parseClassName = "WolfPack"
-        self.textKey = "username"
         self.pullToRefreshEnabled = true
         self.paginationEnabled = false
     }
@@ -81,6 +80,8 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     override func queryForTable() -> PFQuery{
         let geoPoint = PFGeoPoint(location: currentLocation)
         var query = PFQuery(className: "WolfPack")
+        query.whereKey("tracking", equalTo: true)
+        query.whereKey("canTrack", equalTo: true)
         query.whereKey("location", nearGeoPoint:geoPoint)
         query.whereKey("username", notEqualTo: user!.username!)
         return query
