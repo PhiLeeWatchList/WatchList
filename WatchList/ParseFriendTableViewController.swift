@@ -16,7 +16,11 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     var locationManager: CLLocationManager?
-    var user = PFUser.currentUser()
+    let user = PFUser.currentUser()!
+    
+    var trackingArray = [String]()
+    var friendsArray = [String]()
+    
     var name = ""
     var currentLocation = CLLocation(latitude: 0,longitude: 0)
     
@@ -45,7 +49,25 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         layoutForDevices()
         startLocationManager()
         
+        PFUser.currentUser()?.fetchInBackgroundWithBlock({ (user, error) -> Void in
+            if error == nil {
+                let updatedUser = user as! PFUser
+                self.trackingArray = updatedUser["tracking"] as! [String]
+                self.friendsArray = updatedUser["friends"] as! [String]
+                println("new tracking users are \(self.trackingArray)")
+                self.loadObjects()
+            }
+        })
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("reloadTableView"), userInfo: nil, repeats: true)
+        
     }
+    
+    func reloadTableView () {
+        println("tableView updated")
+        self.loadObjects()
+    }
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -80,10 +102,9 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     override func queryForTable() -> PFQuery{
         let geoPoint = PFGeoPoint(location: currentLocation)
         var query = PFQuery(className: "WolfPack")
-        query.whereKey("tracking", equalTo: true)
-        query.whereKey("canTrack", equalTo: true)
+        query.whereKey("username", containedIn: user["tracking"]! as! [String] )
         query.whereKey("location", nearGeoPoint:geoPoint)
-        query.whereKey("username", notEqualTo: user!.username!)
+        query.whereKey("username", notEqualTo: user.username!)
         return query
     }
     

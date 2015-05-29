@@ -50,28 +50,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let userArray = ["lee","phil","chris"]
         
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
-        let request = NSFetchRequest(entityName: "User")
-        let savedUsers = context.executeFetchRequest(request, error: nil) as! [User]
-        var savedUsernames = [String]()
-        for username in savedUsers {
-            savedUsernames.append(username.username)
+        let user = PFUser.currentUser()
+        
+        var saveFriend = false
+        
+        
+        
+        if (user != nil) {
+            var query = PFUser.query()
+            query!.whereKey("username", equalTo: user!.username! )
+            query!.getFirstObjectInBackgroundWithBlock({ (object:PFObject?, error:NSError?) -> Void in
+                if let object = object {
+                    var friendsArray = object["friends"] as! [String]
+                    for friend in userArray {
+                        if !contains(friendsArray, friend) && friend != user!.username! {
+                            friendsArray.append(friend)
+                            println("new friend \(friend) was added")
+                            saveFriend = true
+                        }
+                    }
+                    if saveFriend {
+                        object["friends"] = friendsArray
+                        object.saveInBackgroundWithBlock({ (success, error) -> Void in
+                            if success {
+                                println("new friends updated")
+                            }
+                        })
+                    }
+                }
+            })
         }
+        
+        
+// Old CoreData code
+//        var context = CoreDataStack.sharedInstance.managedObjectContext!
+//        let request = NSFetchRequest(entityName: "User")
+//        let savedUsers = context.executeFetchRequest(request, error: nil) as! [User]
+//        var savedUsernames = [String]()
+//        for username in savedUsers {
+//            savedUsernames.append(username.username)
+//        }
 
         
-        for user in userArray {
-            if contains(savedUsernames,user) {
-                println("User \(user) already exists")
-            } else {
-                var context = CoreDataStack.sharedInstance.managedObjectContext!
-                var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
-                person.username = user
-                person.guid = ""
-                person.id = ""
-                person.selected = false
-                context.save(nil)
-            }
-        }
+//        for user in userArray {
+//            if contains(savedUsernames,user) {
+//                println("User \(user) already exists")
+//            } else {
+//                var context = CoreDataStack.sharedInstance.managedObjectContext!
+//                var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
+//                person.username = user
+//                person.guid = ""
+//                person.id = ""
+//                person.selected = false
+//                context.save(nil)
+//            }
+//        }
         
         
         
@@ -113,34 +146,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let queryItems = components?.queryItems as? [NSURLQueryItem]
             {
-                var context = CoreDataStack.sharedInstance.managedObjectContext!
-                let request = NSFetchRequest(entityName: "User")
-                let savedUsers = context.executeFetchRequest(request, error: nil) as! [User]
-                var savedUsernames = [String]()
-                for username in savedUsers {
-                    savedUsernames.append(username.username)
-                }
+                let user = PFUser.currentUser()
                 
-                for saved in savedUsernames {
-                    if contains(savedUsernames, queryItems[0].value!) {
-                        println("User \(queryItems[0].value!) already exists")
-                    } else {
-                        var context = CoreDataStack.sharedInstance.managedObjectContext!
-                        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
-                        person.username = queryItems[0].value!
-                        person.guid = queryItems[1].value!
-                        person.id = ""
-                        person.selected = false
-                        context.save(nil)
-                    }
+                var saveFriend = false
+                
+                if (user != nil) {
+                    var query = PFUser.query()
+                    query!.whereKey("username", equalTo: user!.username! )
+                    query!.getFirstObjectInBackgroundWithBlock({ (object:PFObject?, error:NSError?) -> Void in
+                        if let object = object {
+                            var friendsArray = object["friends"] as! [String]
+                            let friend = queryItems[0].value!
+                            if !contains(friendsArray, friend) && friend != user!.username! {
+                                friendsArray.append(friend)
+                                println("new friend \(friend) was added")
+                                saveFriend = true
+                            }
+                            if saveFriend {
+                                object["friends"] = friendsArray
+                                object.saveInBackgroundWithBlock({ (success, error) -> Void in
+                                    if success {
+                                        println("new friends updated")
+                                    }
+                                })
+                            }
+                        }
+                    })
                 }
-
             }
         
         return true
         
     }
 
+    //                var context = CoreDataStack.sharedInstance.managedObjectContext!
+    //                let request = NSFetchRequest(entityName: "User")
+    //                let savedUsers = context.executeFetchRequest(request, error: nil) as! [User]
+    //                var savedUsernames = [String]()
+    //                for username in savedUsers {
+    //                    savedUsernames.append(username.username)
+    //                }
+    //
+    //                for saved in savedUsernames {
+    //                    if contains(savedUsernames, queryItems[0].value!) {
+    //                        println("User \(queryItems[0].value!) already exists")
+    //                    } else {
+    //                        var context = CoreDataStack.sharedInstance.managedObjectContext!
+    //                        var person = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as! User
+    //                        person.username = queryItems[0].value!
+    //                        person.guid = queryItems[1].value!
+    //                        person.id = ""
+    //                        person.selected = false
+    //                        context.save(nil)
+    //                    }
+    //                }
+
+    
     
     //TODO: remove ibeacon
 //    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {

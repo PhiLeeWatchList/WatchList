@@ -14,9 +14,10 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
 
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
 
-    let user = PFUser.currentUser()
+    let user = PFUser.currentUser()!
     
     var trackingArray = [String]()
+    var friendsArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +31,18 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         self.revealViewController().rearViewRevealWidth = 130
+        
+        PFUser.currentUser()?.fetchInBackgroundWithBlock({ (user, error) -> Void in
+            if error == nil {
+               let updatedUser = user as! PFUser
+                self.trackingArray = updatedUser["tracking"] as! [String]
+                self.friendsArray = updatedUser["friends"] as! [String]
+                println("new tracking users are \(self.trackingArray)")
+                self.loadObjects()
+            }
+        })
+        
 
-        self.trackingArray = self.user["tracking"] as! [String]
 
     }
 
@@ -57,7 +68,8 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery{
         var query = PFQuery(className: "WolfPack")
-        query.whereKey("username", notEqualTo: user!.username!)
+        query.whereKey("username", notEqualTo: user.username!)
+        query.whereKey("username", containedIn: friendsArray )
         query.orderByAscending("username")
         return query
     }
@@ -81,13 +93,12 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
             })
         }
         
-        if let tracking = object?["tracking"] as? Bool {
-            if tracking {
-                cell.accessoryType = .Checkmark
-            } else {
-                cell.accessoryType = .None
-            }
+        if contains(self.trackingArray, object?["username"] as! String) {
+            cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
         }
+
         
         return cell
     }
@@ -111,26 +122,23 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
     }
 
     func updateParseUser(user: String, selected: Bool) {
-        var query = PFQuery(className: "WolfPack")
-        query.whereKey("username", equalTo:user)
-        query.getFirstObjectInBackgroundWithBlock { (object:PFObject?, error:NSError?) -> Void in
-            if error == nil {
-                // The find succeeded.
-                println("Successfully updated user \(object).")
-                var user = object as PFObject!
-                user["tracking"] = selected
-                user.saveInBackgroundWithBlock({ (success, error) -> Void in
-                    if success {
-                        println("\(user) tracking updated to \(selected)")
-                    }
-                })
-                
-            } else {
-                // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+        if !contains(trackingArray, user) && selected {
+            trackingArray.append(user)
+        } else {
+            for var i=0; i < trackingArray.count;i++ {
+                if trackingArray[i] == user {
+                    println("remove tracking for \(user)")
+                    trackingArray.removeAtIndex(i)
+                    
+                }
             }
-            
         }
+        self.user["tracking"] = self.trackingArray
+        
+        PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) -> Void in
+            println("user updated")
+        })
+
     }
 
 }

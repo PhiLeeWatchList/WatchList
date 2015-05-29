@@ -75,7 +75,6 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                 user.email = email
                 user.setObject(imageFile, forKey: "profilepic")
                 user.setObject(uuid, forKey: "guid")
-                user.setObject(trackingArray, forKey: "tracking")
                 
                 user.signUpInBackgroundWithBlock {
                     (success, signupError) -> Void in
@@ -91,6 +90,8 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                         wolfpack["username"] = username
                         wolfpack["userId"] = user.objectId
                         wolfpack["profilepic"] = imageFile
+                        wolfpack["friends"] = [String]()
+                        wolfpack["tracking"] = [String]()
                         
                         wolfpack.saveInBackgroundWithBlock {
                             (success: Bool, error: NSError?) -> Void in
