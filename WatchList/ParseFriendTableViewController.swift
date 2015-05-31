@@ -24,6 +24,9 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     var name = ""
     var currentLocation = CLLocation(latitude: 0,longitude: 0)
     
+    //New Background Task Stuff
+    var backgroundUpdateTask: UIBackgroundTaskIdentifier!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -179,17 +182,63 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         //allow user to accept location
         if CLLocationManager.authorizationStatus() == .NotDetermined {
             locationManager!.requestAlwaysAuthorization()
-            locationManager!.requestWhenInUseAuthorization()
+            //locationManager!.requestWhenInUseAuthorization()
         }
         
         self.locationManager!.desiredAccuracy = kCLLocationAccuracyNearestTenMeters//kCLLocationAccuracyBest
         self.locationManager!.distanceFilter = 1.0
+        
+        
+        //enable the background stuff if it isn't already
+        
+        if UIApplication.sharedApplication().backgroundRefreshStatus == UIBackgroundRefreshStatus.Denied {
+            let alertController = UIAlertController(title: "Background Mode", message:
+                "The app doesn't work without the Background app Refresh enabled. To turn it on, go to Settings > General > Background app Refresh", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else if (UIApplication.sharedApplication().backgroundRefreshStatus == UIBackgroundRefreshStatus.Restricted) {
+            let alertController = UIAlertController(title: "Background Mode", message:
+                "The functions of this app are limited because the Background app Refresh is disabled.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        //New Background Task Stuff
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.beginBackgroundUpdateTask()
+            
+            //TODO: move our location startup code here
+            
+            //do our parse table reload kick
+            self.reloadTableView()
+            
+            // Do something with the result.
+            var timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "displayAlert", userInfo: nil, repeats: true)
+            NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
+            NSRunLoop.currentRunLoop().run()
+            
+            // End the background task.
+            self.endBackgroundUpdateTask()
+        })
+        
+        
         
     }
     
     
     //CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        
+        
+        
+        
+        
+        
+        
+        
         var location:CLLocation = locations[locations.count-1] as! CLLocation
         
         currentLocation = location
@@ -238,5 +287,28 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
             // ...
         }
     }
+    
+    
+    
+    //New Background Task Stuff
+    func beginBackgroundUpdateTask() {
+        self.backgroundUpdateTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
+            self.endBackgroundUpdateTask()
+        })
+    }
+    
+    func endBackgroundUpdateTask() {
+        UIApplication.sharedApplication().endBackgroundTask(self.backgroundUpdateTask)
+        self.backgroundUpdateTask = UIBackgroundTaskInvalid
+    }
+    
+    func displayAlert() {
+        println("Only this alert will show for now... but we will get location in next!")
+//        let note = UILocalNotification()
+//        note.alertBody = "Only this alert will show for now... but we will get location in next!"
+//        note.soundName = UILocalNotificationDefaultSoundName
+//        UIApplication.sharedApplication().scheduleLocalNotification(note)
+    }
+
     
 }
