@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>GeoManager.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Notification - WatchList WatchKit App.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -48,6 +53,16 @@
 			<true/>
 		</dict>
 		<key>9B7E02AD1AF02B850001C924</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B836D631B1FACFB00720A8C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B836D6D1B1FACFB00720A8C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
