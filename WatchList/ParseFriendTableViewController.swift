@@ -9,23 +9,31 @@
 import UIKit
 import Parse
 import ParseUI
-import CoreLocation
+import GeoManager
 
 
-class ParseFriendTableViewController: PFQueryTableViewController, CLLocationManagerDelegate {
+
+class ParseFriendTableViewController: PFQueryTableViewController {
     
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
-    var locationManager: CLLocationManager?
+
     let user = PFUser.currentUser()!
     
+    var usersHereArray = [String]()
     var trackingArray = [String]()
     var friendsArray = [String]()
-    
+    var tableViewRefreshTimer = NSTimer()
     var name = ""
-    var currentLocation = CLLocation(latitude: 0,longitude: 0)
+    var isInBackground = false
+    
+    let geoManager = GeoManager.sharedInstance
     
     //New Background Task Stuff
     var backgroundUpdateTask: UIBackgroundTaskIdentifier!
+    
+    deinit {
+        geoManager.removeObserver(self, forKeyPath: "location")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,17 +48,9 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         }
         self.revealViewController().rearViewRevealWidth = 130
         
+        geoManager.addObserver(self, forKeyPath: "location", options: .New, context: nil)
+        GeoManager.sharedInstance.start()
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if (defaults.objectForKey(GlobalConstants.THIS_DEVICE_TRANSMIT_UUID) != nil) {
-            //self.testSetupButton.hidden = true
-        }
-        
-        
-        
-        layoutForDevices()
-        startLocationManager()
         
         PFUser.currentUser()?.fetchInBackgroundWithBlock({ (user, error) -> Void in
             if error == nil {
@@ -62,7 +62,9 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
             }
         })
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("reloadTableView"), userInfo: nil, repeats: true)
+        self.tableViewRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("reloadTableView"), userInfo: nil, repeats: true)
+        
+        self.usersHereArray = [""]
         
     }
     
@@ -75,6 +77,13 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterBackground:",
+            name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterBackground:",
+            name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterForeground:",
+            name: UIApplicationWillEnterForegroundNotification, object: nil)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,10 +91,16 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         // Dispose of any resources that can be recreated.
     }
     
-    func layoutForDevices() {
-        
-        
+    
+    override func observeValueForKeyPath(keyPath: String,
+        ofObject object: AnyObject,
+        change: [NSObject : AnyObject], context: UnsafeMutablePointer<()>) {
+            
+            if object === geoManager && keyPath == "location" {
+                self.updateParseLocation()
+            }
     }
+    
     
     // Initialise the PFQueryTable tableview
     override init(style: UITableViewStyle, className: String!) {
@@ -103,15 +118,19 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery{
-        let geoPoint = PFGeoPoint(location: currentLocation)
         var query = PFQuery(className: "WolfPack")
-        query.whereKey("username", containedIn: user["tracking"]! as! [String] )
-        query.whereKey("location", nearGeoPoint:geoPoint)
+        if let location = GeoManager.sharedInstance.location {
+            let geoPoint = PFGeoPoint(location: location)
+            query.whereKey("location", nearGeoPoint:geoPoint)
+            query.whereKey("username", containedIn: user["tracking"]! as! [String] )
+        }        
         query.whereKey("username", notEqualTo: user.username!)
         return query
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+        
+        println("refreshing table")
         
         var cell = tableView.dequeueReusableCellWithIdentifier("CustomCell") as! ParseFriendCell!
         if cell == nil {
@@ -123,43 +142,36 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         cell?.cellView?.layer.cornerRadius = 10
         
         // Extract values from the PFObject to display in the table cell
-        if let nameEnglish = object?["username"] as? String {
-            name = nameEnglish
-            cell?.name?.text = nameEnglish
+        if let username = object?["username"] as? String {
+            name = username
+            cell?.name?.text = username
         }
         if let location = object?["location"] as? PFGeoPoint {
-            let point = PFGeoPoint(location: currentLocation)
-            let distance = location.distanceInMilesTo(point)
-            var message = "Here!"
-            let formatter = NSNumberFormatter()
-            formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-            formatter.locale = NSLocale(localeIdentifier: "en_US")
-            
-            if (distance > 0.01 && distance < 0.05)  {
-                let feet = distance * 5280.0
-                formatter.maximumFractionDigits = 0
-                message = formatter.stringFromNumber(feet)! + " feet away"
-                cell?.cellView?.layer.backgroundColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1).CGColor
-            } else if distance > 0.05 {
-                formatter.maximumFractionDigits = 2
-                message = formatter.stringFromNumber(distance)! + " miles away"
-                cell?.cellView?.layer.backgroundColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1).CGColor
-            }
-            
-            if message == "Here!" {
-                cell?.cellView?.layer.backgroundColor = UIColor(red: 120/255.0, green: 120/255.0, blue: 120/255.0, alpha: 0.5).CGColor
-                let notification: UILocalNotification = UILocalNotification()
+            if let currentLocation = GeoManager.sharedInstance.location {
+                let point = PFGeoPoint(location: currentLocation)
+                let distance = location.distanceInMilesTo(point)
+                var message = "Here!"
+                let formatter = NSNumberFormatter()
+                formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                formatter.locale = NSLocale(localeIdentifier: "en_US")
                 
-                notification.alertBody = "\(name) is here!"
-                notification.soundName = UILocalNotificationDefaultSoundName
-                /*
-                If the application is in the foreground, it will get a callback to application:didReceiveLocalNotification:.
-                If it's not, iOS will display the notification to the user.
-                */
-                UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+                if (distance > 0.01 && distance < 0.05)  {
+                    let feet = distance * 5280.0
+                    formatter.maximumFractionDigits = 0
+                    message = formatter.stringFromNumber(feet)! + " feet away"
+                    cell?.cellView?.layer.backgroundColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1).CGColor
+                } else if distance > 0.05 {
+                    formatter.maximumFractionDigits = 2
+                    message = formatter.stringFromNumber(distance)! + " miles away"
+                    cell?.cellView?.layer.backgroundColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1).CGColor
+                }
                 
+                if message == "Here!" {
+                    cell?.cellView?.layer.backgroundColor = UIColor(red: 120/255.0, green: 120/255.0, blue: 120/255.0, alpha: 0.5).CGColor
+                    
+                }
+                cell?.location?.text = message
             }
-            cell?.location?.text = message
         }
         
         
@@ -174,118 +186,87 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         
         return cell
     }
+
+
     
-    func startLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager!.delegate = self
+    func updateParseLocation(){
         
-        //allow user to accept location
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
-            locationManager!.requestAlwaysAuthorization()
-            //locationManager!.requestWhenInUseAuthorization()
-        }
-        
-        self.locationManager!.desiredAccuracy = kCLLocationAccuracyNearestTenMeters//kCLLocationAccuracyBest
-        self.locationManager!.distanceFilter = 1.0
-        
-        
-        //enable the background stuff if it isn't already
-        
-        if UIApplication.sharedApplication().backgroundRefreshStatus == UIBackgroundRefreshStatus.Denied {
-            let alertController = UIAlertController(title: "Background Mode", message:
-                "The app doesn't work without the Background app Refresh enabled. To turn it on, go to Settings > General > Background app Refresh", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        if let location = GeoManager.sharedInstance.location {
             
-            self.presentViewController(alertController, animated: true, completion: nil)
-        } else if (UIApplication.sharedApplication().backgroundRefreshStatus == UIBackgroundRefreshStatus.Restricted) {
-            let alertController = UIAlertController(title: "Background Mode", message:
-                "The functions of this app are limited because the Background app Refresh is disabled.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            var geoPoint = PFGeoPoint(location: location)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-        
-        //New Background Task Stuff
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.beginBackgroundUpdateTask()
+            var user = PFUser.currentUser()
+            var username = user?.username
+            var query = PFQuery(className:"WolfPack")
+            query.whereKey("username", equalTo:username!)
             
-            //TODO: move our location startup code here
-            
-            //do our parse table reload kick
-            self.reloadTableView()
-            
-            // Do something with the result.
-            var timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "displayAlert", userInfo: nil, repeats: true)
-            NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
-            NSRunLoop.currentRunLoop().run()
-            
-            // End the background task.
-            self.endBackgroundUpdateTask()
-        })
-        
-        
-        
-    }
-    
-    
-    //CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        var location:CLLocation = locations[locations.count-1] as! CLLocation
-        
-        currentLocation = location
-        
-        var geoPoint = PFGeoPoint(location: location)
-        
-        var user = PFUser.currentUser()
-        var username = user?.username
-        var query = PFQuery(className:"WolfPack")
-        query.whereKey("username", equalTo:username!)
-        
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
-            
-            if error == nil {
-                // The find succeeded.
-                println("Successfully retrieved \(objects!.count).")
-                // Do something with the found objects
-                if let objects = objects as? [PFObject] {
-                    for object in objects {
-                        object["location"] = geoPoint
-                        object.saveInBackgroundWithBlock({ (success, error) -> Void in
-                            if error == nil {
-                                self.loadObjects()
-                            }
-                        })
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]?, error: NSError?) -> Void in
+                
+                if error == nil {
+                    if let objects = objects as? [PFObject] {
+                        for object in objects {
+                            object["location"] = geoPoint
+                            object.saveInBackgroundWithBlock({ (success, error) -> Void in
+                                if success {
+                                    if self.isInBackground {
+                                        self.checkLocation()
+                                    } else {
+                                        self.loadObjects()
+                                    }
+                                }
+                            })
+                        }
                     }
+                } else {
+                    // Log details of the failure
+                    println("Error: \(error!) \(error!.userInfo!)")
                 }
-            } else {
-                // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
             }
         }
-        
-        
     }
-    
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println(error)
-    }
-    
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus)
-    {
-        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
-            manager.startUpdatingLocation()
-            // ...
+
+    func checkLocation() {
+        var query = PFQuery(className: "WolfPack")
+        if let location = GeoManager.sharedInstance.location {
+            let geoPoint = PFGeoPoint(location: location)
+            query.whereKey("location", nearGeoPoint:geoPoint)
+            query.whereKey("username", containedIn: user["tracking"]! as! [String] )
         }
+        query.whereKey("username", notEqualTo: user.username!)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let foundObjects = objects {
+                for object in foundObjects {
+                    let name = object["username"] as! String
+                    if let location = object["location"] as? PFGeoPoint {
+                        if let currentLocation = GeoManager.sharedInstance.location {
+                            let point = PFGeoPoint(location: currentLocation)
+                            let distance = location.distanceInMilesTo(point)
+                            var message = "Here!"
+                            let formatter = NSNumberFormatter()
+                            formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                            formatter.locale = NSLocale(localeIdentifier: "en_US")
+                            
+                            if (distance < 0.01)  {
+                                if !contains(self.usersHereArray,name) {
+                                    self.notifyLocation(name)
+                                    self.usersHereArray.append(name)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func notifyLocation(name:String) {
+        var localNotification: UILocalNotification = UILocalNotification()
+        localNotification.alertAction = ""
+        localNotification.alertBody = "\(name) is here!"
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
     
@@ -302,13 +283,26 @@ class ParseFriendTableViewController: PFQueryTableViewController, CLLocationMana
         self.backgroundUpdateTask = UIBackgroundTaskInvalid
     }
     
-    func displayAlert() {
-        println("Only this alert will show for now... but we will get location in next!")
-//        let note = UILocalNotification()
-//        note.alertBody = "Only this alert will show for now... but we will get location in next!"
-//        note.soundName = UILocalNotificationDefaultSoundName
-//        UIApplication.sharedApplication().scheduleLocalNotification(note)
-    }
+    //MARK: - Notifications
+    func didEnterBackground(notification:AnyObject) {
+        println("start backgroundmode")
+        self.isInBackground = true
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.beginBackgroundUpdateTask()
 
+            // Do something with the result.
+            var timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "updateParseLocation", userInfo: nil, repeats: true)
+            NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
+            NSRunLoop.currentRunLoop().run()
+            
+            // End the background task.
+            self.endBackgroundUpdateTask()
+        })
+    }
+    
+    func didEnterForeground(notification:AnyObject) {
+        self.isInBackground = false
+        println("end backgroundmode")
+    }
     
 }

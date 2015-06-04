@@ -48,6 +48,20 @@
                ReferencedContainer = "container:WatchList.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9B836D6D1B1FACFB00720A8C"
+               BuildableName = "GeoManagerTests.xctest"
+               BlueprintName = "GeoManagerTests"
+               ReferencedContainer = "container:WatchList.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -73,6 +87,16 @@
                BlueprintIdentifier = "9B7E02AD1AF02B850001C924"
                BuildableName = "DataBridgeTests.xctest"
                BlueprintName = "DataBridgeTests"
+               ReferencedContainer = "container:WatchList.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9B836D6D1B1FACFB00720A8C"
+               BuildableName = "GeoManagerTests.xctest"
+               BlueprintName = "GeoManagerTests"
                ReferencedContainer = "container:WatchList.xcodeproj">
             </BuildableReference>
          </TestableReference>
