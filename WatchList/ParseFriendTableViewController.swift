@@ -62,8 +62,6 @@ class ParseFriendTableViewController: PFQueryTableViewController {
             }
         })
         
-        self.tableViewRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("reloadTableView"), userInfo: nil, repeats: true)
-        
         self.usersHereArray = [""]
         
     }
@@ -71,6 +69,12 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     func reloadTableView () {
         println("tableView updated")
         self.loadObjects()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableViewRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("reloadTableView"), userInfo: nil, repeats: true)
+        println("table timer started")
     }
     
     
@@ -84,6 +88,12 @@ class ParseFriendTableViewController: PFQueryTableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterForeground:",
             name: UIApplicationWillEnterForegroundNotification, object: nil)
         
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tableViewRefreshTimer.invalidate()
+        println("table timer stopped")
     }
     
     override func didReceiveMemoryWarning() {

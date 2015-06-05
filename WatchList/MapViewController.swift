@@ -23,7 +23,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.title = username
+        
         var latitude:CLLocationDegrees = 34.159725
         
         var longitude:CLLocationDegrees = -118.331573
@@ -40,14 +42,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.setRegion(region, animated: true)
         
-        mapView.showsUserLocation = false
-        
-        self.mapViewRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("queryParseUserLocation"), userInfo: nil, repeats: true)
+        mapView.showsUserLocation = true
         
         self.queryParseUserLocation()
         
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.mapViewRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("queryParseUserLocation"), userInfo: nil, repeats: true)
+         println("map timer started")
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.mapViewRefreshTimer.invalidate()
+        println("map timer stopped")
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -66,22 +78,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func updateMap(user:PFObject) {
 
-            var annotation = MKPointAnnotation()
-            var point = user["location"] as! PFGeoPoint
-            var lat = point.latitude
-            var lon = point.longitude
-            var userLocation = CLLocationCoordinate2DMake(lat, lon)
-            annotation.coordinate = userLocation
-            annotation.title = user["username"] as! String
-            mapView.centerCoordinate = userLocation
-            mapView.addAnnotation(annotation)
-        
+        var annotation = MKPointAnnotation()
+        var point = user["location"] as! PFGeoPoint
+        var lat = point.latitude
+        var lon = point.longitude
+        var userLocation = CLLocationCoordinate2DMake(lat, lon)
+        annotation.coordinate = userLocation
+        annotation.title = user["username"] as! String
+        mapView.centerCoordinate = userLocation
+        mapView.addAnnotation(annotation)
+        println("map location updated")
 
     }
 
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        println("here")
         
         if annotation is MKUserLocation {
             //return nil so map view draws "blue dot" for standard user location
@@ -113,14 +124,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotationView!.centerImage.layer.cornerRadius = annotationView!.centerImage.frame.size.width / 2
             annotationView!.centerImage.layer.masksToBounds = true
             annotationView!.centerImage.layer.borderColor =  annotationView!.borderColor.CGColor
-            annotationView!.centerImage.layer.borderWidth = annotationView!.size/8
+            annotationView!.centerImage.layer.borderWidth = 2
             
             var newUserView:UIView = UIView(frame: CGRectMake(0,0, annotationView!.size, annotationView!.size))
             newUserView.addSubview(annotationView!.centerImage)
-            
- 
-            newUserView.addSubview(annotationView!.centerLabel)
-            
+
             //add to the field view
             annotationView!.addSubview(newUserView)
             
@@ -134,19 +142,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         annotationView!.image = UIImage(named: "blank_pin")
 
         let userPicture = userObject["profilepic"] as! PFFile
-        println("user photo \(userPicture)")
         userPicture.getDataInBackgroundWithBlock { (data:NSData?, error:NSError?) -> Void in
             if (error == nil) {
-                println("retrieved image data")
                 let image = UIImage(data:data!)
                 annotationView!.centerImage.image = image
             }
-        }
-
-        
-        if let txt = annotation?.title {
-            let labelString:String = annotation.title!
-            annotationView!.centerLabel.text  = labelString.substringWithRange(Range<String.Index>(start: labelString.startIndex, end: advance(labelString.startIndex, 1))).uppercaseString
         }
         
         return annotationView
