@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UA1-Eb-5TG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UA1-Eb-5TG">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -334,7 +334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fja-z5-CjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3289" y="1499"/>
+            <point key="canvasLocation" x="3493" y="2163"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="2io-qx-Nxo">
@@ -968,7 +968,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2n-J8-iXd">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2n-J8-iXd">
                                                     <rect key="frame" x="513" y="30" width="61" height="22"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1029,11 +1029,44 @@
                     </navigationItem>
                     <connections>
                         <outlet property="menuBarButton" destination="N0B-92-W9v" id="1yu-dE-std"/>
+                        <segue destination="cup-Iu-QRW" kind="show" identifier="toMapView" id="ArX-zX-3Ys"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C9x-cS-aN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2271" y="1431"/>
+        </scene>
+        <!--MapView-->
+        <scene sceneID="Nuw-Pr-UFc">
+            <objects>
+                <viewController title="MapView" id="cup-Iu-QRW" customClass="MapViewController" customModule="WatchList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yE4-Fi-K1a"/>
+                        <viewControllerLayoutGuide type="bottom" id="cle-1P-zxB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9bi-8k-SQU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iwk-lb-CoQ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iwk-lb-CoQ" firstAttribute="top" secondItem="yE4-Fi-K1a" secondAttribute="bottom" id="MKl-Rf-cxp"/>
+                            <constraint firstAttribute="trailing" secondItem="iwk-lb-CoQ" secondAttribute="trailing" id="aex-KK-3C3"/>
+                            <constraint firstItem="iwk-lb-CoQ" firstAttribute="leading" secondItem="9bi-8k-SQU" secondAttribute="leading" id="k2p-yD-1kf"/>
+                            <constraint firstItem="iwk-lb-CoQ" firstAttribute="bottom" secondItem="cle-1P-zxB" secondAttribute="top" id="x4Y-3h-Tal"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="iwk-lb-CoQ" id="1xG-jm-jpR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RfG-cw-b8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3012" y="1431"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fVA-XX-MLr">

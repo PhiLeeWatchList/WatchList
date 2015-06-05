@@ -34,6 +34,7 @@
 		0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */; };
 		6FCA823CDC61782C17C134DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6659FFF1CE1835731688002B /* libPods.a */; };
 		9B0622861AF977DF002E161B /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0622851AF977DF002E161B /* SignupViewController.swift */; };
+		9B1187731B21892D00689A9F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1187721B21892D00689A9F /* MapViewController.swift */; };
 		9B146B921B1667A1000AB523 /* ParseFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B146B911B1667A1000AB523 /* ParseFriendCell.swift */; };
 		9B35DE1D1AF5943A009E37B8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B35DE1C1AF5943A009E37B8 /* AssetsLibrary.framework */; };
 		9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
@@ -213,6 +214,7 @@
 		0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		6659FFF1CE1835731688002B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B0622851AF977DF002E161B /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		9B1187721B21892D00689A9F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9B146B911B1667A1000AB523 /* ParseFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseFriendCell.swift; sourceTree = "<group>"; };
 		9B35DE1C1AF5943A009E37B8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		9B43678F1AEEC2150001B432 /* WatchList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WatchList.entitlements; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				0C86246E1AB91A290042CAA8 /* AppDelegate.swift */,
 				0C47B2A31AEACC0F00902891 /* Constants.swift */,
 				0C9FBD591AE8466A001FB601 /* MainViewController.swift */,
+				9B1187721B21892D00689A9F /* MapViewController.swift */,
 				9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */,
 				9B146B911B1667A1000AB523 /* ParseFriendCell.swift */,
 				0C32A3041AF315B400A7990B /* SideMenuViewController.swift */,
@@ -971,6 +974,7 @@
 				0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */,
 				0C47B2B71AEC600C00902891 /* CBPeripheralManager+Ext.m in Sources */,
 				9B9C80EA1B15714E004CF90F /* ParseFriendTableViewController.swift in Sources */,
+				9B1187731B21892D00689A9F /* MapViewController.swift in Sources */,
 				0C32A3051AF315B400A7990B /* SideMenuViewController.swift in Sources */,
 				0C47B2A41AEACC0F00902891 /* Constants.swift in Sources */,
 				9BD509E21AFAE39F00AD3C09 /* User.swift in Sources */,
@@ -1188,7 +1192,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchList/WatchList.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1213,7 +1217,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchList/WatchList.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

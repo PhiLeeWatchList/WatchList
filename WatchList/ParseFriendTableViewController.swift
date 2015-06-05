@@ -187,7 +187,26 @@ class ParseFriendTableViewController: PFQueryTableViewController {
         return cell
     }
 
-
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ParseFriendCell;
+    
+        name = cell.name!.text!
+        
+        performSegueWithIdentifier("toMapView", sender: self)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toMapView" {
+            tableViewRefreshTimer.invalidate()
+            
+            let vc = segue.destinationViewController as! MapViewController
+            vc.username = name
+        }
+    }
+    
     
     func updateParseLocation(){
         
