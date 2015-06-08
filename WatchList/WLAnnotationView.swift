@@ -13,6 +13,7 @@ class WLAnnotationView: MKAnnotationView {
 
     //var borderColor:UIColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1)
     var borderColor:UIColor = UIColor.grayColor()
+    var selectedColor:UIColor = UIColor.greenColor()
     var bgColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
     var size:CGFloat = 40.0
     var userID:String!

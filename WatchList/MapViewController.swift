@@ -18,6 +18,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     var username = String()
     var mapViewRefreshTimer = NSTimer()
+    var userInfo = [String:PFFile]()
+    var currentUser = PFUser.currentUser()?.username!
     
     var userObject = PFObject(className: "WolfPack")
     
@@ -67,28 +69,34 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func queryParseUserLocation(){
             var query = PFQuery(className: "WolfPack")
-            query.whereKey("username", equalTo: username)
-            query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-                if let object = objects?.last as? PFObject {
-                    self.userObject = object
-                    self.updateMap(object)
-                }
+            query.whereKey("username", notEqualTo: currentUser!)
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error:NSError?) -> Void in
+            if objects != nil {
+                println("found \(objects!.count)")
+                self.updateMap(objects!)
+            }
         }
+            
     }
     
-    func updateMap(user:PFObject) {
-
-        var annotation = MKPointAnnotation()
-        var point = user["location"] as! PFGeoPoint
-        var lat = point.latitude
-        var lon = point.longitude
-        var userLocation = CLLocationCoordinate2DMake(lat, lon)
-        annotation.coordinate = userLocation
-        annotation.title = user["username"] as! String
-        mapView.centerCoordinate = userLocation
-        mapView.addAnnotation(annotation)
-        println("map location updated")
-
+    func updateMap(users:[AnyObject]) {        
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        for user in users {
+            var annotation = MKPointAnnotation()
+            let mapuser = user["username"] as! String
+            var point = user["location"] as! PFGeoPoint
+            var lat = point.latitude
+            var lon = point.longitude
+            var userLocation = CLLocationCoordinate2DMake(lat, lon)
+            annotation.coordinate = userLocation
+            annotation.title = mapuser
+            self.mapView.addAnnotation(annotation)
+            let userpic = user["profilepic"] as! PFFile
+            self.userInfo[mapuser] = userpic
+            if mapuser == username {
+                self.mapView.centerCoordinate = userLocation
+            }
+        }
     }
 
     
@@ -109,16 +117,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             
             annotationView!.size = 40.0
-            annotationView!.centerLabel = UILabel(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
-            
-            annotationView!.centerLabel.layer.cornerRadius = annotationView!.centerLabel.frame.size.width / 2
-            annotationView!.centerLabel.layer.masksToBounds = true
-            annotationView!.centerLabel.layer.borderColor = annotationView!.borderColor.CGColor
-            annotationView!.centerLabel.layer.borderWidth = annotationView!.size/8
-            
-            annotationView!.centerLabel.textAlignment = NSTextAlignment.Center
-            annotationView!.centerLabel.textColor = .whiteColor()
-            annotationView!.centerLabel.backgroundColor = annotationView!.bgColor
             
             annotationView!.centerImage = UIImageView(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
             annotationView!.centerImage.layer.cornerRadius = annotationView!.centerImage.frame.size.width / 2
@@ -126,6 +124,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotationView!.centerImage.layer.borderColor =  annotationView!.borderColor.CGColor
             annotationView!.centerImage.layer.borderWidth = 2
             
+            if annotation.title == username {
+                annotationView!.centerImage.layer.borderColor = annotationView!.selectedColor.CGColor
+            }
             var newUserView:UIView = UIView(frame: CGRectMake(0,0, annotationView!.size, annotationView!.size))
             newUserView.addSubview(annotationView!.centerImage)
 
@@ -140,8 +141,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         //we must use some image to allow callout
         annotationView!.image = UIImage(named: "blank_pin")
-
-        let userPicture = userObject["profilepic"] as! PFFile
+        
+        println("here")
+        
+        let userPicture = userInfo[annotation.title!] as PFFile!
         userPicture.getDataInBackgroundWithBlock { (data:NSData?, error:NSError?) -> Void in
             if (error == nil) {
                 let image = UIImage(data:data!)
@@ -149,7 +152,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
         
-        return annotationView
+        return annotationView!
     }
     
     
