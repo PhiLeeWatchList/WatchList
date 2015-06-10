@@ -121,12 +121,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotationView!.centerImage = UIImageView(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
             annotationView!.centerImage.layer.cornerRadius = annotationView!.centerImage.frame.size.width / 2
             annotationView!.centerImage.layer.masksToBounds = true
-            annotationView!.centerImage.layer.borderColor =  annotationView!.borderColor.CGColor
+            println("Annotation title is \(annotation.title)")
+            if annotation.title == self.username {
+                annotationView!.centerImage.layer.borderColor = annotationView!.selectedColor.CGColor
+            } else {
+                annotationView!.centerImage.layer.borderColor =  annotationView!.borderColor.CGColor
+            }
             annotationView!.centerImage.layer.borderWidth = 2
             
-            if annotation.title == username {
-                annotationView!.centerImage.layer.borderColor = annotationView!.selectedColor.CGColor
-            }
             var newUserView:UIView = UIView(frame: CGRectMake(0,0, annotationView!.size, annotationView!.size))
             newUserView.addSubview(annotationView!.centerImage)
 
@@ -139,10 +141,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotationView!.annotation = annotation
         }
         
-        //we must use some image to allow callout
+        //we must use some image for pin
         annotationView!.image = UIImage(named: "blank_pin")
-        
-        println("here")
         
         let userPicture = userInfo[annotation.title!] as PFFile!
         userPicture.getDataInBackgroundWithBlock { (data:NSData?, error:NSError?) -> Void in
@@ -152,7 +152,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
         
-        return annotationView!
+        return annotationView
     }
     
     

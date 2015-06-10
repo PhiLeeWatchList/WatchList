@@ -30,7 +30,7 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
             menuBarButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        self.revealViewController().rearViewRevealWidth = 130
+        self.revealViewController().rearViewRevealWidth = 160
         
         PFUser.currentUser()?.fetchInBackgroundWithBlock({ (user, error) -> Void in
             if error == nil {

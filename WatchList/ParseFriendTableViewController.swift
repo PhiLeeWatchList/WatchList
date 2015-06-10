@@ -46,7 +46,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
             menuBarButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        self.revealViewController().rearViewRevealWidth = 130
+        self.revealViewController().rearViewRevealWidth = 160
         
         geoManager.addObserver(self, forKeyPath: "location", options: .New, context: nil)
         GeoManager.sharedInstance.start()

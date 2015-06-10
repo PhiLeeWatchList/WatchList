@@ -40,6 +40,7 @@
 		9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
 		9B491DC51AF0683A00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
 		9B491DC61AF0683C00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
+		9B526AA41B28C70E0064701B /* SSASideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B526AA31B28C70E0064701B /* SSASideMenu.swift */; };
 		9B7E02A91AF02B840001C924 /* DataBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7E02A81AF02B840001C924 /* DataBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B7E02AF1AF02B850001C924 /* DataBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; };
 		9B7E02B81AF02B850001C924 /* DataBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02B71AF02B850001C924 /* DataBridgeTests.swift */; };
@@ -55,6 +56,8 @@
 		9B883E1B1AF4177E0000EC53 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
 		9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B42541AE8D53B0010F7EB /* tableRowController.swift */; };
 		9B9C80EA1B15714E004CF90F /* ParseFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */; };
+		9BAC3C501B26C70A00166236 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC3C4F1B26C70A00166236 /* StartViewController.swift */; };
+		9BB3E11A1B27ADC1003E7572 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */; };
 		9BCB738B1AF4849C001C081C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738A1AF4849C001C081C /* Parse.framework */; };
 		9BCB738D1AF484A7001C081C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738C1AF484A7001C081C /* Bolts.framework */; };
 		9BCB73991AF4856F001C081C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738E1AF4856F001C081C /* AudioToolbox.framework */; };
@@ -220,6 +223,7 @@
 		9B43678F1AEEC2150001B432 /* WatchList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WatchList.entitlements; sourceTree = "<group>"; };
 		9B491DB81AF0523700C0DD8B /* WatchList WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WatchList WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		9B491DBA1AF05DBB00C0DD8B /* WatchList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchList.xcdatamodel; sourceTree = "<group>"; };
+		9B526AA31B28C70E0064701B /* SSASideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSASideMenu.swift; sourceTree = "<group>"; };
 		9B7E02A41AF02B840001C924 /* DataBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7E02A71AF02B840001C924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B7E02A81AF02B840001C924 /* DataBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBridge.h; sourceTree = "<group>"; };
@@ -236,6 +240,8 @@
 		9B836D771B1FACFC00720A8C /* GeoManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoManagerTests.swift; sourceTree = "<group>"; };
 		9B8B42541AE8D53B0010F7EB /* tableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tableRowController.swift; path = ../WatchList/tableRowController.swift; sourceTree = "<group>"; };
 		9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseFriendTableViewController.swift; sourceTree = "<group>"; };
+		9BAC3C4F1B26C70A00166236 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		9BCB738A1AF4849C001C081C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9BCB738C1AF484A7001C081C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9BCB738E1AF4856F001C081C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -409,10 +415,13 @@
 				9B43678F1AEEC2150001B432 /* WatchList.entitlements */,
 				0C86246E1AB91A290042CAA8 /* AppDelegate.swift */,
 				0C47B2A31AEACC0F00902891 /* Constants.swift */,
+				9B526AA31B28C70E0064701B /* SSASideMenu.swift */,
 				0C9FBD591AE8466A001FB601 /* MainViewController.swift */,
 				9B1187721B21892D00689A9F /* MapViewController.swift */,
 				9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */,
 				9B146B911B1667A1000AB523 /* ParseFriendCell.swift */,
+				9BAC3C4F1B26C70A00166236 /* StartViewController.swift */,
+				9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */,
 				0C32A3041AF315B400A7990B /* SideMenuViewController.swift */,
 				0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */,
 				0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */,
@@ -953,7 +962,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B146B921B1667A1000AB523 /* ParseFriendCell.swift in Sources */,
+				9BAC3C501B26C70A00166236 /* StartViewController.swift in Sources */,
 				9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */,
+				9B526AA41B28C70E0064701B /* SSASideMenu.swift in Sources */,
 				0C47B2B81AEC600C00902891 /* CBUUID+Ext.m in Sources */,
 				0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */,
 				0C8624911AB91E640042CAA8 /* README.md in Sources */,
@@ -971,6 +982,7 @@
 				9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */,
 				9B0622861AF977DF002E161B /* SignupViewController.swift in Sources */,
 				0C47B2B61AEC600C00902891 /* CBCentralManager+Ext.m in Sources */,
+				9BB3E11A1B27ADC1003E7572 /* UserTableViewCell.swift in Sources */,
 				0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */,
 				0C47B2B71AEC600C00902891 /* CBPeripheralManager+Ext.m in Sources */,
 				9B9C80EA1B15714E004CF90F /* ParseFriendTableViewController.swift in Sources */,
