@@ -31,7 +31,6 @@
 		0C9FBD511AE6F691001FB601 /* WatchList WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0C9FBD361AE6F690001FB601 /* WatchList WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD591AE8466A001FB601 /* MainViewController.swift */; };
 		0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */; };
-		0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */; };
 		6FCA823CDC61782C17C134DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6659FFF1CE1835731688002B /* libPods.a */; };
 		9B0622861AF977DF002E161B /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0622851AF977DF002E161B /* SignupViewController.swift */; };
 		9B1187731B21892D00689A9F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1187721B21892D00689A9F /* MapViewController.swift */; };
@@ -40,14 +39,16 @@
 		9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
 		9B491DC51AF0683A00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
 		9B491DC61AF0683C00C0DD8B /* WatchList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B491DB91AF05DBB00C0DD8B /* WatchList.xcdatamodeld */; };
+		9B506D101B28FAE8005FAC9F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B506D0F1B28FAE8005FAC9F /* TableViewCell.swift */; };
+		9B506D111B291DFB005FAC9F /* GeoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B836D5D1B1FA90B00720A8C /* GeoManager.swift */; };
 		9B526AA41B28C70E0064701B /* SSASideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B526AA31B28C70E0064701B /* SSASideMenu.swift */; };
+		9B526AA61B28D54F0064701B /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B526AA51B28D54F0064701B /* LeftMenuViewController.swift */; };
 		9B7E02A91AF02B840001C924 /* DataBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7E02A81AF02B840001C924 /* DataBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B7E02AF1AF02B850001C924 /* DataBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; };
 		9B7E02B81AF02B850001C924 /* DataBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02B71AF02B850001C924 /* DataBridgeTests.swift */; };
 		9B7E02BB1AF02B850001C924 /* DataBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; };
 		9B7E02BC1AF02B850001C924 /* DataBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7E02A41AF02B840001C924 /* DataBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B7E02C51AF02BAE0001C924 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
-		9B836D5E1B1FA90B00720A8C /* GeoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B836D5D1B1FA90B00720A8C /* GeoManager.swift */; };
 		9B836D691B1FACFB00720A8C /* GeoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B836D681B1FACFB00720A8C /* GeoManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B836D6F1B1FACFB00720A8C /* GeoManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B836D641B1FACFB00720A8C /* GeoManager.framework */; };
 		9B836D781B1FACFC00720A8C /* GeoManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B836D771B1FACFC00720A8C /* GeoManagerTests.swift */; };
@@ -76,7 +77,6 @@
 		9BCB73A91AF48ABC001C081C /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB73A81AF48ABC001C081C /* ParseUI.framework */; };
 		9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCB73AA1AF492E1001C081C /* LoginViewController.swift */; };
 		9BD509E21AFAE39F00AD3C09 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD509E11AFAE39F00AD3C09 /* User.swift */; };
-		9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */; };
 		9BF8DD0D1B179557004782B3 /* ParseSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8DD0C1B179557004782B3 /* ParseSelectFriendsViewController.swift */; };
 		9BF8DD0F1B179976004782B3 /* ParseSelectFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8DD0E1B179976004782B3 /* ParseSelectFriendCell.swift */; };
 /* End PBXBuildFile section */
@@ -214,7 +214,6 @@
 		0C9FBD4D1AE6F691001FB601 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0C9FBD591AE8466A001FB601 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconConfigViewController.swift; sourceTree = "<group>"; };
-		0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		6659FFF1CE1835731688002B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B0622851AF977DF002E161B /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		9B1187721B21892D00689A9F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -223,7 +222,9 @@
 		9B43678F1AEEC2150001B432 /* WatchList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WatchList.entitlements; sourceTree = "<group>"; };
 		9B491DB81AF0523700C0DD8B /* WatchList WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WatchList WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		9B491DBA1AF05DBB00C0DD8B /* WatchList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchList.xcdatamodel; sourceTree = "<group>"; };
+		9B506D0F1B28FAE8005FAC9F /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		9B526AA31B28C70E0064701B /* SSASideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSASideMenu.swift; sourceTree = "<group>"; };
+		9B526AA51B28D54F0064701B /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		9B7E02A41AF02B840001C924 /* DataBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7E02A71AF02B840001C924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B7E02A81AF02B840001C924 /* DataBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBridge.h; sourceTree = "<group>"; };
@@ -261,7 +262,6 @@
 		9BCB73AA1AF492E1001C081C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9BD509E11AFAE39F00AD3C09 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BD509E31AFAEDFB00AD3C09 /* WatchList-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WatchList-Bridging-Header.h"; sourceTree = "<group>"; };
-		9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		9BF8DD0C1B179557004782B3 /* ParseSelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseSelectFriendsViewController.swift; sourceTree = "<group>"; };
 		9BF8DD0E1B179976004782B3 /* ParseSelectFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseSelectFriendCell.swift; sourceTree = "<group>"; };
 		ACD7BA99A6DC660F9101D519 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -416,6 +416,7 @@
 				0C86246E1AB91A290042CAA8 /* AppDelegate.swift */,
 				0C47B2A31AEACC0F00902891 /* Constants.swift */,
 				9B526AA31B28C70E0064701B /* SSASideMenu.swift */,
+				9B526AA51B28D54F0064701B /* LeftMenuViewController.swift */,
 				0C9FBD591AE8466A001FB601 /* MainViewController.swift */,
 				9B1187721B21892D00689A9F /* MapViewController.swift */,
 				9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */,
@@ -424,13 +425,12 @@
 				9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */,
 				0C32A3041AF315B400A7990B /* SideMenuViewController.swift */,
 				0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */,
-				0C9FBD5D1AE846A7001FB601 /* AddFriendsViewController.swift */,
 				9B0622851AF977DF002E161B /* SignupViewController.swift */,
 				9BCB73AA1AF492E1001C081C /* LoginViewController.swift */,
 				0C92A74F1B0D133500DB0FBA /* WLAnnotationView.swift */,
 				9BF8DD0C1B179557004782B3 /* ParseSelectFriendsViewController.swift */,
+				9B506D0F1B28FAE8005FAC9F /* TableViewCell.swift */,
 				9BF8DD0E1B179976004782B3 /* ParseSelectFriendCell.swift */,
-				9BE48BB31AEEF8AD005BEF9E /* TableViewCell.swift */,
 				0C8624721AB91A290042CAA8 /* Main.storyboard */,
 				0C8624751AB91A290042CAA8 /* Images.xcassets */,
 				0C47B2A71AEC5F6D00902891 /* 3rdParty */,
@@ -963,14 +963,14 @@
 			files = (
 				9B146B921B1667A1000AB523 /* ParseFriendCell.swift in Sources */,
 				9BAC3C501B26C70A00166236 /* StartViewController.swift in Sources */,
-				9BE48BB41AEEF8AD005BEF9E /* TableViewCell.swift in Sources */,
 				9B526AA41B28C70E0064701B /* SSASideMenu.swift in Sources */,
 				0C47B2B81AEC600C00902891 /* CBUUID+Ext.m in Sources */,
-				0C9FBD5E1AE846A7001FB601 /* AddFriendsViewController.swift in Sources */,
 				0C8624911AB91E640042CAA8 /* README.md in Sources */,
+				9B526AA61B28D54F0064701B /* LeftMenuViewController.swift in Sources */,
 				0C47B2BC1AEC602700902891 /* GCDUtilities.m in Sources */,
 				9BF8DD0D1B179557004782B3 /* ParseSelectFriendsViewController.swift in Sources */,
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
+				9B506D111B291DFB005FAC9F /* GeoManager.swift in Sources */,
 				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
 				9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */,
 				9B883E1B1AF4177E0000EC53 /* CoreDataStack.swift in Sources */,
@@ -978,11 +978,11 @@
 				0C47B2AF1AEC5FF400902891 /* CLBeacon+Ext.m in Sources */,
 				0C9FBD5A1AE8466A001FB601 /* MainViewController.swift in Sources */,
 				9BF8DD0F1B179976004782B3 /* ParseSelectFriendCell.swift in Sources */,
-				9B836D5E1B1FA90B00720A8C /* GeoManager.swift in Sources */,
 				9B491DBB1AF05DBB00C0DD8B /* WatchList.xcdatamodeld in Sources */,
 				9B0622861AF977DF002E161B /* SignupViewController.swift in Sources */,
 				0C47B2B61AEC600C00902891 /* CBCentralManager+Ext.m in Sources */,
 				9BB3E11A1B27ADC1003E7572 /* UserTableViewCell.swift in Sources */,
+				9B506D101B28FAE8005FAC9F /* TableViewCell.swift in Sources */,
 				0C9FBD5C1AE84684001FB601 /* BeaconConfigViewController.swift in Sources */,
 				0C47B2B71AEC600C00902891 /* CBPeripheralManager+Ext.m in Sources */,
 				9B9C80EA1B15714E004CF90F /* ParseFriendTableViewController.swift in Sources */,

@@ -2,33 +2,23 @@
 //  TableViewCell.swift
 //  WatchList
 //
-//  Created by Lee Strasheim on 4/27/15.
+//  Created by Lee Strasheim on 6/10/15.
 //  Copyright (c) 2015 PhiLee. All rights reserved.
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class TableViewCell: UITableViewCell {
 
+    @IBOutlet weak var username: UILabel!
     
-
-    @IBOutlet weak var photo: UIImageView!
-
-    
-    @IBOutlet weak var name: UILabel!
-
-    
-    @IBOutlet weak var guid: UILabel!
-    
+    @IBOutlet weak var profileImage: PFImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.photo.image = UIImage(named: "logo")
-        self.photo.layer.cornerRadius = 20
-        self.photo.layer.borderWidth = 1
-        self.photo.layer.borderColor = UIColor.whiteColor().CGColor
-        self.photo.layer.masksToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -36,6 +26,5 @@ class TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    
+
 }

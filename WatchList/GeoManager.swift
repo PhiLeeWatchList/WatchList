@@ -65,11 +65,12 @@ public class GeoManager : NSObject, CLLocationManagerDelegate {
     //MARK: - CLLocationManagerDelegate
     public func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
-            self.willChangeValueForKey("location")
-            self.location = locations.last as? CLLocation
-            self.didChangeValueForKey("location")
-            println("did update location: \(self.location)")
-            //self.locationManager.stopUpdatingLocation()
+        //self.willChangeValueForKey("location")
+        self.location = locations.last as? CLLocation
+        //self.didChangeValueForKey("location")
+        println("did update location: \(self.location)")
+        //self.locationManager.stopUpdatingLocation()
+        NSNotificationCenter.defaultCenter().postNotificationName("NewLocation", object: nil)
     }
     
     public func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {

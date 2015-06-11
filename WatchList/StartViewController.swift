@@ -11,8 +11,13 @@ import MapKit
 import Parse
 import GeoManager
 
+var getUser = true
+
 class StartViewController: UIViewController, MKMapViewDelegate {
 
+    @IBAction func menuButton(sender: UIBarButtonItem) {
+        presentLeftMenuViewController()
+    }
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,7 +25,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     
     var username = ""
     var userInfo = [String:PFFile]()
-    let user = PFUser.currentUser()!
+    var user = PFUser.currentUser()!
     var usersHereArray = [String]()
     var trackingArray = [String]()
     var friendsArray = [String]()
@@ -35,6 +40,13 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     //New Background Task Stuff
     var backgroundUpdateTask: UIBackgroundTaskIdentifier!
     
+
+//    required init(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        geoManager.addObserver(self, forKeyPath: "location", options: .New, context: nil)
+//    }
+//    
+//    
 //    deinit {
 //        geoManager.removeObserver(self, forKeyPath: "location")
 //    }
@@ -44,8 +56,11 @@ class StartViewController: UIViewController, MKMapViewDelegate {
 
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black;
         
-        geoManager.addObserver(self, forKeyPath: "location", options: .New, context: nil)
+        self.title = "WatchList"
+        
         GeoManager.sharedInstance.start()
+        geoManager.addObserver(self, forKeyPath: "location", options: .New, context: nil)
+       
         
         var latitude:CLLocationDegrees = 34.159725
         
@@ -65,24 +80,17 @@ class StartViewController: UIViewController, MKMapViewDelegate {
         
         mapView.showsUserLocation = true
         
-        
-        PFUser.currentUser()?.fetchInBackgroundWithBlock({ (user, error) -> Void in
-            if error == nil {
-                let updatedUser = user as! PFUser
-                self.trackingArray = updatedUser["tracking"] as! [String]
-                self.friendsArray = updatedUser["friends"] as! [String]
-                println("new tracking users are \(self.trackingArray)")
-                self.queryForTable()
-            }
-        })
-        
         self.usersHereArray = [""]
+        
+        updateUser()
+        
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.tableViewRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("reloadViews"), userInfo: nil, repeats: true)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUser", name:"UpdateUser", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateParseLocation", name:"NewLocation", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -101,6 +109,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
         super.viewWillDisappear(animated)
         self.tableViewRefreshTimer.invalidate()
         println("table timer stopped")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -116,7 +125,23 @@ class StartViewController: UIViewController, MKMapViewDelegate {
             if object === geoManager && keyPath == "location" {
                 self.updateParseLocation()
             }
+            
     }
+    
+    
+    func updateUser() {
+        PFUser.currentUser()?.fetchInBackgroundWithBlock({ (user, error) -> Void in
+            if error == nil {
+                let updatedUser = user as! PFUser
+                self.trackingArray = updatedUser["tracking"] as! [String]
+                self.friendsArray = updatedUser["friends"] as! [String]
+                self.user = updatedUser
+                println("new tracking users are \(self.trackingArray)")
+                self.queryForTable()
+            }
+        })
+    }
+    
     
     func queryForTable(){
         var query = PFQuery(className: "WolfPack")
@@ -160,9 +185,9 @@ class StartViewController: UIViewController, MKMapViewDelegate {
             self.userInfo[mapuser] = userpic
             if mapuser == username {
                 self.mapView.centerCoordinate = userLocation
-            }
-            self.tableView.reloadData()
+            }            
         }
+        self.tableView.reloadData()
     }
     
     
@@ -364,8 +389,6 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
             cell = UserTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         }
         
-        println("cell is \(cell)")
-        
         let object = objects[indexPath.row]
         
         cell?.cellView?.layer.borderColor = UIColor.grayColor().CGColor
@@ -380,7 +403,7 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
         // Extract values from the PFObject to display in the table cell
         if let username = object["username"] as? String {
             name = username
-            println("username is \(username)")
+            //println("username is \(username)")
             cell?.name?.text = username
         }
         if let location = object["location"] as? PFGeoPoint {
@@ -425,7 +448,7 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         
-        println("cell is now \(cell)")
+       // println("cell is now \(cell)")
         return cell!
     }
     
@@ -436,5 +459,8 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
         self.username = cell.name.text!
         updateMap(self.objects)
     }
+    
+    
+
     
 }

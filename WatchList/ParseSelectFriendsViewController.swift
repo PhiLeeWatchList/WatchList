@@ -25,12 +25,12 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black;
         
         
-        if self.revealViewController() != nil {
-            menuBarButton.target = self.revealViewController()
-            menuBarButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        self.revealViewController().rearViewRevealWidth = 160
+//        if self.revealViewController() != nil {
+//            menuBarButton.target = self.revealViewController()
+//            menuBarButton.action = "revealToggle:"
+//            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//        }
+//        self.revealViewController().rearViewRevealWidth = 160
         
         PFUser.currentUser()?.fetchInBackgroundWithBlock({ (user, error) -> Void in
             if error == nil {
@@ -117,7 +117,7 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
             cell.accessoryType = .None
             updateParseUser(name!, selected: false)
         }
-        
+
         
     }
 
@@ -137,6 +137,7 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
         
         PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) -> Void in
             println("user updated")
+            NSNotificationCenter.defaultCenter().postNotificationName("UpdateUser", object: nil)
         })
 
     }
