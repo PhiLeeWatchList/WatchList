@@ -56,6 +56,7 @@
 		9B836D7C1B1FACFC00720A8C /* GeoManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B836D641B1FACFB00720A8C /* GeoManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B883E1B1AF4177E0000EC53 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E02C41AF02BAE0001C924 /* CoreDataStack.swift */; };
 		9B8B42551AE8D53B0010F7EB /* tableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B42541AE8D53B0010F7EB /* tableRowController.swift */; };
+		9B8CF6191B30B5E9007CC54E /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8CF6181B30B5E9007CC54E /* profileViewController.swift */; };
 		9B9C80EA1B15714E004CF90F /* ParseFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */; };
 		9BAC3C501B26C70A00166236 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC3C4F1B26C70A00166236 /* StartViewController.swift */; };
 		9BB3E11A1B27ADC1003E7572 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */; };
@@ -240,6 +241,7 @@
 		9B836D761B1FACFC00720A8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B836D771B1FACFC00720A8C /* GeoManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoManagerTests.swift; sourceTree = "<group>"; };
 		9B8B42541AE8D53B0010F7EB /* tableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = tableRowController.swift; path = ../WatchList/tableRowController.swift; sourceTree = "<group>"; };
+		9B8CF6181B30B5E9007CC54E /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
 		9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseFriendTableViewController.swift; sourceTree = "<group>"; };
 		9BAC3C4F1B26C70A00166236 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */,
 				9B146B911B1667A1000AB523 /* ParseFriendCell.swift */,
 				9BAC3C4F1B26C70A00166236 /* StartViewController.swift */,
+				9B8CF6181B30B5E9007CC54E /* profileViewController.swift */,
 				9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */,
 				0C32A3041AF315B400A7990B /* SideMenuViewController.swift */,
 				0C9FBD5B1AE84684001FB601 /* BeaconConfigViewController.swift */,
@@ -970,6 +973,7 @@
 				0C47B2BC1AEC602700902891 /* GCDUtilities.m in Sources */,
 				9BF8DD0D1B179557004782B3 /* ParseSelectFriendsViewController.swift in Sources */,
 				0C86246F1AB91A290042CAA8 /* AppDelegate.swift in Sources */,
+				9B8CF6191B30B5E9007CC54E /* profileViewController.swift in Sources */,
 				9B506D111B291DFB005FAC9F /* GeoManager.swift in Sources */,
 				0C47B2BF1AEC603A00902891 /* EasedValue.m in Sources */,
 				9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */,

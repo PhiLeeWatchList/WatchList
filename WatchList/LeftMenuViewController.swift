@@ -20,11 +20,34 @@ class LeftMenuViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
+    @IBAction func trackButton(sender: AnyObject) {
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        var firstViewController = storyboard.instantiateViewControllerWithIdentifier("FirstViewController") as! UIViewController
+        
+        sideMenuViewController?.contentViewController = UINavigationController(rootViewController: firstViewController)
+        
+        sideMenuViewController?.hideMenuViewController()
+    }
+    
+    
+    
+    @IBAction func profileButton(sender: AnyObject) {
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        var profileViewController = storyboard.instantiateViewControllerWithIdentifier("profileView") as! UIViewController
+        
+        sideMenuViewController?.contentViewController = UINavigationController(rootViewController: profileViewController)
+        
+        sideMenuViewController?.hideMenuViewController()
+        
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -159,12 +182,12 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            self.objects.removeAtIndex(indexPath.item)
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            self.objects.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath],  withRowAnimation: UITableViewRowAnimation.Automatic)
             self.tableView.reloadData()
         }
     }
-    
     
     
 }
