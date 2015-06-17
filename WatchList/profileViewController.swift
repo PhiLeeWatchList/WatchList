@@ -152,15 +152,29 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
             let imageData = UIImagePNGRepresentation(self?.profilePic.image)
             let imageFile = PFFile(name:"profile.png", data:imageData)
             imageFile.saveInBackgroundWithBlock({ (sucess:Bool, error:NSError?) -> Void in
-                var user = PFUser.currentUser()
-                user?.setObject(imageFile, forKey: "profilepic")
-                user?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
-                    self!.activityIndicator.stopAnimating()
-                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
-                    if !success {
-                        println("error updating user's new photo")
+                var user = PFUser.currentUser() as PFUser!
+                var query = PFQuery(className: "WolfPack")
+                query.whereKey("username", equalTo: user.username!)
+                query.getFirstObjectInBackgroundWithBlock({ (object:PFObject?, error:NSError?) -> Void in
+                    if let object = object as PFObject! {
+                        object["profilepic"] = imageFile
+                        object.saveInBackgroundWithBlock({ (success, error) -> Void in
+                            if success {
+                                user.setObject(imageFile, forKey: "profilepic")
+                                user.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+                                    self!.activityIndicator.stopAnimating()
+                                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                                    if !success {
+                                        println("error updating user's new photo")
+                                    }
+                                })
+
+                            }
+                        })
+                        
                     }
                 })
+                
             })
             
         })
