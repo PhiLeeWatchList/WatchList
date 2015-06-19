@@ -324,7 +324,8 @@ class StartViewController: UIViewController, MKMapViewDelegate {
         var localNotification: UILocalNotification = UILocalNotification()
         localNotification.alertAction = ""
         localNotification.alertBody = "\(name) is here!"
-        localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
+        localNotification.soundName = UILocalNotificationDefaultSoundName
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 20)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     

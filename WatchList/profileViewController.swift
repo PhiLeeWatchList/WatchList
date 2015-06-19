@@ -23,7 +23,9 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Update Profile"
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black;
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.title = "Update Profile"
         
         let image = UIImage(named: "menu.png")
         
