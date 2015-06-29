@@ -15,7 +15,7 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var profilepic: PFImageView!
-
+    @IBOutlet weak var lastUpdateLabel: UILabel!
     
     
     override func awakeFromNib() {

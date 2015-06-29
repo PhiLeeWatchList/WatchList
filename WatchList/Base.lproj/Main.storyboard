@@ -444,13 +444,25 @@
                                                                 </mask>
                                                             </variation>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eca-CA-Tcp">
+                                                            <rect key="frame" x="367" y="46" width="200" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="7NT-Kp-RId"/>
+                                                                <constraint firstAttribute="width" constant="200" id="U6S-Uc-jjx"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="eca-CA-Tcp" secondAttribute="trailing" constant="24" id="2cY-rk-Bdx"/>
                                                         <constraint firstAttribute="bottom" secondItem="FbM-52-0w5" secondAttribute="bottom" constant="5" id="3TY-oc-BSq"/>
                                                         <constraint firstItem="fG2-zt-Jqt" firstAttribute="top" secondItem="8BY-JE-Pg9" secondAttribute="top" constant="5" id="4es-Sl-2Gv"/>
                                                         <constraint firstAttribute="trailing" secondItem="FbM-52-0w5" secondAttribute="trailing" constant="24" id="4qh-GW-pda"/>
                                                         <constraint firstItem="fG2-zt-Jqt" firstAttribute="leading" secondItem="SOj-XY-BYw" secondAttribute="trailing" constant="8" id="7nM-Os-NFz"/>
                                                         <constraint firstItem="SOj-XY-BYw" firstAttribute="top" secondItem="8BY-JE-Pg9" secondAttribute="top" constant="9" id="DvQ-eS-XFl"/>
+                                                        <constraint firstItem="eca-CA-Tcp" firstAttribute="top" secondItem="FbM-52-0w5" secondAttribute="bottom" constant="-19" id="Jbq-qT-y9b"/>
                                                         <constraint firstAttribute="height" constant="70" id="Unm-17-sW7"/>
                                                         <constraint firstItem="SOj-XY-BYw" firstAttribute="leading" secondItem="8BY-JE-Pg9" secondAttribute="leading" constant="8" id="gOD-Bi-S1b"/>
                                                         <constraint firstAttribute="bottom" secondItem="fG2-zt-Jqt" secondAttribute="bottom" constant="5" id="hZz-gh-ufu"/>
@@ -480,6 +492,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="cellView" destination="8BY-JE-Pg9" id="IpW-L4-cZO"/>
+                                            <outlet property="lastUpdateLabel" destination="eca-CA-Tcp" id="ohR-Hn-Ue4"/>
                                             <outlet property="location" destination="FbM-52-0w5" id="MDW-G9-pXY"/>
                                             <outlet property="name" destination="fG2-zt-Jqt" id="AIh-hF-7uK"/>
                                             <outlet property="profilepic" destination="SOj-XY-BYw" id="raZ-fx-y0f"/>
