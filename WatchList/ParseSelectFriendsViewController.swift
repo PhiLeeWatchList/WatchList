@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Parse
-import ParseUI
 
 class ParseSelectFriendsViewController: PFQueryTableViewController {
 
@@ -37,7 +35,7 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
                let updatedUser = user as! PFUser
                 self.trackingArray = updatedUser["tracking"] as! [String]
                 self.friendsArray = updatedUser["friends"] as! [String]
-                println("new tracking users are \(self.trackingArray)")
+                print("new tracking users are \(self.trackingArray)")
                 self.loadObjects()
             }
         })
@@ -57,7 +55,7 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         
         // Configure the PFQueryTableView
         self.parseClassName = "WolfPack"
@@ -67,7 +65,7 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery{
-        var query = PFQuery(className: "WolfPack")
+        let query = PFQuery(className: "WolfPack")
         query.whereKey("username", notEqualTo: user.username!)
         query.whereKey("username", containedIn: friendsArray )
         query.orderByAscending("username")
@@ -89,11 +87,11 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
         if let photo = object?["profilepic"] as? PFFile {
             cell.profileImage.file = photo
             cell.profileImage.loadInBackground({ (image, error) -> Void in
-                println("image loaded")
+                print("image loaded")
             })
         }
         
-        if contains(self.trackingArray, object?["username"] as! String) {
+        if self.trackingArray.contains((object?["username"] as! String)) {
             cell.accessoryType = .Checkmark
         } else {
             cell.accessoryType = .None
@@ -108,7 +106,7 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ParseSelectFriendCell;
         
-        var name = cell.username!.text
+        let name = cell.username!.text
         
         if cell.accessoryType == .None {
             cell.accessoryType = .Checkmark
@@ -122,12 +120,12 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
     }
 
     func updateParseUser(user: String, selected: Bool) {
-        if !contains(trackingArray, user) && selected {
+        if !trackingArray.contains(user) && selected {
             trackingArray.append(user)
         } else {
             for var i=0; i < trackingArray.count;i++ {
                 if trackingArray[i] == user {
-                    println("remove tracking for \(user)")
+                    print("remove tracking for \(user)")
                     trackingArray.removeAtIndex(i)
                     
                 }
@@ -136,7 +134,7 @@ class ParseSelectFriendsViewController: PFQueryTableViewController {
         self.user["tracking"] = self.trackingArray
         
         PFUser.currentUser()?.saveInBackgroundWithBlock({ (success, error) -> Void in
-            println("user updated")
+            print("user updated")
             NSNotificationCenter.defaultCenter().postNotificationName("UpdateUser", object: nil)
         })
 

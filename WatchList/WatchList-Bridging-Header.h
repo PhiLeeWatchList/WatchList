@@ -5,3 +5,5 @@
 #import "INBeaconService.h"
 #import "SWRevealViewController.h"
 #import "KeyboardManager.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>

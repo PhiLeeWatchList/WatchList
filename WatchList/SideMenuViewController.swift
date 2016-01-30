@@ -40,7 +40,7 @@ class SideMenuViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(menuItems[indexPath.item]) as! UITableViewCell
+        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(menuItems[indexPath.item])!
 //        NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
 //        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         
@@ -55,7 +55,7 @@ class SideMenuViewController: UITableViewController {
     }
  
     @IBAction func headHome() {
-        println("Button seen.  Trigging exit segue manually...")
+        print("Button seen.  Trigging exit segue manually...")
         self.performSegueWithIdentifier("goBackHome", sender: self)
     }
     

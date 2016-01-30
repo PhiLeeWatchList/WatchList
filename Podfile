@@ -7,3 +7,5 @@ pod 'SWRevealViewController', '~> 2.3'
 
 pod 'IQKeyboardManager'
 
+pod 'Parse', '~> 1.12'
+pod 'ParseUI', '~> 1.2'

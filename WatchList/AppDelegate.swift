@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import DataBridge
-import Parse
 
 
 @UIApplicationMain
@@ -36,14 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
         {
             //allow user to accept location when backgrounded
-            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Sound | .Alert | .Badge, categories: nil))
+            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
         }
         else
         {
             //do iOS 7
         }
         
-        var navigationBarAppearace = UINavigationBar.appearance()
+        let navigationBarAppearace = UINavigationBar.appearance()
         
         navigationBarAppearace.tintColor = UIColor.whiteColor()
         navigationBarAppearace.barTintColor = UIColor.blackColor()
@@ -57,15 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         if (user != nil) {
-            var query = PFUser.query()
+            let query = PFUser.query()
             query!.whereKey("username", equalTo: user!.username! )
             query!.getFirstObjectInBackgroundWithBlock({ (object:PFObject?, error:NSError?) -> Void in
                 if let object = object {
                     var friendsArray = object["friends"] as! [String]
                     for friend in userArray {
-                        if !contains(friendsArray, friend) && friend != user!.username! {
+                        if !friendsArray.contains(friend) && friend != user!.username! {
                             friendsArray.append(friend)
-                            println("new friend \(friend) was added")
+                            print("new friend \(friend) was added")
                             saveFriend = true
                         }
                     }
@@ -73,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         object["friends"] = friendsArray
                         object.saveInBackgroundWithBlock({ (success, error) -> Void in
                             if success {
-                                println("new friends updated")
+                                print("new friends updated")
                             }
                         })
                     }
@@ -139,12 +138,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
     {
         
         let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)
             
-            if let queryItems = components?.queryItems as? [NSURLQueryItem]
+            if let queryItems = components!.queryItems! as? [NSURLQueryItem]
             {
                 let user = PFUser.currentUser()
                 
@@ -157,16 +156,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if let object = object {
                             var friendsArray = object["friends"] as! [String]
                             let friend = queryItems[0].value!
-                            if !contains(friendsArray, friend) && friend != user!.username! {
+                            if !friendsArray.contains(friend) && friend != user!.username! {
                                 friendsArray.append(friend)
-                                println("new friend \(friend) was added")
+                                print("new friend \(friend) was added")
                                 saveFriend = true
                             }
                             if saveFriend {
                                 object["friends"] = friendsArray
                                 object.saveInBackgroundWithBlock({ (success, error) -> Void in
                                     if success {
-                                        println("new friends updated")
+                                        print("new friends updated")
                                     }
                                 })
                             }

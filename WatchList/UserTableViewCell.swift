@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ParseUI
 
 class UserTableViewCell: UITableViewCell {
 

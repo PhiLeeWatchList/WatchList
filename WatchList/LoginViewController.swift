@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 
 
@@ -41,7 +40,7 @@ class LoginViewController: UIViewController {
             activityIndicator.startAnimating()
             UIApplication.sharedApplication().beginIgnoringInteractionEvents()
             
-            PFUser.logInWithUsernameInBackground(username, password:password) {
+            PFUser.logInWithUsernameInBackground(username!, password:password!) {
                 (user, signupError) -> Void in
                 
 
@@ -50,13 +49,13 @@ class LoginViewController: UIViewController {
                 
                 if signupError == nil {
                     
-                    println("logged in")
+                    print("logged in")
     
                     self.performSegueWithIdentifier("mainView", sender: self)
                     
                 } else {
                     
-                    if let errorString = signupError!.userInfo?["error"] as? NSString {
+                    if let errorString = signupError!.userInfo["error"] as? NSString {
                         
                         self.error = errorString as! String
                         
@@ -83,7 +82,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func logoutFromMainMenu(segue:UIStoryboardSegue) {
         PFUser.logOut()
-        println("logged out")
+        print("logged out")
     }
     
     override func viewDidLoad() {
@@ -94,8 +93,8 @@ class LoginViewController: UIViewController {
 
     
     override func viewWillAppear(animated: Bool) {
-        var currentUser = PFUser.currentUser()
-        println(currentUser)
+        let currentUser = PFUser.currentUser()
+        print(currentUser)
         if currentUser != nil {
             self.performSegueWithIdentifier("mainView", sender: self)
         }
@@ -119,7 +118,7 @@ class LoginViewController: UIViewController {
     
     func displayAlert(title:String, error:String) {
         
-        var alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
             
             self.dismissViewControllerAnimated(true, completion: nil)

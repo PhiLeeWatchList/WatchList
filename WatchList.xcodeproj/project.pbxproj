@@ -60,7 +60,6 @@
 		9B9C80EA1B15714E004CF90F /* ParseFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */; };
 		9BAC3C501B26C70A00166236 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAC3C4F1B26C70A00166236 /* StartViewController.swift */; };
 		9BB3E11A1B27ADC1003E7572 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */; };
-		9BCB738B1AF4849C001C081C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738A1AF4849C001C081C /* Parse.framework */; };
 		9BCB738D1AF484A7001C081C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738C1AF484A7001C081C /* Bolts.framework */; };
 		9BCB73991AF4856F001C081C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738E1AF4856F001C081C /* AudioToolbox.framework */; };
 		9BCB739A1AF4856F001C081C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB738F1AF4856F001C081C /* CFNetwork.framework */; };
@@ -75,7 +74,6 @@
 		9BCB73A31AF4856F001C081C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB73981AF4856F001C081C /* SystemConfiguration.framework */; };
 		9BCB73A51AF48893001C081C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB73A41AF48893001C081C /* Social.framework */; };
 		9BCB73A71AF488D3001C081C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB73A61AF488D3001C081C /* Accounts.framework */; };
-		9BCB73A91AF48ABC001C081C /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB73A81AF48ABC001C081C /* ParseUI.framework */; };
 		9BCB73AB1AF492E1001C081C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCB73AA1AF492E1001C081C /* LoginViewController.swift */; };
 		9BD509E21AFAE39F00AD3C09 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD509E11AFAE39F00AD3C09 /* User.swift */; };
 		9BF8DD0D1B179557004782B3 /* ParseSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8DD0C1B179557004782B3 /* ParseSelectFriendsViewController.swift */; };
@@ -245,7 +243,6 @@
 		9B9C80E91B15714E004CF90F /* ParseFriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseFriendTableViewController.swift; sourceTree = "<group>"; };
 		9BAC3C4F1B26C70A00166236 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		9BB3E1191B27ADC1003E7572 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
-		9BCB738A1AF4849C001C081C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9BCB738C1AF484A7001C081C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9BCB738E1AF4856F001C081C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9BCB738F1AF4856F001C081C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -260,7 +257,6 @@
 		9BCB73981AF4856F001C081C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9BCB73A41AF48893001C081C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		9BCB73A61AF488D3001C081C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		9BCB73A81AF48ABC001C081C /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		9BCB73AA1AF492E1001C081C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9BD509E11AFAE39F00AD3C09 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BD509E31AFAEDFB00AD3C09 /* WatchList-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WatchList-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -276,7 +272,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B35DE1D1AF5943A009E37B8 /* AssetsLibrary.framework in Frameworks */,
-				9BCB73A91AF48ABC001C081C /* ParseUI.framework in Frameworks */,
 				9BCB73A71AF488D3001C081C /* Accounts.framework in Frameworks */,
 				9BCB73A51AF48893001C081C /* Social.framework in Frameworks */,
 				9BCB73991AF4856F001C081C /* AudioToolbox.framework in Frameworks */,
@@ -292,7 +287,6 @@
 				9B836D7B1B1FACFC00720A8C /* GeoManager.framework in Frameworks */,
 				9BCB73A31AF4856F001C081C /* SystemConfiguration.framework in Frameworks */,
 				9B7E02BB1AF02B850001C924 /* DataBridge.framework in Frameworks */,
-				9BCB738B1AF4849C001C081C /* Parse.framework in Frameworks */,
 				6FCA823CDC61782C17C134DF /* libPods.a in Frameworks */,
 				9BCB738D1AF484A7001C081C /* Bolts.framework in Frameworks */,
 			);
@@ -591,7 +585,6 @@
 			isa = PBXGroup;
 			children = (
 				9B35DE1C1AF5943A009E37B8 /* AssetsLibrary.framework */,
-				9BCB73A81AF48ABC001C081C /* ParseUI.framework */,
 				9BCB73A61AF488D3001C081C /* Accounts.framework */,
 				9BCB73A41AF48893001C081C /* Social.framework */,
 				9BCB738E1AF4856F001C081C /* AudioToolbox.framework */,
@@ -606,7 +599,6 @@
 				9BCB73971AF4856F001C081C /* StoreKit.framework */,
 				9BCB73981AF4856F001C081C /* SystemConfiguration.framework */,
 				9BCB738C1AF484A7001C081C /* Bolts.framework */,
-				9BCB738A1AF4849C001C081C /* Parse.framework */,
 				6659FFF1CE1835731688002B /* libPods.a */,
 			);
 			name = Frameworks;
@@ -645,6 +637,7 @@
 				0C9FBD581AE6F691001FB601 /* Embed App Extensions */,
 				9B7E02C01AF02B850001C924 /* Embed Frameworks */,
 				B0EC3AB5A664276029AE7A39 /* Copy Pods Resources */,
+				F3D1BFD9E6FECFD38D4D5C45 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -789,6 +782,8 @@
 		0C8624611AB91A290042CAA8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = PhiLee;
 				TargetAttributes = {
@@ -955,6 +950,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3D1BFD9E6FECFD38D4D5C45 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

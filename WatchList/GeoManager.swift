@@ -63,21 +63,21 @@ public class GeoManager : NSObject, CLLocationManagerDelegate {
     }
     
     //MARK: - CLLocationManagerDelegate
-    public func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         //self.willChangeValueForKey("location")
-        self.location = locations.last as? CLLocation
+        self.location = locations.last! as CLLocation
         //self.didChangeValueForKey("location")
-        println("did update location: \(self.location)")
+        print("did update location: \(self.location)")
         //self.locationManager.stopUpdatingLocation()
         NSNotificationCenter.defaultCenter().postNotificationName("NewLocation", object: nil)
     }
     
-    public func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println("error getting location")
+    public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("error getting location")
     }
     
-    public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if (!self.locationAuthorized && status == .AuthorizedWhenInUse) {
             self.start()
         }

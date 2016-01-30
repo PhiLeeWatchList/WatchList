@@ -8,7 +8,6 @@
 
 import UIKit
 import MobileCoreServices
-import Parse
 
 
 
@@ -54,18 +53,18 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
             activityIndicator.startAnimating()
             UIApplication.sharedApplication().beginIgnoringInteractionEvents()
             
-            let imageData = UIImagePNGRepresentation(self.image.image)
-            let imageFile = PFFile(name:"profile.png", data:imageData)
+            let imageData = UIImagePNGRepresentation(self.image.image!)
+            let imageFile = PFFile(name:"profile.png", data:imageData!)
             imageFile.saveInBackgroundWithBlock { (success, error) -> Void in
 
                 var uuid = NSUUID().UUIDString
 
                 
                 var username = self.usernameField.text
-                username = username.lowercaseString
+                username = username!.lowercaseString
                 
                 var email = self.emailField.text
-                email = email.lowercaseString
+                email = email!.lowercaseString
                 
                 var trackingArray = [""]
                 
@@ -84,7 +83,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                     
                     if signupError == nil {
                         
-                        println("logged in")
+                        print("logged in")
                         
                         var wolfpack = PFObject(className:"WolfPack")
                         wolfpack["username"] = username
@@ -100,13 +99,13 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                                     self.performSegueWithIdentifier("signupToMainView", sender: self)
                                 }
                             } else {
-                                println("Problem creating WolfPack object")
+                                print("Problem creating WolfPack object")
                             }
                         }
                         
                     } else {
                         
-                        if let errorString = signupError!.userInfo?["error"] as? NSString {
+                        if let errorString = signupError!.userInfo["error"] as? NSString {
                             
                             self.error = errorString as! String
                             
@@ -144,7 +143,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
 
     func displayAlert(title:String, error:String) {
         
-        var alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
             
             //self.dismissViewControllerAnimated(true, completion: nil)
@@ -156,7 +155,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     func showImagePickerActionSheet(){
-        var action : UIAlertController = UIAlertController(title: "Alert", message: "Select Option", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let action : UIAlertController = UIAlertController(title: "Alert", message: "Select Option", preferredStyle: UIAlertControllerStyle.ActionSheet)
         action.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { alertAction in
             //self.dismissViewControllerAnimated(true, completion: nil)
             self.takePhoto()
@@ -180,10 +179,10 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func takePhoto() {
         if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            var picker = UIImagePickerController()
+            let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = UIImagePickerControllerSourceType.Camera
-            picker.mediaTypes = [kUTTypeImage]
+            picker.mediaTypes = [kUTTypeImage as String]
             picker.allowsEditing = true
             self.presentViewController(picker, animated: true, completion: nil)
             
@@ -195,10 +194,10 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func choosePhoto() {
         if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)){
-            var picker = UIImagePickerController()
+            let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            picker.mediaTypes = [kUTTypeImage]
+            picker.mediaTypes = [kUTTypeImage as String]
             picker.allowsEditing = true
             self.presentViewController(picker, animated: true, completion: nil)
             
@@ -211,7 +210,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
     
     // MARK: - Delegate Methods
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         NSLog("Did Finish Picking")
         let mediaType = info[UIImagePickerControllerMediaType] as! String
@@ -259,7 +258,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
 extension UIImage {
     public func resize(size:CGSize, completionHandler:(resizedImage:UIImage, data:NSData)->()) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
-            var newSize:CGSize = size
+            let newSize:CGSize = size
             let rect = CGRectMake(0, 0, newSize.width, newSize.height)
             UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
             self.drawInRect(rect)
@@ -267,7 +266,7 @@ extension UIImage {
             UIGraphicsEndImageContext()
             let imageData = UIImageJPEGRepresentation(newImage, 0.5)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                completionHandler(resizedImage: newImage, data:imageData)
+                completionHandler(resizedImage: newImage, data:imageData!)
             })
         })
     }
