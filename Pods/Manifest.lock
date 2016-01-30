@@ -1,4 +1,9 @@
 PODS:
+  - Bolts (1.6.0):
+    - Bolts/AppLinks (= 1.6.0)
+    - Bolts/Tasks (= 1.6.0)
+  - Bolts/AppLinks (1.6.0):
+    - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
   - IQKeyboardManager (3.2.3)
   - Parse (1.12.0):
@@ -9,6 +14,7 @@ PODS:
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
+  - Bolts (~> 1.6)
   - IQKeyboardManager
   - Parse (~> 1.12)
   - ParseUI (~> 1.2)

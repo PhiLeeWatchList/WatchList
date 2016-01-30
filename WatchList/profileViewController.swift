@@ -151,7 +151,7 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
             
             let imageData = UIImagePNGRepresentation((self?.profilePic.image)!)
             let imageFile = PFFile(name:"profile.png", data:imageData!)
-            imageFile.saveInBackgroundWithBlock({ (sucess:Bool, error:NSError?) -> Void in
+            imageFile?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
                 var user = PFUser.currentUser() as PFUser!
                 var query = PFQuery(className: "WolfPack")
                 query.whereKey("username", equalTo: user.username!)
@@ -160,7 +160,7 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
                         object["profilepic"] = imageFile
                         object.saveInBackgroundWithBlock({ (success, error) -> Void in
                             if success {
-                                user.setObject(imageFile, forKey: "profilepic")
+                                user.setObject(imageFile!, forKey: "profilepic")
                                 user.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
                                     self!.activityIndicator.stopAnimating()
                                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -168,13 +168,12 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
                                         print("error updating user's new photo")
                                     }
                                 })
-
+                                
                             }
                         })
                         
                     }
                 })
-                
             })
             
         })

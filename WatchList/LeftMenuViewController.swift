@@ -74,14 +74,12 @@ class LeftMenuViewController: UIViewController {
         query.whereKey("username", notEqualTo: user!.username!)
         query.whereKey("username", containedIn: friendsArray )
         query.orderByAscending("username")
-        query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
-            if let objects = objects {
-                self.objects = []
-                for object in  objects {
-                    self.objects.append(object as! PFObject)
-                }
-                self.tableView.reloadData()
+        query.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            self.objects = []
+            for object in objects! {
+                self.objects.append(object)
             }
+            self.tableView.reloadData()
             
         }
     }

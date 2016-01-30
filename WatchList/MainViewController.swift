@@ -748,29 +748,27 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         query.whereKey("username", equalTo:username!)
         
         query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
+            (objects: [PFObject]?, error: NSError?) -> Void in
             
             if error == nil {
                 // The find succeeded.
                 print("Successfully retrieved \(objects!.count).")
                 // Do something with the found objects
-                if let objects = objects as? [PFObject] {
-                    for object in objects {
-                        object["location"] = geoPoint
-                        object.saveInBackgroundWithBlock({ (success, error) -> Void in
-                            if error == nil {
-                                var query = PFQuery(className:"WolfPack")
-                                query.whereKey("location", nearGeoPoint:geoPoint)
-                                query.limit = 10
-                                
-                                print("user: \(user?.username)  email: \(user?.email)")
-                                query.findObjectsInBackgroundWithBlock({ (places: [AnyObject]?, error: NSError?) -> Void in
-                                    self.updateMap(places!)
-                                })
-                                
-                            }
-                        })
-                    }
+                for object in objects! {
+                    object["location"] = geoPoint
+                    object.saveInBackgroundWithBlock({ (success, error) -> Void in
+                        if error == nil {
+                            var query = PFQuery(className:"WolfPack")
+                            query.whereKey("location", nearGeoPoint:geoPoint)
+                            query.limit = 10
+                            
+                            print("user: \(user?.username)  email: \(user?.email)")
+                            query.findObjectsInBackgroundWithBlock({ (places: [PFObject]?, error: NSError?) -> Void in
+                                self.updateMap(places!)
+                            })
+                            
+                        }
+                    })
                 }
             } else {
                 // Log details of the failure

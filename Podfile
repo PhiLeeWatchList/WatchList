@@ -9,3 +9,4 @@ pod 'IQKeyboardManager'
 
 pod 'Parse', '~> 1.12'
 pod 'ParseUI', '~> 1.2'
+pod 'Bolts', '~> 1.6'

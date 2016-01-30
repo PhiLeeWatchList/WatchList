@@ -150,15 +150,13 @@ class StartViewController: UIViewController, MKMapViewDelegate {
             query.whereKey("username", containedIn: user["tracking"]! as! [String] )
         }
         query.whereKey("username", notEqualTo: user.username!)
-        query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
             if error == nil {
                 self.objects = []
-                if let objects = objects as? [PFObject] {
-                    for object in objects {
-                        self.objects.append(object)
-                    }
-                    self.updateMap(objects)
+                for object in objects! {
+                    self.objects.append(object)
                 }
+                self.updateMap(objects!)
             }
         }
     }
@@ -258,22 +256,20 @@ class StartViewController: UIViewController, MKMapViewDelegate {
             query.whereKey("username", equalTo:username!)
             
             query.findObjectsInBackgroundWithBlock {
-                (objects: [AnyObject]?, error: NSError?) -> Void in
+                (objects: [PFObject]?, error: NSError?) -> Void in
                 
                 if error == nil {
-                    if let objects = objects as? [PFObject] {
-                        for object in objects {
-                            object["location"] = geoPoint
-                            object.saveInBackgroundWithBlock({ (success, error) -> Void in
-                                if success {
-                                    if self.isInBackground {
-                                        self.checkLocation()
-                                    } else {
-                                        self.queryForTable()
-                                    }
+                    for object in objects! {
+                        object["location"] = geoPoint
+                        object.saveInBackgroundWithBlock({ (success, error) -> Void in
+                            if success {
+                                if self.isInBackground {
+                                    self.checkLocation()
+                                } else {
+                                    self.queryForTable()
                                 }
-                            })
-                        }
+                            }
+                        })
                     }
                 } else {
                     // Log details of the failure
@@ -291,29 +287,26 @@ class StartViewController: UIViewController, MKMapViewDelegate {
             query.whereKey("username", containedIn: user["tracking"]! as! [String] )
         }
         query.whereKey("username", notEqualTo: user.username!)
-        query.findObjectsInBackgroundWithBlock { (objects:[AnyObject]?, error:NSError?) -> Void in
-            if let objects = objects as? [PFObject] {
-                for object in objects {
-                    let name = object["username"] as! String
-                    if let location = object["location"] as? PFGeoPoint {
-                        if let currentLocation = GeoManager.sharedInstance.location {
-                            let point = PFGeoPoint(location: currentLocation)
-                            let distance = location.distanceInMilesTo(point)
-                            var message = "Here!"
-                            let formatter = NSNumberFormatter()
-                            formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-                            formatter.locale = NSLocale(localeIdentifier: "en_US")
-                            
-                            if (distance < 0.01)  {
-                                if !self.usersHereArray.contains(name) {
-                                    self.notifyLocation(name)
-                                    self.usersHereArray.append(name)
-                                }
+        query.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            for object in objects! {
+                let name = object["username"] as! String
+                if let location = object["location"] as? PFGeoPoint {
+                    if let currentLocation = GeoManager.sharedInstance.location {
+                        let point = PFGeoPoint(location: currentLocation)
+                        let distance = location.distanceInMilesTo(point)
+                        var message = "Here!"
+                        let formatter = NSNumberFormatter()
+                        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                        formatter.locale = NSLocale(localeIdentifier: "en_US")
+                        
+                        if (distance < 0.01)  {
+                            if !self.usersHereArray.contains(name) {
+                                self.notifyLocation(name)
+                                self.usersHereArray.append(name)
                             }
                         }
                     }
                 }
-
             }
         }
     }

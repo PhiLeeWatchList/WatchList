@@ -228,22 +228,20 @@ class ParseFriendTableViewController: PFQueryTableViewController {
             query.whereKey("username", equalTo:username!)
             
             query.findObjectsInBackgroundWithBlock {
-                (objects: [AnyObject]?, error: NSError?) -> Void in
+                (objects: [PFObject]?, error: NSError?) -> Void in
                 
                 if error == nil {
-                    if let objects = objects as? [PFObject] {
-                        for object in objects {
-                            object["location"] = geoPoint
-                            object.saveInBackgroundWithBlock({ (success, error) -> Void in
-                                if success {
-                                    if self.isInBackground {
-                                        self.checkLocation()
-                                    } else {
-                                        self.loadObjects()
-                                    }
+                    for object in objects! {
+                        object["location"] = geoPoint
+                        object.saveInBackgroundWithBlock({ (success, error) -> Void in
+                            if success {
+                                if self.isInBackground {
+                                    self.checkLocation()
+                                } else {
+                                    self.loadObjects()
                                 }
-                            })
-                        }
+                            }
+                        })
                     }
                 } else {
                     // Log details of the failure

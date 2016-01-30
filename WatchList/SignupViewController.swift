@@ -55,7 +55,8 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
             
             let imageData = UIImagePNGRepresentation(self.image.image!)
             let imageFile = PFFile(name:"profile.png", data:imageData!)
-            imageFile.saveInBackgroundWithBlock { (success, error) -> Void in
+            
+            imageFile!.saveInBackgroundWithBlock { (success:Bool, error: NSError?) -> Void in
 
                 var uuid = NSUUID().UUIDString
 
@@ -72,7 +73,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
                 user.username = username
                 user.password = self.passwordField.text
                 user.email = email
-                user.setObject(imageFile, forKey: "profilepic")
+                user.setObject(imageFile!, forKey: "profilepic")
                 user.setObject(uuid, forKey: "guid")
                 
                 user.signUpInBackgroundWithBlock {

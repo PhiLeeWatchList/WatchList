@@ -67,14 +67,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func queryParseUserLocation(){
-            let query = PFQuery(className: "WolfPack")
-            query.whereKey("username", notEqualTo: currentUser!)
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error:NSError?) -> Void in
+        let query = PFQuery(className: "WolfPack")
+        query.whereKey("username", notEqualTo: currentUser!)
+        
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             if objects != nil {
-                print("found \(objects!.count)")
+                //print("found \(objects!.count)")
                 self.updateMap(objects!)
             }
         }
+        
             
     }
     
