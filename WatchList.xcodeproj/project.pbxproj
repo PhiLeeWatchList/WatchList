@@ -1214,7 +1214,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WatchList/WatchList.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Philip Starner (B6Y896GM4L)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Philip Starner (B6Y896GM4L)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1224,7 +1224,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "eb9814d3-a29a-47b6-bb0c-8efe7f77b9a6";
+				PROVISIONING_PROFILE = "949858f8-ed85-4294-9670-0ff9e24dd0c5";
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchList/WatchList-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1249,7 +1249,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "eb9814d3-a29a-47b6-bb0c-8efe7f77b9a6";
+				PROVISIONING_PROFILE = "949858f8-ed85-4294-9670-0ff9e24dd0c5";
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchList/WatchList-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1305,7 +1305,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "d2393ad0-3db1-49d4-a107-495bde09fe7b";
+				PROVISIONING_PROFILE = "d0bc3fcd-5741-49cf-b559-43d175cb659d";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1322,7 +1322,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "d2393ad0-3db1-49d4-a107-495bde09fe7b";
+				PROVISIONING_PROFILE = "d0bc3fcd-5741-49cf-b559-43d175cb659d";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1344,7 +1344,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "923b6ce0-42d5-4f8e-97aa-1d5a3cbd2b75";
+				PROVISIONING_PROFILE = "8e796be0-9944-463e-b0f4-8863344d7384";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchList WatchKit App/WatchList WatchKit App-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1366,7 +1366,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "923b6ce0-42d5-4f8e-97aa-1d5a3cbd2b75";
+				PROVISIONING_PROFILE = "8e796be0-9944-463e-b0f4-8863344d7384";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchList WatchKit App/WatchList WatchKit App-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 4;
