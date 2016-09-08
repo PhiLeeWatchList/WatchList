@@ -83,19 +83,19 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         
         // 34.153725, -118.336573 Morton's, Burbank CA
 
-        var latitude:CLLocationDegrees = 34.159725
+        let latitude:CLLocationDegrees = 34.159725
         
-        var longitude:CLLocationDegrees = -118.331573
+        let longitude:CLLocationDegrees = -118.331573
         
-        var latDelta:CLLocationDegrees = 0.01
+        let latDelta:CLLocationDegrees = 0.01
         
-        var lonDelta:CLLocationDegrees = 0.01
+        let lonDelta:CLLocationDegrees = 0.01
         
-        var span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta,lonDelta)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta,lonDelta)
         
-        var location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
         
-        var region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         
         mapView.setRegion(region, animated: true)
         
@@ -152,33 +152,33 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         if (self.locationManager != nil) {
             
             if CLLocationManager.locationServicesEnabled() {
-                println("starting up location updates")
+                print("starting up location updates")
                 locationManager!.startUpdatingLocation()
             } else {
-                println("NOT starting up location updates")
+                print("NOT starting up location updates")
             }
         }
     }
     
     @IBAction func onFakeUser(sender: AnyObject) {
         
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
         let predicate = NSPredicate(format: "selected == true")
         request.predicate = predicate
         
-        if let users = context.executeFetchRequest(request, error: nil) as? [User] {
+        if let users = (try? context.executeFetchRequest(request)) as? [User] {
             for user in users {
-                println("show user \(user.username), guid is \(user.guid)")
+                print("show user \(user.username), guid is \(user.guid)")
                 let uuid = user.guid
                 let name = user.username
                 let imageData = user.image
                 if(self.canAddUserToField(uuid)) {
-                    println("Can add user \(name)")
+                    print("Can add user \(name)")
                     self.addUserToView(name,imageData: imageData)
                     self.personAddedArray.append(uuid)
                 } else {
-                    println("Can't add user \(name)")
+                    print("Can't add user \(name)")
                 }
             }
         }
@@ -199,10 +199,10 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             if (self.locationManager != nil) {
                 
                 if CLLocationManager.locationServicesEnabled() {
-                    println("starting up location updates")
+                    print("starting up location updates")
                     locationManager!.startUpdatingLocation()
                 } else {
-                    println("NOT starting up location updates")
+                    print("NOT starting up location updates")
                 }
             }
             
@@ -214,11 +214,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     }
     
     func updateFriends() {
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
-        let users = context.executeFetchRequest(request, error: nil) as! [User]
+        let users = (try! context.executeFetchRequest(request)) as! [User]
         for user in users {
-            println("User id for \(user.username) is \(user.id)")
+            print("User id for \(user.username) is \(user.id)")
             if user.id == "" {
                 self.updateUserFromParse(user.username)
             }
@@ -231,14 +231,14 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         query!.getFirstObjectInBackgroundWithBlock { (object:PFObject?, error:NSError?) -> Void in
             if error == nil {
                 // The find succeeded.
-                println("Successfully retrieved user \(object).")
+                print("Successfully retrieved user \(object).")
                 var user = object as! PFUser
                 self.getImageFromParse(user)
 
                 
             } else {
                 // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+                print("Error: \(error!) \(error!.userInfo)")
             }
             
         }
@@ -257,8 +257,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
                 self.updateCoreDataUser(object,image: imageData!)
                 //println(imageData)
             } else {
-                var username = object["username"] as! String
-                println("Error getting image data for \(username).")
+                let username = object["username"] as! String
+                print("Error getting image data for \(username).")
             }
             
         })
@@ -268,25 +268,28 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     
     func updateCoreDataUser(user:PFUser, image:NSData) {
         let user = user
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let context = CoreDataStack.sharedInstance.managedObjectContext!
         let fetchRequest : NSFetchRequest = NSFetchRequest(entityName: "User")
         let predicate = NSPredicate(format: "username == %@",user.username!)
         fetchRequest.predicate = predicate
         
-        var error : NSError? = nil
-        var results = context.executeFetchRequest(fetchRequest, error: &error) as! [User]
+        let error : NSError? = nil
+        var results = (try! context.executeFetchRequest(fetchRequest)) as! [User]
         if error != nil {
-            println("An error occurred loading the data")
+            print("An error occurred loading the data")
         } else {
             let guid = user["guid"] as! String
-            println("user guid is \(guid).")
+            print("user guid is \(guid).")
             let result = results[0]
             result.id = user.objectId!
             result.image = image
             result.guid = guid
             var saveError : NSError? = nil
-            if !context.save(&saveError) {
-                println("Could not update record")
+            do {
+                try context.save()
+            } catch let error as NSError {
+                saveError = error
+                print("Could not update record")
             }
             self.storeUUIDToUserDefaults(guid)
             self.storeNameToUserDefaults(user.username!)
@@ -297,11 +300,11 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     func updateMap(places: [AnyObject]) {
         mapView.removeAnnotations(self.mapView.annotations)
         for place in places {
-            var annotation = MKPointAnnotation()
-            var point = place["location"] as! PFGeoPoint
-            var lat = point.latitude
-            var lon = point.longitude
-            var userLocation = CLLocationCoordinate2DMake(lat, lon)
+            let annotation = MKPointAnnotation()
+            let point = place["location"] as! PFGeoPoint
+            let lat = point.latitude
+            let lon = point.longitude
+            let userLocation = CLLocationCoordinate2DMake(lat, lon)
             annotation.coordinate = userLocation
             annotation.title = place["username"] as! String
             
@@ -310,7 +313,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     }
     
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
         
         if annotation is MKUserLocation {
             //return nil so map view draws "blue dot" for standard user location
@@ -348,7 +351,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             newUserView.addSubview(annotationView!.centerImage)
             
             //add a label if we don't have user or a user.image returned
-            if let user:User = self.getUser(annotation.title!) {
+            if let user:User = self.getUser(String(annotation.title)) {
                 if (user.image == nil) {
                     newUserView.addSubview(annotationView!.centerLabel)
                 }
@@ -370,21 +373,21 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         
         //because we are deque reusing, we need to always set the image and label.
         if(annotation.title! != nil) {
-            if let user:User = self.getUser(annotation.title!) {
+            if let user:User = self.getUser(String(annotation.title)) {
                 if let imageData:NSData = user.image {
                     annotationView!.centerImage.image = UIImage(data: imageData)
                 }
             }
         }
-        if let txt = annotation?.title {
-            let labelString:String = annotation.title!
-            annotationView!.centerLabel.text  = labelString.substringWithRange(Range<String.Index>(start: labelString.startIndex, end: advance(labelString.startIndex, 1))).uppercaseString
+        if let txt:String = String(annotation.title) {
+            let labelString:String = String(annotation.title)
+            annotationView!.centerLabel.text  = labelString.substringWithRange(Range<String.Index>(start: labelString.startIndex, end: labelString.startIndex.advancedBy(1))).uppercaseString
         }
         
         return annotationView
     }
     
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         view.canShowCallout = true
     }
     
@@ -512,16 +515,16 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     }
     
     func addUserToView (name: String, imageData:NSData) {
-        var imageBorderColor:UIColor = UIColor(red: 250.0/255.0, green: 250.0/255.0, blue: 250.0/255.0, alpha: 1)
-        var imageBgColor:UIColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1)
-        var nameColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
+        let imageBorderColor:UIColor = UIColor(red: 250.0/255.0, green: 250.0/255.0, blue: 250.0/255.0, alpha: 1)
+        let imageBgColor:UIColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1)
+        let nameColor:UIColor = UIColor(red: 112.0/255.0, green: 146.0/255.0, blue: 255.0/255.0, alpha: 1)
         
-        var newUserLabel:UILabel = UILabel(frame: CGRectMake(0, userBubbleSize, userBubbleSize, labelSize))
+        let newUserLabel:UILabel = UILabel(frame: CGRectMake(0, userBubbleSize, userBubbleSize, labelSize))
         newUserLabel.text = name
         newUserLabel.textAlignment = NSTextAlignment.Center
         newUserLabel.textColor = nameColor
         
-        var newUserImageView:UIImageView = UIImageView(frame: CGRectMake(0, 0, userBubbleSize, userBubbleSize))
+        let newUserImageView:UIImageView = UIImageView(frame: CGRectMake(0, 0, userBubbleSize, userBubbleSize))
         newUserImageView.layer.cornerRadius = newUserImageView.frame.size.width / 2
         newUserImageView.layer.masksToBounds = true
         newUserImageView.layer.borderColor = imageBorderColor.CGColor
@@ -529,7 +532,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
         newUserImageView.layer.borderWidth = userBubbleSize/18
         newUserImageView.image = UIImage(data: imageData)
         
-        var newUserView:UIView = UIView(frame: CGRectMake(0,0, userBubbleSize, userBubbleSize+labelSize))
+        let newUserView:UIView = UIView(frame: CGRectMake(0,0, userBubbleSize, userBubbleSize+labelSize))
         newUserView.addSubview(newUserImageView)
         newUserView.addSubview(newUserLabel)
         newUserView.tag = self.peopleHereArray.count //do not tag until added
@@ -546,7 +549,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     func snapTheNewUserOnScreen(userView: UIView) {
         
         let xOffset:CGFloat = userBubbleSize * CGFloat(self.userFieldView.subviews.count-1);
-        println("count: \(self.userFieldView.subviews.count-1)")
+        print("count: \(self.userFieldView.subviews.count-1)")
         
         let point:CGPoint = CGPointMake(userBubbleSize/2.0 + xOffset, userBubbleSize/2.0)
         
@@ -692,10 +695,10 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     
     func getUserImageData(username: String) -> NSData? {
         
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
         
-        if let users = context.executeFetchRequest(request, error: nil) as? [User] {
+        if let users = (try? context.executeFetchRequest(request)) as? [User] {
             for user in users {
                 if (user.username == username) {
                     return user.image
@@ -707,10 +710,10 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     }
     
     func getUser(username: String) -> User? {
-        var context = CoreDataStack.sharedInstance.managedObjectContext!
+        let context = CoreDataStack.sharedInstance.managedObjectContext!
         let request = NSFetchRequest(entityName: "User")
         
-        if let users = context.executeFetchRequest(request, error: nil) as? [User] {
+        if let users = (try? context.executeFetchRequest(request)) as? [User] {
             for user in users {
                 if (user.username == username) {
                     return user
@@ -735,8 +738,8 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
     }
     
     //CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var location:CLLocation = locations[locations.count-1] as! CLLocation
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        var location:CLLocation = locations[locations.count-1] 
         
         var geoPoint = PFGeoPoint(location: location)
     
@@ -750,7 +753,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
             
             if error == nil {
                 // The find succeeded.
-                println("Successfully retrieved \(objects!.count).")
+                print("Successfully retrieved \(objects!.count).")
                 // Do something with the found objects
                 if let objects = objects as? [PFObject] {
                     for object in objects {
@@ -761,7 +764,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
                                 query.whereKey("location", nearGeoPoint:geoPoint)
                                 query.limit = 10
                                 
-                                println("user: \(user?.username)  email: \(user?.email)")
+                                print("user: \(user?.username)  email: \(user?.email)")
                                 query.findObjectsInBackgroundWithBlock({ (places: [AnyObject]?, error: NSError?) -> Void in
                                     self.updateMap(places!)
                                 })
@@ -772,7 +775,7 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
                 }
             } else {
                 // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+                print("Error: \(error!) \(error!.userInfo)")
             }
         }
         
@@ -791,12 +794,12 @@ class MainViewController: UIViewController, INBeaconServiceDelegate, CLLocationM
 //        INBeaconService.singleton().startBroadcasting()
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println(error)
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
         //        txtLatitude.text = "Can't get your location!"
     }
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
     {
         if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
             manager.startUpdatingLocation()

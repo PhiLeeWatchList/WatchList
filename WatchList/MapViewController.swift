@@ -28,19 +28,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         self.title = username
         
-        var latitude:CLLocationDegrees = 34.159725
+        let latitude:CLLocationDegrees = 34.159725
         
-        var longitude:CLLocationDegrees = -118.331573
+        let longitude:CLLocationDegrees = -118.331573
         
-        var latDelta:CLLocationDegrees = 0.05
+        let latDelta:CLLocationDegrees = 0.05
         
-        var lonDelta:CLLocationDegrees = 0.05
+        let lonDelta:CLLocationDegrees = 0.05
         
-        var span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta,lonDelta)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta,lonDelta)
         
-        var location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
         
-        var region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         
         mapView.setRegion(region, animated: true)
         
@@ -53,12 +53,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.mapViewRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("queryParseUserLocation"), userInfo: nil, repeats: true)
-         println("map timer started")
+         print("map timer started")
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.mapViewRefreshTimer.invalidate()
-        println("map timer stopped")
+        print("map timer stopped")
     }
     
     
@@ -68,11 +68,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func queryParseUserLocation(){
-            var query = PFQuery(className: "WolfPack")
+            let query = PFQuery(className: "WolfPack")
             query.whereKey("username", notEqualTo: currentUser!)
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error:NSError?) -> Void in
             if objects != nil {
-                println("found \(objects!.count)")
+                print("found \(objects!.count)")
                 self.updateMap(objects!)
             }
         }
@@ -82,12 +82,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func updateMap(users:[AnyObject]) {        
         self.mapView.removeAnnotations(self.mapView.annotations)
         for user in users {
-            var annotation = MKPointAnnotation()
+            let annotation = MKPointAnnotation()
             let mapuser = user["username"] as! String
-            var point = user["location"] as! PFGeoPoint
-            var lat = point.latitude
-            var lon = point.longitude
-            var userLocation = CLLocationCoordinate2DMake(lat, lon)
+            let point = user["location"] as! PFGeoPoint
+            let lat = point.latitude
+            let lon = point.longitude
+            let userLocation = CLLocationCoordinate2DMake(lat, lon)
             annotation.coordinate = userLocation
             annotation.title = mapuser
             self.mapView.addAnnotation(annotation)
@@ -100,7 +100,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
         
         if annotation is MKUserLocation {
             //return nil so map view draws "blue dot" for standard user location
@@ -121,8 +121,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotationView!.centerImage = UIImageView(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
             annotationView!.centerImage.layer.cornerRadius = annotationView!.centerImage.frame.size.width / 2
             annotationView!.centerImage.layer.masksToBounds = true
-            println("Annotation title is \(annotation.title)")
-            if annotation.title == self.username {
+            print("Annotation title is \(annotation.title)")
+            if String(annotation.title) == self.username {
                 annotationView!.centerImage.layer.borderColor = annotationView!.selectedColor.CGColor
             } else {
                 annotationView!.centerImage.layer.borderColor =  annotationView!.borderColor.CGColor
@@ -144,7 +144,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //we must use some image for pin
         annotationView!.image = UIImage(named: "blank_pin")
         
-        let userPicture = userInfo[annotation.title!] as PFFile!
+        let userPicture = userInfo[String(annotation.title)] as PFFile!
         userPicture.getDataInBackgroundWithBlock { (data:NSData?, error:NSError?) -> Void in
             if (error == nil) {
                 let image = UIImage(data:data!)

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>DataBridge.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>GeoManager.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>WatchList WatchKit App (Notification).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>WatchList WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>WatchList.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0C8624681AB91A290042CAA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0C86247D1AB91A290042CAA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0C9FBD421AE6F691001FB601</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B7E02A31AF02B840001C924</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B7E02AD1AF02B850001C924</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B836D631B1FACFB00720A8C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B836D6D1B1FACFB00720A8C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

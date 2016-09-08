@@ -25,7 +25,7 @@ class InterfaceController: WKInterfaceController {
             
             table.setNumberOfRows(users.count, withRowType: "tableRowController")
             
-            for (index, user) in enumerate(users) {
+            for (index, user) in users.enumerate() {
                 let row = table.rowControllerAtIndex(index) as! tableRowController
                 row.tableRowLabel.setText(user)
                 row.initials.setText(initials)
@@ -41,15 +41,15 @@ class InterfaceController: WKInterfaceController {
             dateFormatter.dateFormat = "hh:mm a"
             let stringDate = dateFormatter.stringFromDate(NSDate())
             
-            var user = notificationIdentifier + " arrived at " + stringDate
-            var fullName: String = "First Last"
+            let user = notificationIdentifier + " arrived at " + stringDate
+            let fullName: String = "First Last"
             let fullNameArr = fullName.componentsSeparatedByString(" ")
             
-            var firstName: String = fullNameArr[0]
-            var lastName: String = fullNameArr[1]
+            let firstName: String = fullNameArr[0]
+            let lastName: String = fullNameArr[1]
             
-            var firstInitial = first(firstName)
-            var lastInitial = first(lastName)
+            let firstInitial = firstName.characters.first
+            let lastInitial = lastName.characters.first
             var initials : String = String(firstInitial!) + String(lastInitial!)
             
             if NSUserDefaults.standardUserDefaults().objectForKey("users") != nil {

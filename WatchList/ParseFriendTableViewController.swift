@@ -57,7 +57,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
                 let updatedUser = user as! PFUser
                 self.trackingArray = updatedUser["tracking"] as! [String]
                 self.friendsArray = updatedUser["friends"] as! [String]
-                println("new tracking users are \(self.trackingArray)")
+                print("new tracking users are \(self.trackingArray)")
                 self.loadObjects()
             }
         })
@@ -67,14 +67,14 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     }
     
     func reloadTableView () {
-        println("tableView updated")
+        print("tableView updated")
         self.loadObjects()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.tableViewRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target:self, selector: Selector("reloadTableView"), userInfo: nil, repeats: true)
-        println("table timer started")
+        print("table timer started")
     }
     
     
@@ -93,7 +93,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.tableViewRefreshTimer.invalidate()
-        println("table timer stopped")
+        print("table timer stopped")
     }
     
     override func didReceiveMemoryWarning() {
@@ -102,9 +102,9 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     }
     
     
-    override func observeValueForKeyPath(keyPath: String,
-        ofObject object: AnyObject,
-        change: [NSObject : AnyObject], context: UnsafeMutablePointer<()>) {
+    override func observeValueForKeyPath(keyPath: String?,
+        ofObject object: AnyObject?,
+        change: [String : AnyObject]?, context: UnsafeMutablePointer<()>) {
             
             if object === geoManager && keyPath == "location" {
                 self.updateParseLocation()
@@ -118,7 +118,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         
         // Configure the PFQueryTableView
         self.parseClassName = "WolfPack"
@@ -128,7 +128,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery{
-        var query = PFQuery(className: "WolfPack")
+        let query = PFQuery(className: "WolfPack")
         if let location = GeoManager.sharedInstance.location {
             let geoPoint = PFGeoPoint(location: location)
             query.whereKey("location", nearGeoPoint:geoPoint)
@@ -140,7 +140,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
         
-        println("refreshing table")
+        print("refreshing table")
         
         var cell = tableView.dequeueReusableCellWithIdentifier("CustomCell") as! ParseFriendCell!
         if cell == nil {
@@ -185,12 +185,12 @@ class ParseFriendTableViewController: PFQueryTableViewController {
         }
         
         
-        var initialThumbnail = UIImage(named: "logo")
+        let initialThumbnail = UIImage(named: "logo")
         cell.profileImage.image = initialThumbnail
         if let thumbnail = object?["profilepic"] as? PFFile {
             cell.profileImage.file = thumbnail
             cell.profileImage.loadInBackground({ (image, error) -> Void in
-                println("image loaded")
+                print("image loaded")
             })
         }
         
@@ -249,14 +249,14 @@ class ParseFriendTableViewController: PFQueryTableViewController {
                     }
                 } else {
                     // Log details of the failure
-                    println("Error: \(error!) \(error!.userInfo!)")
+                    print("Error: \(error!) \(error!.userInfo)")
                 }
             }
         }
     }
 
     func checkLocation() {
-        var query = PFQuery(className: "WolfPack")
+        let query = PFQuery(className: "WolfPack")
         if let location = GeoManager.sharedInstance.location {
             let geoPoint = PFGeoPoint(location: location)
             query.whereKey("location", nearGeoPoint:geoPoint)
@@ -277,7 +277,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
                             formatter.locale = NSLocale(localeIdentifier: "en_US")
                             
                             if (distance < 0.01)  {
-                                if !contains(self.usersHereArray,name) {
+                                if !self.usersHereArray.contains(name) {
                                     self.notifyLocation(name)
                                     self.usersHereArray.append(name)
                                 }
@@ -291,7 +291,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     
     
     func notifyLocation(name:String) {
-        var localNotification: UILocalNotification = UILocalNotification()
+        let localNotification: UILocalNotification = UILocalNotification()
         localNotification.alertAction = ""
         localNotification.alertBody = "\(name) is here!"
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
@@ -314,13 +314,13 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     
     //MARK: - Notifications
     func didEnterBackground(notification:AnyObject) {
-        println("start backgroundmode")
+        print("start backgroundmode")
         self.isInBackground = true
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.beginBackgroundUpdateTask()
 
             // Do something with the result.
-            var timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "updateParseLocation", userInfo: nil, repeats: true)
+            let timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "updateParseLocation", userInfo: nil, repeats: true)
             NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
             NSRunLoop.currentRunLoop().run()
             
@@ -331,7 +331,7 @@ class ParseFriendTableViewController: PFQueryTableViewController {
     
     func didEnterForeground(notification:AnyObject) {
         self.isInBackground = false
-        println("end backgroundmode")
+        print("end backgroundmode")
     }
     
 }

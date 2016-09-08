@@ -62,19 +62,19 @@ class StartViewController: UIViewController, MKMapViewDelegate {
         geoManager.addObserver(self, forKeyPath: "location", options: .New, context: nil)
        
         
-        var latitude:CLLocationDegrees = 34.159725
+        let latitude:CLLocationDegrees = 34.159725
         
-        var longitude:CLLocationDegrees = -118.331573
+        let longitude:CLLocationDegrees = -118.331573
         
-        var latDelta:CLLocationDegrees = 0.05
+        let latDelta:CLLocationDegrees = 0.05
         
-        var lonDelta:CLLocationDegrees = 0.05
+        let lonDelta:CLLocationDegrees = 0.05
         
-        var span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta,lonDelta)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta,lonDelta)
         
-        var location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
         
-        var region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         
         mapView.setRegion(region, animated: true)
         
@@ -108,7 +108,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.tableViewRefreshTimer.invalidate()
-        println("table timer stopped")
+        print("table timer stopped")
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -118,9 +118,9 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     }
 
     
-    override func observeValueForKeyPath(keyPath: String,
-        ofObject object: AnyObject,
-        change: [NSObject : AnyObject], context: UnsafeMutablePointer<()>) {
+    override func observeValueForKeyPath(keyPath: String?,
+        ofObject object: AnyObject?,
+        change: [String : AnyObject]?, context: UnsafeMutablePointer<()>) {
             
             if object === geoManager && keyPath == "location" {
                 self.updateParseLocation()
@@ -136,7 +136,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
                 self.trackingArray = updatedUser["tracking"] as! [String]
                 self.friendsArray = updatedUser["friends"] as! [String]
                 self.user = updatedUser
-                println("new tracking users are \(self.trackingArray)")
+                print("new tracking users are \(self.trackingArray)")
                 self.queryForTable()
             }
         })
@@ -144,7 +144,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     
     
     func queryForTable(){
-        var query = PFQuery(className: "WolfPack")
+        let query = PFQuery(className: "WolfPack")
         if let location = GeoManager.sharedInstance.location {
             let geoPoint = PFGeoPoint(location: location)
             query.whereKey("location", nearGeoPoint:geoPoint)
@@ -172,12 +172,12 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     func updateMap(users:[PFObject]) {
         self.mapView.removeAnnotations(self.mapView.annotations)
         for user in users {
-            var annotation = MKPointAnnotation()
+            let annotation = MKPointAnnotation()
             let mapuser = user["username"] as! String
-            var point = user["location"] as! PFGeoPoint
-            var lat = point.latitude
-            var lon = point.longitude
-            var userLocation = CLLocationCoordinate2DMake(lat, lon)
+            let point = user["location"] as! PFGeoPoint
+            let lat = point.latitude
+            let lon = point.longitude
+            let userLocation = CLLocationCoordinate2DMake(lat, lon)
             annotation.coordinate = userLocation
             annotation.title = mapuser
             self.mapView.addAnnotation(annotation)
@@ -191,7 +191,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
         
         if annotation is MKUserLocation {
             //return nil so map view draws "blue dot" for standard user location
@@ -212,15 +212,15 @@ class StartViewController: UIViewController, MKMapViewDelegate {
             annotationView!.centerImage = UIImageView(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
             annotationView!.centerImage.layer.cornerRadius = annotationView!.centerImage.frame.size.width / 2
             annotationView!.centerImage.layer.masksToBounds = true
-            println("Annotation title is \(annotation.title)")
-            if annotation.title == self.username {
+            print("Annotation title is \(annotation.title)")
+            if String(annotation.title) == self.username {
                 annotationView!.centerImage.layer.borderColor = annotationView!.selectedColor.CGColor
             } else {
                 annotationView!.centerImage.layer.borderColor =  annotationView!.borderColor.CGColor
             }
             annotationView!.centerImage.layer.borderWidth = 2
             
-            var newUserView:UIView = UIView(frame: CGRectMake(0,0, annotationView!.size, annotationView!.size))
+            let newUserView:UIView = UIView(frame: CGRectMake(0,0, annotationView!.size, annotationView!.size))
             newUserView.addSubview(annotationView!.centerImage)
             
             //add to the field view
@@ -235,7 +235,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
         //we must use some image for pin
         annotationView!.image = UIImage(named: "blank_pin")
         
-        let userPicture = userInfo[annotation.title!] as PFFile!
+        let userPicture = userInfo[String(annotation.title)] as PFFile!
         userPicture.getDataInBackgroundWithBlock { (data:NSData?, error:NSError?) -> Void in
             if (error == nil) {
                 let image = UIImage(data:data!)
@@ -251,11 +251,11 @@ class StartViewController: UIViewController, MKMapViewDelegate {
         
         if let location = GeoManager.sharedInstance.location {
             
-            var geoPoint = PFGeoPoint(location: location)
+            let geoPoint = PFGeoPoint(location: location)
             
-            var user = PFUser.currentUser()
-            var username = user?.username
-            var query = PFQuery(className:"WolfPack")
+            let user = PFUser.currentUser()
+            let username = user?.username
+            let query = PFQuery(className:"WolfPack")
             query.whereKey("username", equalTo:username!)
             
             query.findObjectsInBackgroundWithBlock {
@@ -278,14 +278,14 @@ class StartViewController: UIViewController, MKMapViewDelegate {
                     }
                 } else {
                     // Log details of the failure
-                    println("Error: \(error!) \(error!.userInfo!)")
+                    print("Error: \(error!) \(error!.userInfo)")
                 }
             }
         }
     }
     
     func checkLocation() {
-        var query = PFQuery(className: "WolfPack")
+        let query = PFQuery(className: "WolfPack")
         if let location = GeoManager.sharedInstance.location {
             let geoPoint = PFGeoPoint(location: location)
             query.whereKey("location", nearGeoPoint:geoPoint)
@@ -300,13 +300,13 @@ class StartViewController: UIViewController, MKMapViewDelegate {
                         if let currentLocation = GeoManager.sharedInstance.location {
                             let point = PFGeoPoint(location: currentLocation)
                             let distance = location.distanceInMilesTo(point)
-                            var message = "Here!"
+                            let message = "Here!"
                             let formatter = NSNumberFormatter()
                             formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
                             formatter.locale = NSLocale(localeIdentifier: "en_US")
                             
                             if (distance < 0.01)  {
-                                if !contains(self.usersHereArray,name) {
+                                if !self.usersHereArray.contains(name) {
                                     self.notifyLocation(name)
                                     self.usersHereArray.append(name)
                                 }
@@ -321,7 +321,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     
     
     func notifyLocation(name:String) {
-        var localNotification: UILocalNotification = UILocalNotification()
+        let localNotification: UILocalNotification = UILocalNotification()
         localNotification.alertAction = ""
         localNotification.alertBody = "\(name) is here!"
         localNotification.soundName = UILocalNotificationDefaultSoundName
@@ -345,13 +345,13 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     
     //MARK: - Notifications
     func didEnterBackground(notification:AnyObject) {
-        println("start backgroundmode")
+        print("start backgroundmode")
         self.isInBackground = true
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.beginBackgroundUpdateTask()
             
             // Do something with the result.
-            var timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "updateParseLocation", userInfo: nil, repeats: true)
+            let timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "updateParseLocation", userInfo: nil, repeats: true)
             NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
             NSRunLoop.currentRunLoop().run()
             
@@ -362,7 +362,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
     
     func didEnterForeground(notification:AnyObject) {
         self.isInBackground = false
-        println("end backgroundmode")
+        print("end backgroundmode")
     }
     
 
@@ -376,11 +376,11 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
  
     func timeAgoSinceDate(date:NSDate, numericDates:Bool) -> String {
         let calendar = NSCalendar.currentCalendar()
-        let unitFlags = NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekOfYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitSecond
+        let unitFlags: NSCalendarUnit = [NSCalendarUnit.Minute, NSCalendarUnit.Hour, NSCalendarUnit.Day, NSCalendarUnit.WeekOfYear, NSCalendarUnit.Month, NSCalendarUnit.Year, NSCalendarUnit.Second]
         let now = NSDate()
         let earliest = now.earlierDate(date)
         let latest = (earliest == now) ? date : now
-        let components:NSDateComponents = calendar.components(unitFlags, fromDate: earliest, toDate: latest, options: nil)
+        let components:NSDateComponents = calendar.components(unitFlags, fromDate: earliest, toDate: latest, options: [])
         
         if (components.year >= 2) {
             return "\(components.year) years ago"
@@ -440,14 +440,14 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("user count is \(self.objects.count)")
+        print("user count is \(self.objects.count)")
         return self.objects.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        println("refreshing table")
+        print("refreshing table")
         
         var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UserTableViewCell?
         if cell == nil {
@@ -473,7 +473,7 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
         }
         if let location = object["location"] as? PFGeoPoint {
             if let currentLocation = GeoManager.sharedInstance.location {
-                println("current location is \(currentLocation)")
+                print("current location is \(currentLocation)")
                 let point = PFGeoPoint(location: currentLocation)
                 let distance = location.distanceInMilesTo(point)
                 var message = "Here!"
@@ -497,22 +497,22 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 cell?.location?.text = message
-                println("message is \(message)")
+                print("message is \(message)")
             }
         }
         let date = object.updatedAt
-        println(timeAgoSinceDate(date!,numericDates: true)) //prints out 10:12
+        print(timeAgoSinceDate(date!,numericDates: true)) //prints out 10:12
         
         cell?.lastUpdateLabel.text = "updated \(timeAgoSinceDate(date!, numericDates: true))"
         
         
-        var initialThumbnail = UIImage(named: "logo")
+        let initialThumbnail = UIImage(named: "logo")
         cell?.profilepic?.image = initialThumbnail
         if let thumbnail = object["profilepic"] as? PFFile {
-            println("profile image is \(thumbnail)")
+            print("profile image is \(thumbnail)")
             cell?.profilepic?.file = thumbnail
             cell?.profilepic?.loadInBackground({ (image, error) -> Void in
-                println("image loaded")
+                print("image loaded")
             })
         }
         

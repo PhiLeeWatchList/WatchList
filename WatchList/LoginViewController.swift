@@ -26,53 +26,57 @@ class LoginViewController: UIViewController {
         var username = usernameField.text
         var password = passwordField.text
         
-        if username == "" || password == "" {
-            error = "You must enter a username and password"
-            
-            displayAlert("Oops!", error: error)
-            
-        } else {
-            
-            activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-            activityIndicator.center = self.view.center
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
-            view.addSubview(activityIndicator)
-            activityIndicator.startAnimating()
-            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-            
-            PFUser.logInWithUsernameInBackground(username, password:password) {
-                (user, signupError) -> Void in
+        if let username = username, let password = password {
+            if username == "" || password == "" {
+                error = "You must enter a username and password"
                 
-
-                self.activityIndicator.stopAnimating()
-                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                displayAlert("Oops!", error: error)
                 
-                if signupError == nil {
+            } else {
+                
+                activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+                activityIndicator.center = self.view.center
+                activityIndicator.hidesWhenStopped = true
+                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+                view.addSubview(activityIndicator)
+                activityIndicator.startAnimating()
+                UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+                
+                PFUser.logInWithUsernameInBackground(username, password:password) {
+                    (user, signupError) -> Void in
                     
-                    println("logged in")
-    
-                    self.performSegueWithIdentifier("mainView", sender: self)
                     
-                } else {
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     
-                    if let errorString = signupError!.userInfo?["error"] as? NSString {
+                    if signupError == nil {
                         
-                        self.error = errorString as! String
+                        print("logged in")
+                        
+                        self.performSegueWithIdentifier("mainView", sender: self)
                         
                     } else {
                         
-                        self.error = "Please try again later."
+                        if let errorString = signupError!.userInfo["error"]  {
+                            
+                            self.error = errorString as! String
+                            
+                        } else {
+                            
+                            self.error = "Please try again later."
+                            
+                        }
+                        
+                        self.displayAlert("Could Not Log In", error: self.error)
+                        
                         
                     }
-                    
-                    self.displayAlert("Could Not Log In", error: self.error)
-                    
-                    
                 }
+                
             }
-            
         }
+        
+        
     }
 
     
@@ -83,7 +87,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func logoutFromMainMenu(segue:UIStoryboardSegue) {
         PFUser.logOut()
-        println("logged out")
+        print("logged out")
     }
     
     override func viewDidLoad() {
@@ -94,8 +98,8 @@ class LoginViewController: UIViewController {
 
     
     override func viewWillAppear(animated: Bool) {
-        var currentUser = PFUser.currentUser()
-        println(currentUser)
+        let currentUser = PFUser.currentUser()
+        print(currentUser)
         if currentUser != nil {
             self.performSegueWithIdentifier("mainView", sender: self)
         }
@@ -119,7 +123,7 @@ class LoginViewController: UIViewController {
     
     func displayAlert(title:String, error:String) {
         
-        var alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
             
             self.dismissViewControllerAnimated(true, completion: nil)

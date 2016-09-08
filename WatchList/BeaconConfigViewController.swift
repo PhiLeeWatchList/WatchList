@@ -91,7 +91,7 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     }
     
     @IBAction func onShare(sender: AnyObject) {
-        var picker = MFMailComposeViewController()
+        let picker = MFMailComposeViewController()
         picker.mailComposeDelegate = self
         picker.setSubject("WatchList Friend ID")
         
@@ -101,14 +101,14 @@ class BeaconConfigViewController: UIViewController, UITextFieldDelegate, MFMailC
     }
     
     func randomBeaconValues() {
-        var uuid = NSUUID().UUIDString
+        let uuid = NSUUID().UUIDString
         self.guid = uuid
         self.guidText.text = uuid
         
     }
     
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     

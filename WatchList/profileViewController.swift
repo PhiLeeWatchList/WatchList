@@ -31,7 +31,7 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .Plain, target: self, action: "presentLeftMenuViewController")
         
-        var user = PFUser.currentUser() as PFUser!
+        let user = PFUser.currentUser() as PFUser!
         
         self.username.text = user.username
         
@@ -68,7 +68,7 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     func showImagePickerActionSheet(){
-        var action : UIAlertController = UIAlertController(title: "Alert", message: "Select Option", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let action : UIAlertController = UIAlertController(title: "Alert", message: "Select Option", preferredStyle: UIAlertControllerStyle.ActionSheet)
         action.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { alertAction in
             //self.dismissViewControllerAnimated(true, completion: nil)
             self.takePhoto()
@@ -92,10 +92,10 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
     
     func takePhoto() {
         if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            var picker = UIImagePickerController()
+            let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = UIImagePickerControllerSourceType.Camera
-            picker.mediaTypes = [kUTTypeImage]
+            picker.mediaTypes = [kUTTypeImage as String]
             picker.allowsEditing = true
             self.presentViewController(picker, animated: true, completion: nil)
             
@@ -107,10 +107,10 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
     
     func choosePhoto() {
         if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)){
-            var picker = UIImagePickerController()
+            let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            picker.mediaTypes = [kUTTypeImage]
+            picker.mediaTypes = [kUTTypeImage as String]
             picker.allowsEditing = true
             self.presentViewController(picker, animated: true, completion: nil)
             
@@ -123,7 +123,7 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
     
     // MARK: - Delegate Methods
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
         activityIndicator.center = self.view.center
@@ -151,8 +151,8 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
             
             self!.dismissViewControllerAnimated(true, completion: nil)
             
-            let imageData = UIImagePNGRepresentation(self?.profilePic.image)
-            let imageFile = PFFile(name:"profile.png", data:imageData)
+            let imageData = UIImagePNGRepresentation((self?.profilePic.image)!)
+            let imageFile = PFFile(name:"profile.png", data:imageData!)
             imageFile.saveInBackgroundWithBlock({ (sucess:Bool, error:NSError?) -> Void in
                 var user = PFUser.currentUser() as PFUser!
                 var query = PFQuery(className: "WolfPack")
@@ -167,7 +167,7 @@ class profileViewController: UIViewController, UINavigationControllerDelegate, U
                                     self!.activityIndicator.stopAnimating()
                                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                                     if !success {
-                                        println("error updating user's new photo")
+                                        print("error updating user's new photo")
                                     }
                                 })
 
