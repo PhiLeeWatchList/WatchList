@@ -212,7 +212,7 @@ class StartViewController: UIViewController, MKMapViewDelegate {
             annotationView!.centerImage = UIImageView(frame: CGRectMake(0, 0, annotationView!.size, annotationView!.size))
             annotationView!.centerImage.layer.cornerRadius = annotationView!.centerImage.frame.size.width / 2
             annotationView!.centerImage.layer.masksToBounds = true
-            print("Annotation title is \(annotation.title)")
+            print("Annotation title is \(annotation.title!)")
             if String(annotation.title) == self.username {
                 annotationView!.centerImage.layer.borderColor = annotationView!.selectedColor.CGColor
             } else {
